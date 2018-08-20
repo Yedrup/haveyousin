@@ -1,0 +1,4 @@
+.c-footer__title {
+    color: var(--footerTextColor);
+    font-family: mainFontBoldItalic;
+}

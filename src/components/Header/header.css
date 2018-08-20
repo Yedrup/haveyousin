@@ -1,0 +1,13 @@
+.c-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--headerBackgroundColor);
+    color: var(--headerTextColor);
+}
+
+.c-logo {
+    color: var(--color-red);
+    font-family: logoFont;
+}

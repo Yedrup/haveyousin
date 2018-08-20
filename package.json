@@ -1,0 +1,21 @@
+{
+  "name": "haveyousin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HaveYouSin is a web app on which you receive feed of movies released or about to be released in order to create lists with content you want to see. You can create custom lists with older movies and series.",
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-icons": "^3.0.5",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "react-transition-group": "^2.4.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

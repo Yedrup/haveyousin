@@ -1,0 +1,40 @@
+
+@font-face {
+  font-family: mainFontBoldItalic;
+  src: url('../fonts/dustismo_bold_italic.ttf');
+}
+
+@font-face {
+  font-family: mainFontBold;
+  src: url('../fonts/dustismo_bold.ttf');
+}
+
+@font-face {
+  font-family: mainFontItalic;
+  src: url('../fonts/dustismo_italic.ttf');
+}
+
+@font-face {
+  font-family: logoFont;
+  src: url('../fonts/RINGM___.TTF');
+}
+
+
+html {
+  background-color: var(--bodyBackgroundColor);
+  color: var(--bodyTextColor);
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+.main {
+  background-color:black;
+  flex: 1;
+
+}
