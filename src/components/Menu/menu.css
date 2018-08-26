@@ -1,0 +1,26 @@
+.c-menu {
+    background: var(--menuBackgroundColor);
+    width: 20%;
+    position: relative;
+}
+
+.c-menu_items {
+    list-style:none;
+}
+.c-menu__button {
+    display:none;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    font-size: 1.5rem;
+}
+
+
+@media screen and (max-width:1024px) {
+    .c-menu { 
+      display:none;
+     }
+     .c-menu__button { 
+        display:flex;
+    }
+}

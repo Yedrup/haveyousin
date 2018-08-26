@@ -1,4 +1,15 @@
+.c-footer {
+   background: var(--footerBackgroundColor);
+}
+
 .c-footer__title {
     color: var(--footerTextColor);
     font-family: mainFontBoldItalic;
+}
+
+
+@media screen and (min-width:1024px) {
+    .c-footer { 
+      display:none;
+     }
 }

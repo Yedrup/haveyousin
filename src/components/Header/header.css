@@ -11,3 +11,9 @@
     color: var(--color-red);
     font-family: logoFont;
 }
+
+@media screen and (min-width:1024px) {
+    .c-header__menu-icon { 
+      display:none;
+     }
+}

@@ -1,5 +1,6 @@
 :root {
 
+
     --color-red: #e33b3b; /*rgb(227,59,59)*/
     --color-yellow: #fed530; /*rgb(254,213,48)*/
     --color-mercury: #E5E5E5; /*rgb(229,229,229)*/
@@ -14,13 +15,19 @@
 
     --bodyBackgroundColor: var(--color-codGrey);
     --bodyTextColor: var(--color-boulder);
-   
+
+    --color-active: var(--color-yellow);
+
     --headerBackgroundColor: var(--color-carbon);
     --headerTextColor: var(--color-silver);
 
-    --footerBackgroundColor: var(--color-silver);
+    --footerBackgroundColor: var(--color-mineShaft);
     --footerTextColor: var(--color-silver);
     
+
+    --menuBackgroundColor: var(--color-codGrey);
+    --button-close-color : var(---color-boulder);
+
     --cardLinesBackgroundColor: var(--color-black);
     --cardMainBackgroundColor: var(--color-carbon);
     --cardTitleTextColor: var(--color-mercury);
@@ -28,6 +35,5 @@
 
     --inputBackgroundColor: var(--color-mercury);
 
-    
 
 }
