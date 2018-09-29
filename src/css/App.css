@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: mainFontBoldItalic;
   src: url('../fonts/dustismo_bold_italic.ttf');
@@ -19,7 +18,6 @@
   src: url('../fonts/RINGM___.TTF');
 }
 
-
 html {
   background-color: var(--bodyBackgroundColor);
   color: var(--bodyTextColor);
@@ -31,11 +29,11 @@ html {
   height: 100vh;
 }
 
-
 .main {
-  background-color:black;
+  background-color: var(--bodyBackgroundColor);
   flex: 1;
-
+  padding: 0.25rem;
+  margin-bottom: var(--footerHeight);
 }
 
 .content {
@@ -44,5 +42,46 @@ html {
   flex: 1;
 }
 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
 
+a {
+  text-decoration: none;
+}
 
+li {
+  list-style: none;
+}
+
+.colorTextActive {
+  color: var(--color-active);
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width:1024px) {
+  .main {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (min-width:767px) {
+  .main {
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .main, .c-header {
+    margin-left: var(--menuWidth)
+  }
+}

@@ -9,25 +9,34 @@
     --color-scorpion: #606060; /*rgb(96,96,96)*/
     --color-mineShaft: #262525; /*rrgb(38,37,37)*/
     --color-codGrey: #191919; /*rgb(25,25,25)*/
+    --color-codGrey-darker: #111111; /*rgb(17,17,17)*/
     --color-carbon: #080808; /*rgb(8,8,8)*/
     --color-black: #000000; /*rgb(0,0,0)*/
 
 
-    --bodyBackgroundColor: var(--color-codGrey);
-    --bodyTextColor: var(--color-boulder);
 
     --color-active: var(--color-yellow);
 
+    --iconNavColor: var(--color-silver);
+    --menuTexColor: var( --color-scorpion);
+    --menuBackgroundColor: var(--color-carbon);
+    --menuMarginTop : var(--headerHeight);
+    --button-close-color : var(---color-boulder);
+    --menuWidth : 20%;
+
+    --bodyBackgroundColor: var(--color-codGrey-darker);
+    --bodyTextColor: var(--color-boulder);
+
+    --listTitle: var(--color-yellow);
+
+
     --headerBackgroundColor: var(--color-carbon);
     --headerTextColor: var(--color-silver);
+    --headerHeight :5rem;
 
     --footerBackgroundColor: var(--color-mineShaft);
-    --footerTextColor: var(--color-silver);
+    --footerHeight: 60px;
     
-
-    --menuBackgroundColor: var(--color-codGrey);
-    --button-close-color : var(---color-boulder);
-
     --cardLinesBackgroundColor: var(--color-black);
     --cardMainBackgroundColor: var(--color-carbon);
     --cardTitleTextColor: var(--color-mercury);

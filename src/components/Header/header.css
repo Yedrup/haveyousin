@@ -1,19 +1,36 @@
+
 .c-header {
+    display: flex;
+    padding: 0 1rem;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    background-color: var(--headerBackgroundColor);
+    color: var(--headerTextColor);
+    min-height: var(--headerHeight);
+}
+.c-header__main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: var(--headerBackgroundColor);
-    color: var(--headerTextColor);
+    flex-wrap: wrap;
 }
 
 .c-logo {
     color: var(--color-red);
     font-family: logoFont;
+    font-size: 1.25rem;
 }
 
 @media screen and (min-width:1024px) {
-    .c-header__menu-icon { 
-      display:none;
-     }
+
+    .c-header__search {
+        position: relative;
+    }
+    .c-header__main {
+        justify-content: flex-end;
+    }
+    .c-search {
+        width:30rem;
+    }
 }

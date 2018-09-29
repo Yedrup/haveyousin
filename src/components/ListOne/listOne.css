@@ -1,0 +1,25 @@
+.o-list__cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.o-list__header {
+    display: flex;
+}
+
+.o-list__title {
+    color: var(--listTitle);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.o-list__title__text {
+    margin-left: .5rem;
+}
+
+@media screen and (min-width:767px) {
+    .o-list__cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

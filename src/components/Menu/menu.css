@@ -1,12 +1,35 @@
 .c-menu {
     background: var(--menuBackgroundColor);
-    width: 20%;
-    position: relative;
+    width:var(--menuWidth);
+    position: fixed;
+    height: 100%;
+    padding: 0 0 0 .5rem;
+    z-index: 800;
+}
+.c-logo--menu {
+    height: var(--headerHeight);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.c-menu__items {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    align-items: flex-start;
+    margin: 0;
+}
+.c-menu__item {
+    display: flex;
+    margin : .35rem 0;
+}
+.c-menu__item__title {
+    margin-left: .5rem;
+}
+.c-menu__item__link__text {
+    color: var(--menuTexColor);
 }
 
-.c-menu_items {
-    list-style:none;
-}
 .c-menu__button {
     display:none;
     position: absolute;
