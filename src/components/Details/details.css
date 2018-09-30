@@ -1,0 +1,12 @@
+.c-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.c-detail__header {
+
+}
+
+.c-detail__pannel {
+    width: 50%;
+}

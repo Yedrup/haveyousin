@@ -1,0 +1,52 @@
+
+.c-image {
+    position: relative;
+}
+
+.c-image-background {
+    position: relative;
+    z-index: 44;
+    background: black;
+}
+
+
+.c-image-background--45 {
+    width: 45px;
+    min-height: 61px;
+}
+.c-image-background--185 {
+    width: 185px;
+    max-height: 278px;
+}
+
+.c-image-background--92 {
+    width: 92px;
+    max-height: 138px;
+}
+
+
+.c-image-background--45:before ,
+.c-image-background--92:before ,
+.c-image-background--185:before {
+    color: var(--color-red);
+    font-family: logoFont;
+    background: black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%, -50%)
+}
+
+
+.c-image-background--45:before {
+    content: "HYS";
+}
+
+.c-image-background--92:before {
+    content: "HYS";
+    font-size: 2rem;
+}
+.c-image-background--185:before {
+    content: "HaveYouSin";
+    font-size: 1.5rem;
+}
