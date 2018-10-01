@@ -2,12 +2,12 @@ import React from "react";
 import MediaQuery from "react-responsive";
 import Truncate from "react-truncate";
 import { Link } from "react-router-dom";
-import ActionPannel from "../ActionPannel/ActionPannel";
 import ImageService from "../../services/ImageService";
 import "./card.css";
 
 class Card extends React.Component {
   render() {
+    let ActionPannel = this.props.ActionPannel;
     console.log("props from card", this.props);
     if (this.props.contentType !== "person") {
       return (
@@ -65,7 +65,12 @@ class Card extends React.Component {
                 Actors: Tom Ellis, Lauren German , Lesley-Ann Brandt...
               </p>
               <footer>
-                <ActionPannel contentId={this.props.contentId} />
+                {React.cloneElement(
+                  ActionPannel,
+                  { contentId: this.props.contentId },
+                  { contentType: this.props.contentType }
+                )}
+                {/* <ActionPannel contentId={this.props.contentId} /> */}
               </footer>
             </div>
           </MediaQuery>
@@ -99,10 +104,15 @@ class Card extends React.Component {
               />
             </Link>
             <footer>
-              <ActionPannel
+              {/* <ActionPannel
                 contentId={this.props.contentId}
                 contentType={this.props.contentType}
-              />
+              /> */}
+              {React.cloneElement(
+                ActionPannel,
+                { contentId: this.props.contentId },
+                { contentType: this.props.contentType }
+              )}
             </footer>
           </MediaQuery>
         </article>
@@ -129,10 +139,15 @@ class Card extends React.Component {
             />
           </Link>
           <figcaption>{this.props.title}</figcaption>
-          <ActionPannel
+          {/* <ActionPannel
             contentId={this.props.contentId}
             contentType={this.props.contentType}
-          />
+          /> */}
+          {React.cloneElement(
+            ActionPannel,
+            { contentId: this.props.contentId },
+            { contentType: this.props.contentType }
+          )}
         </figure>
       );
     }

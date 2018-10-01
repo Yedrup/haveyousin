@@ -10,44 +10,68 @@ import "./css/App.css";
 import "./css/variables.css";
 
 //fakedata
-import * as fakedata from './fakedata.json';
-import * as fakeList from './listsfakedata.json';
+import * as fakedata from "./fakedata.json";
+import * as fakeList from "./listsfakedata.json";
+
+//TODO : declare all functions modification here + firebase management
 
 class App extends Component {
   state = {
-    lists : {
+    lists: {
       testMovies: fakedata,
       lists: fakeList.user.lists,
-      toWatchList: fakeList.user.lists.toWatchList,//firebase
-      archives: fakeList.user.lists.archives,//firebase
-      favorites: fakeList.user.lists.favorites,//firebase
-      customLists: fakeList.user.lists.customLists, //firebase
+      toWatchList: fakeList.user.lists.toWatchList, //firebase
+      archives: fakeList.user.lists.archives, //firebase
+      favorites: fakeList.user.lists.favorites, //firebase []
+      customLists: fakeList.user.lists.customLists, //firebase [{},{}]
       calendar: {
-      "nameList": "calendar",
-      "nameIcon": "calendar"} //tmdb => request 1 by day.
+        nameList: "calendar",
+        nameIcon: "calendar"
+      } //tmdb => request 1 by day.
     }
   };
+
+  addToWatchList(id) {
+    console.log("log from function addToWatchList with id:", id);
+  }
+
+  addToArchives(id) {
+    console.log("log from function addToArchives with id:", id);
+  }
+
+  addToFavorite(id) {
+    console.log("log from function addToFavorite with id:", id);
+  }
+
+  addToCustomLists(id) {
+    console.log("log from function addToCustomLists with id:", id);
+  }
 
   render() {
     return (
       <BrowserRouter>
-      <div className="App">
-        <Menu />
-        <div className="content">
-          <Header  />
-          <div className="main">  
-            <Router lists={this.state.lists.lists} 
-              toWatchList={this.state.lists.toWatchList}
-             favorites={this.state.lists.favorites}
-             archives={this.state.lists.archives}
-             customLists={this.state.lists.customLists}
-             calendar={this.state.lists.calendar}
-             testMovies={this.state.lists.testMovies}
-             />
+        <div className="App">
+          <Menu />
+          <div className="content">
+            <Header />
+            <div className="main">
+              <Router
+                lists={this.state.lists.lists}
+                toWatchList={this.state.lists.toWatchList}
+                favorites={this.state.lists.favorites}
+                archives={this.state.lists.archives}
+                customLists={this.state.lists.customLists}
+                calendar={this.state.lists.calendar}
+                testMovies={this.state.lists.testMovies}
+                addToWatchList={this.addToWatchList}
+                addToArchives={this.addToArchives}
+                addToFavorite={this.addToFavorite}
+                addToCustomLists={this.addToCustomLists}
+              />
+            </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
       </BrowserRouter>
     );
   }

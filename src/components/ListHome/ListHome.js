@@ -2,19 +2,20 @@ import React from "react";
 import "./listHome.css";
 import MediaQuery from "react-responsive";
 import Truncate from "react-truncate";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class ListHome extends React.Component {
   render() {
     console.log(this.props.customLists);
     console.log(this.props);
+
     let customLists = this.props.customLists;
     return (
       <div>
         <h2>ListHome</h2>
         <div className="c-listHome__list">
-          {Object.keys(this.props.customLists).map(key => (
-             <Link key={key} id={key}
+          {Object.keys(customLists).map(key => (
+             <Link key={key} id={key} test="rest"
              to={{
                pathname: "/list/"+[key],
                state: {
@@ -41,4 +42,4 @@ class ListHome extends React.Component {
     );
   }
 }
-export default ListHome;
+export default withRouter(ListHome);

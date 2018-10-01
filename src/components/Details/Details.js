@@ -7,7 +7,7 @@ import {
   getDetailsPeople
 } from "../../services/tmdbService";
 import ImageService from "../../services/ImageService";
-import ActionPannel from "../ActionPannel/ActionPannel";
+// import ActionPannel from "../ActionPannel/ActionPannel";
 
 class Details extends React.Component {
   state = {
@@ -16,7 +16,6 @@ class Details extends React.Component {
     name: "",
     loaded: false
   };
-
   getDetails = async (id, type) => {
     let contentId = id;
     let contentType = type;
@@ -69,6 +68,7 @@ class Details extends React.Component {
   };
 
   componentDidMount() {
+
     this.getDetails(
       this.props.location.state.contentId,
       this.props.location.state.contentType
@@ -96,6 +96,7 @@ class Details extends React.Component {
   }
   render() {
     console.log("detail this state", this.state);
+    let ActionPannel = this.props.ActionPannel;
     return (
       <section className="c-details">
         <header className="c-detail__header">
@@ -111,10 +112,11 @@ class Details extends React.Component {
           {this.state.name}
         </p>
         <div className="c-detail__pannel">
-          <ActionPannel
+        {React.cloneElement(ActionPannel, {contentId: this.state.contentId}, {contentType:this.props.location.state.contentType})}
+          {/* <ActionPannel
             contentId={this.state.contentId}
             contentType={this.props.location.state.contentType}
-          />
+          /> */}
         </div>
       </section>
     );

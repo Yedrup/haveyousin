@@ -16,7 +16,6 @@ import {
   FaQuestionCircle,
   FaCheck
 } from "react-icons/fa";
-// {} from "react-icons/io";
 
 class IconService extends React.Component {
   render() {

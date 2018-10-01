@@ -1,14 +1,20 @@
 import React from "react";
 import Card from "../Card/Card";
 import IconService from "../../services/IconService";
+import {withRouter} from "react-router-dom";
+
 import "./listOne.css";
 
 class ListOne extends React.Component {
+
   render() {
     let results;
     let nameIcon;
     let list;
-    console.log(this.props);
+    let ActionPannel = this.props.ActionPannel;
+
+    console.log(this.props.location)
+
     if (this.props.list) {
       list = this.props.list;
       results = this.props.list.results;
@@ -18,9 +24,7 @@ class ListOne extends React.Component {
       results = this.props.location.state.list.results;
       nameIcon = this.props.location.state.list.nameIcon;
     }
-    console.log("results", results);
-    console.log("list", list);
-    //the card need to be less oriented , the type passes by a prop
+
     return (
       <article>
         <header className="o-list__header o-list__title">
@@ -44,6 +48,7 @@ class ListOne extends React.Component {
                 release={content.release_date}
                 poster={content.media_type === "person" ? content.profile_path  : content.poster_path}
                 contentType={contentType}
+                ActionPannel={ActionPannel}
               />
             );
           })}
@@ -53,4 +58,4 @@ class ListOne extends React.Component {
   }
 }
 
-export default ListOne;
+export default withRouter(ListOne);
