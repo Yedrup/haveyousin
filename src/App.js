@@ -39,14 +39,22 @@ class App extends Component {
     console.log("log from function addToArchives with id:", id);
   }
 
-  addToFavorite(id) {
-    console.log("log from function addToFavorite with id:", id);
-  }
+  addToFavorite = newItem => {
+    console.log("log from function addToFavorite with id:", newItem);
+    // let test = this.state.lists.favorites.results;
+    //  const favorites = [ ...test.results, newItem ];
+    //  this.setState({ favorites : [...favorites,newItem ] });
+    //  console.log(this.state);
+
+    //  this.setState({ toDoNotes: [...this.state.toDoNotes, newNote]})
+  };
 
   addToCustomLists(id) {
     console.log("log from function addToCustomLists with id:", id);
   }
-
+  componentDidMount() {
+    console.log("Mounted!");
+  }
   render() {
     return (
       <BrowserRouter>

@@ -17,7 +17,6 @@ class Router extends React.Component {
     console.log(this.props);
     // console.log(this.props.toWatchList);
     // console.log(this.props.customLists);
-    //TODO : pass function on each route
     return (
       <Switch>
         <Route exact path="/" component={Home} />
@@ -26,6 +25,7 @@ class Router extends React.Component {
           path="/list/:listId"
           render={() => (
             <ListOne
+            lists={this.props.lists}
               ActionPannel={
                 <ActionPannel
                   addToWatchList={this.props.addToWatchList}

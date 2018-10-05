@@ -68,7 +68,6 @@ class Details extends React.Component {
   };
 
   componentDidMount() {
-
     this.getDetails(
       this.props.location.state.contentId,
       this.props.location.state.contentType
@@ -108,11 +107,15 @@ class Details extends React.Component {
           <h1 className="c-detail__title">{this.state.name}</h1>
         </header>
         <p>
-          DETAILS of content id {this.state.contentId} and named{" "}
+          DETAILS of content id {this.state.contentId} and named
           {this.state.name}
         </p>
         <div className="c-detail__pannel">
-        {React.cloneElement(ActionPannel, {contentId: this.state.contentId}, {contentType:this.props.location.state.contentType})}
+          {React.cloneElement(
+            ActionPannel,
+            { contentId: this.state.contentId },
+            { contentType: this.props.location.state.contentType }
+          )}
           {/* <ActionPannel
             contentId={this.state.contentId}
             contentType={this.props.location.state.contentType}

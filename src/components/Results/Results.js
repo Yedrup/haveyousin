@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./results.css";
 import ImageService from  "../../services/ImageService";
+import {withRouter} from "react-router-dom";
 
 class Results extends React.Component {
 
@@ -47,4 +48,4 @@ class Results extends React.Component {
     }
   }
 }
-export default Results;
+export default withRouter(Results);

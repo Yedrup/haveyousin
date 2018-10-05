@@ -4,6 +4,7 @@ import Truncate from "react-truncate";
 import { Link } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "./card.css";
+import {withRouter} from "react-router-dom";
 
 class Card extends React.Component {
   render() {
@@ -154,4 +155,4 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+export default withRouter(Card);

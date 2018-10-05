@@ -7,23 +7,70 @@ import "./listOne.css";
 
 class ListOne extends React.Component {
 
+//   state = {
+//     list : {},
+//     results : [],
+//     nameIcon : ""
+//   }
+
+//   componentDidMount() {
+// console.log(this.props)
+//     if (this.props.list) {
+//     this.setState({
+//       list : this.props.list,
+//       results : this.props.list.results,
+//       nameIcon : this.props.list.nameIcon
+//     });
+//   } else {
+//     this.setState({
+//       list : this.props.location.state.list,
+//       results : this.props.location.state.list.results,
+//       nameIcon : this.props.location.state.list.nameIcon
+//     });
+//   }
+
+
+    // if (this.props.list) {
+    //   list = this.props.list;
+    //   results = this.props.list.results;
+    //   nameIcon = this.props.list.nameIcon;
+    // } else {
+    //   list = this.props.location.state.list;
+    //   results = this.props.location.state.list.results;
+    //   nameIcon = this.props.location.state.list.nameIcon;
+    // }
+  // }
+
+  // if (this.props.list) {
+  //   list = this.props.list;
+  //   results = this.props.list.results;
+  //   nameIcon = this.props.list.nameIcon;
+  // } else {
+  //   list = this.props.location.state.list;
+  //   results = this.props.location.state.list.results;
+  //   nameIcon = this.props.location.state.list.nameIcon;
+  // }
   render() {
+
+    console.log(this.props)
+    // console.log(this.state)
+
     let results;
     let nameIcon;
     let list;
     let ActionPannel = this.props.ActionPannel;
 
-    console.log(this.props.location)
+    // console.log(this.props.location)
 
     if (this.props.list) {
-      list = this.props.list;
-      results = this.props.list.results;
-      nameIcon = this.props.list.nameIcon;
-    } else {
-      list = this.props.location.state.list;
-      results = this.props.location.state.list.results;
-      nameIcon = this.props.location.state.list.nameIcon;
-    }
+    list = this.props.list;
+    results = this.props.list.results;
+    nameIcon = this.props.list.nameIcon;
+  } else {
+    list = this.props.location.state.list;
+    results = this.props.location.state.list.results;
+    nameIcon = this.props.location.state.list.nameIcon;
+  }
 
     return (
       <article>
@@ -42,7 +89,7 @@ class ListOne extends React.Component {
 
             return (
               <Card
-                key={content.id}
+                key={content.id+Date.now()}
                 contentId={content.id}
                 title={content.title}
                 release={content.release_date}
