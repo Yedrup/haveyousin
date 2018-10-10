@@ -14,7 +14,7 @@ class Router extends React.Component {
   render() {
     console.log(this.props.location.pathname); // outputs currently active route
     // console.log(this.props.testMovies);
-    console.log(this.props);
+    console.log(this.props.lists?"yeah" : "nope");
     // console.log(this.props.toWatchList);
     // console.log(this.props.customLists);
     return (
@@ -25,13 +25,14 @@ class Router extends React.Component {
           path="/list/:listId"
           render={() => (
             <ListOne
-            lists={this.props.lists}
+            // lists={this.props.lists}
               ActionPannel={
                 <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
+                  // addToWatchList={this.props.addToWatchList}
+                  // addToArchives={this.props.addToArchives}
+                  // addToFavorite={this.props.addToFavorite}
+                  // addToCustomLists={this.props.addToCustomLists}
+                  addToList={this.props.addToList}
                 />
               }
             />
@@ -44,13 +45,14 @@ class Router extends React.Component {
           path="/listHome"
           render={() => (
             <ListHome
-              customLists={this.props.customLists}
+              // customLists={this.props.customLists}
               ActionPannel={
                 <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
+                  // addToWatchList={this.props.addToWatchList}
+                  // addToArchives={this.props.addToArchives}
+                  // addToFavorite={this.props.addToFavorite}
+                  // addToCustomLists={this.props.addToCustomLists}
+                  addToList={this.props.addToList}
                 />
               }
             />
@@ -63,16 +65,37 @@ class Router extends React.Component {
             <Details
               ActionPannel={
                 <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
+                  // addToWatchList={this.props.addToWatchList}
+                  // addToArchives={this.props.addToArchives}
+                  // addToFavorite={this.props.addToFavorite}
+                  // addToCustomLists={this.props.addToCustomLists}
+                  addToList={this.props.addToList}
+
                 />
               }
             />
           )}
         />
-        <Route
+         <Route
+          path="/calendar"
+          render={() => (
+            <Calendar
+              list={this.props.calendar}
+              ActionPannel={
+                <ActionPannel
+                addToList={this.props.addToList}
+
+                  // addToWatchList={this.props.addToWatchList}
+                  // addToArchives={this.props.addToArchives}
+                  // addToFavorite={this.props.addToFavorite}
+                  // addToCustomLists={this.props.addToCustomLists}
+                />
+              }
+            />
+          )}
+        />
+        <Route component={NotFound} />
+        {/* <Route
           path="/favorites"
           render={() => (
             <ListOne
@@ -93,6 +116,8 @@ class Router extends React.Component {
           render={() => (
             <ListOne
               list={this.props.toWatchList}
+              results={this.props.toWatchList.results}
+              iconName={this.props.toWatchList.iconName}
               ActionPannel={
                 <ActionPannel
                   addToWatchList={this.props.addToWatchList}
@@ -119,24 +144,7 @@ class Router extends React.Component {
               }
             />
           )}
-        />
-        <Route
-          path="/calendar"
-          render={() => (
-            <Calendar
-              list={this.props.calendar}
-              ActionPannel={
-                <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
-                />
-              }
-            />
-          )}
-        />
-        <Route component={NotFound} />
+        /> */}
       </Switch>
     );
   }

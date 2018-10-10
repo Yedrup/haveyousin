@@ -10,74 +10,62 @@ import "./css/App.css";
 import "./css/variables.css";
 
 //fakedata
-import * as fakedata from "./fakedata.json";
-import * as fakeList from "./listsfakedata.json";
+// import * as fakedata from "./fakedata.json";
+// import * as fakeList from "./listsfakedata.json";
+import fakeListJs from "./listsfakedata.js";
 
 //TODO : declare all functions modification here + firebase management
 
 class App extends Component {
+  //initialize state
   state = {
-    lists: {
-      testMovies: fakedata,
-      lists: fakeList.user.lists,
-      toWatchList: fakeList.user.lists.toWatchList, //firebase
-      archives: fakeList.user.lists.archives, //firebase
-      favorites: fakeList.user.lists.favorites, //firebase []
-      customLists: fakeList.user.lists.customLists, //firebase [{},{}]
+    lists: {},
+    calendar: {},
+    customLists: [],
+    userIsConnect: false,
+    userId: 0,
+    lastResearchMade: ""
+  };
+
+  // use new file lists
+  componentDidMount() {
+    console.log("Mounted!");
+    console.log(fakeListJs);
+    // const customList=fakeListJs.filter(list=>(list.canBeErased === true))
+    // console.table(customList)
+    this.setState({
+      lists: fakeListJs,
       calendar: {
         nameList: "calendar",
         nameIcon: "calendar"
-      } //tmdb => request 1 by day.
-    }
-  };
-
-  addToWatchList(id) {
-    console.log("log from function addToWatchList with id:", id);
+      },
+      // customLists : 
+    });
   }
 
-  addToArchives(id) {
-    console.log("log from function addToArchives with id:", id);
+  addToList(listId, itemId) {
+    console.log(
+      `log from function addToList listId : ${listId} , item id: ${itemId}`
+    );
   }
 
-  addToFavorite = newItem => {
-    console.log("log from function addToFavorite with id:", newItem);
-    // let test = this.state.lists.favorites.results;
-    //  const favorites = [ ...test.results, newItem ];
-    //  this.setState({ favorites : [...favorites,newItem ] });
-    //  console.log(this.state);
-
-    //  this.setState({ toDoNotes: [...this.state.toDoNotes, newNote]})
-  };
-
-  addToCustomLists(id) {
-    console.log("log from function addToCustomLists with id:", id);
-  }
-  componentDidMount() {
-    console.log("Mounted!");
-  }
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <Menu />
+          <Menu
+            lists={this.state.lists}
+          />
           <div className="content">
             <Header />
             <div className="main">
               <Router
-                lists={this.state.lists.lists}
-                toWatchList={this.state.lists.toWatchList}
-                favorites={this.state.lists.favorites}
-                archives={this.state.lists.archives}
-                customLists={this.state.lists.customLists}
-                calendar={this.state.lists.calendar}
-                testMovies={this.state.lists.testMovies}
-                addToWatchList={this.addToWatchList}
-                addToArchives={this.addToArchives}
-                addToFavorite={this.addToFavorite}
-                addToCustomLists={this.addToCustomLists}
+                lists={this.state.lists}
+                calendar={this.state.calendar}
+                addToList={this.addToList}
               />
             </div>
-            <Footer />
+            <Footer lists={this.state.lists} />
           </div>
         </div>
       </BrowserRouter>

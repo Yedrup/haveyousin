@@ -24,22 +24,26 @@ class ActionPannel extends React.Component {
     };
 
     let contentId = this.props.contentId;
+    let listId;
+    if(this.props.match.params.listId) {
+      listId = `List-${this.props.match.params.listId}`;
+    }
     const actionPannelItems = [
       {
         title: "toWatchList",
-        action: () => this.props.addToWatchList(contentId)
+        action: () => this.props.addToList(contentId,listId = "List-1")
       },
       {
         title: "archives",
-        action: () => this.props.addToArchives(contentId)
+        action: () => this.props.addToList(contentId,listId = "List-2")
       },
       {
         title: "favorites",
-        action: () => this.props.addToFavorite(TestFav)
+        action: () => this.props.addToList(contentId,listId = "List-3")
       },
       {
         title: "customLists",
-        action: () => this.props.addToCustomLists(contentId)
+        action: () => this.props.addToList(contentId,listId = "custom")
       }
     ];
     if (this.props.contentType !== "person") {

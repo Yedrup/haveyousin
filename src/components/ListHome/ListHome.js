@@ -9,11 +9,11 @@ class ListHome extends React.Component {
     console.log(this.props.customLists);
     console.log(this.props);
 
-    let customLists = this.props.customLists;
+    // let customLists = this.props.customLists;
     return (
       <div>
         <h2>ListHome</h2>
-        <div className="c-listHome__list">
+        {/* <div className="c-listHome__list">
           {Object.keys(customLists).map(key => (
              <Link key={key} id={key} test="rest"
              to={{
@@ -37,7 +37,7 @@ class ListHome extends React.Component {
             </div>
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }

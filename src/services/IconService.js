@@ -41,7 +41,8 @@ class IconService extends React.Component {
       return icon.title === iconToFind;
     }
     let IconName = Icons.find(getIconComponent);
-    IconName = IconName.nameIcon;
+    if(IconName) IconName = IconName.nameIcon;
+    else return null
 
     return (
       <span>

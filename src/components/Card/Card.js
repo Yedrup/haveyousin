@@ -9,7 +9,7 @@ import {withRouter} from "react-router-dom";
 class Card extends React.Component {
   render() {
     let ActionPannel = this.props.ActionPannel;
-    console.log("props from card", this.props);
+    // console.log("props from card", this.props);
     if (this.props.contentType !== "person") {
       return (
         <article className="c-card">
