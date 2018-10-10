@@ -15,7 +15,8 @@ class ListOne extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state) {
+    console.log(this.props.location)
+    if (this.props.location.state && this.props.location.state.list) {
       this.setState({
         list: this.props.location.state.list,
         results: this.props.location.state.list.results,
@@ -28,9 +29,10 @@ class ListOne extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log("prevProps",prevProps)
+    console.log(this.props.location)
     // // Typical usage (don't forget to compare props):
     if (this.props.match.params.listId !== prevProps.match.params.listId) {
-      if(this.props.location.state) {
+      if(this.props.location.state && this.props.location.state.list) {
         this.setState({
           list: this.props.location.state.list,
           results: this.props.location.state.list.results,
@@ -84,3 +86,4 @@ class ListOne extends React.Component {
 }
 
 export default withRouter(ListOne);
+

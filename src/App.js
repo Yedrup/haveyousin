@@ -34,12 +34,13 @@ class App extends Component {
     // const customList=fakeListJs.filter(list=>(list.canBeErased === true))
     // console.table(customList)
     this.setState({
-      lists: fakeListJs,
+      lists: fakeListJs.lists,
+      customLists: fakeListJs.customLists,
       calendar: {
         nameList: "calendar",
         nameIcon: "calendar"
-      },
-      // customLists : 
+      }
+      // customLists :
     });
   }
 
@@ -53,19 +54,22 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Menu
-            lists={this.state.lists}
-          />
+          <Menu lists={this.state.lists} 
+          customLists={this.state.customLists} />
           <div className="content">
             <Header />
             <div className="main">
               <Router
                 lists={this.state.lists}
+                customLists={this.state.customLists}
                 calendar={this.state.calendar}
                 addToList={this.addToList}
               />
             </div>
-            <Footer lists={this.state.lists} />
+            <Footer
+              lists={this.state.lists}
+              customLists={this.state.customLists}
+            />
           </div>
         </div>
       </BrowserRouter>

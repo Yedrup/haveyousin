@@ -4,15 +4,13 @@ import IconService from "../../services/IconService";
 import { NavLink, withRouter } from "react-router-dom";
 
 class Menu extends React.Component {
-
   componentDidMount() {
-
-  let test = this.props.lists
-  console.log('test',test)
+    let test = this.props.lists;
+    console.log("test", test);
   }
 
   render() {
-    console.log(this.props.lists);
+    // console.log(this.props.lists);
     const menuItems = [
       {
         title: "home",
@@ -25,27 +23,33 @@ class Menu extends React.Component {
       {
         title: "toWatchList",
         link: "/list/1",
-        state: this.props.lists["List-1"]
+        state: {
+          list: this.props.lists["List-1"]
+        }
       },
       {
         title: "archives",
         link: "/list/2",
-        state: this.props.lists["List-2"]
-        // ,
-        // state: this.props.archives
+        state: {
+          list: this.props.lists["List-2"]
+        }
       },
       {
         title: "favorites",
         link: "/list/3",
-        state: this.props.lists["List-3"]
+        state: {
+          list: this.props.lists["List-3"]
+        }
         // ,
         // state: this.props.favorites
       },
       {
         title: "customLists",
-        link: "/listHome"
-        // ,
-        // state: this.props.customLists
+        link: "/listHome",
+        state: {
+          customLists: this.props.customLists,
+          list: this.props.lists
+        }
       },
       {
         title: "user",
@@ -60,10 +64,14 @@ class Menu extends React.Component {
     let currentPath = this.props.location.pathname;
     return (
       <div className="c-menu">
-        <NavLink exact strict to={"/"}
-        activeStyle={{
-          color: "var(--color-active)"
-        }}>
+        <NavLink
+          exact
+          strict
+          to={"/"}
+          activeStyle={{
+            color: "var(--color-active)"
+          }}
+        >
           <h1 className="c-logo c-logo--menu"> HaveYouSin </h1>
         </NavLink>
         <ul className="c-menu__items">
@@ -72,11 +80,19 @@ class Menu extends React.Component {
             return (
               <li key={index}>
                 <NavLink
-                exact
+                  exact
+                  strict
                   to={{
                     pathname: menuItem.link,
                     state: {
-                      list: menuItem.state ? menuItem.state : ""
+                      list:
+                        menuItem.state && menuItem.state.list
+                          ? menuItem.state.list
+                          : "",
+                      customLists:
+                        menuItem.state && menuItem.state.customLists
+                          ? menuItem.state.customLists
+                          : ""
                     }
                   }}
                   activeStyle={{
@@ -90,9 +106,7 @@ class Menu extends React.Component {
                       color: "var(--iconNavColor)"
                     }}
                   />
-                  <span className="c-menu__item__title">
-                    {menuItem.title}
-                  </span>
+                  <span className="c-menu__item__title">{menuItem.title}</span>
                 </NavLink>
               </li>
             );

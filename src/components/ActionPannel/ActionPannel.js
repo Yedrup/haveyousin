@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 class ActionPannel extends React.Component {
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     let TestFav = {
       poster_path: "tatapoutoutou",
       overview:
