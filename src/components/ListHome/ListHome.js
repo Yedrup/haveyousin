@@ -42,7 +42,7 @@ class ListHome extends React.Component {
               to={{
                 pathname: "/list/" + [customList.id],
                 state: {
-                  list : lists["List-"+customList.id]
+                  list : lists["List"+customList.id]
                 }
               }}
             >

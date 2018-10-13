@@ -4,7 +4,10 @@ import IconService from "../../services/IconService";
 import {
   withRouter
 } from "react-router-dom";
-
+import {
+  setInLocalStorage,
+  getFromLocalStorage
+} from "../../services/localStorageService";
 import "./listOne.css";
 
 class ListOne extends React.Component {
@@ -22,6 +25,7 @@ class ListOne extends React.Component {
         results: this.props.location.state.list.results,
         nameIcon: this.props.location.state.list.nameIcon
       });
+      setInLocalStorage("miaou", this.props.location.state.list)
     } else {
       return null
     }
@@ -31,17 +35,17 @@ class ListOne extends React.Component {
     console.log("prevProps",prevProps)
     console.log(this.props.location)
     // // Typical usage (don't forget to compare props):
-    if (this.props.match.params.listId !== prevProps.match.params.listId) {
-      if(this.props.location.state && this.props.location.state.list) {
+    if ((this.props.match.params.listId !== prevProps.match.params.listId) && (this.props.location.state && this.props.location.state.list)) {
         this.setState({
           list: this.props.location.state.list,
           results: this.props.location.state.list.results,
           nameIcon: this.props.location.state.list.nameIcon
         });
+        setInLocalStorage("miaou", this.props.location.state.list)
       }else {
         return null
       }
-    }
+    // }
   }
 
   render() {

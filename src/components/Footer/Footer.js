@@ -10,17 +10,17 @@ class Footer extends React.Component {
       {
         title: "toWatchList",
         link: "/list/1",
-        state: this.props.lists["List-1"]
+        state: this.props.lists["List1"]
       },
       {
         title: "archives",
         link: "/list/2",
-        state: this.props.lists["List-2"]
+        state: this.props.lists["List2"]
       },
       {
         title: "favorites",
         link: "/list/3",
-        state: this.props.lists["List-3"]
+        state: this.props.lists["List3"]
       },
       { title: "customLists", link: "/listHome" }
     ];

@@ -32,7 +32,8 @@ class Router extends React.Component {
                   // addToArchives={this.props.addToArchives}
                   // addToFavorite={this.props.addToFavorite}
                   // addToCustomLists={this.props.addToCustomLists}
-                  addToList={this.props.addToList}
+                  addItemToList={this.props.addItemToList}
+                  addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -48,11 +49,8 @@ class Router extends React.Component {
               // customLists={this.props.customLists}
               ActionPannel={
                 <ActionPannel
-                  // addToWatchList={this.props.addToWatchList}
-                  // addToArchives={this.props.addToArchives}
-                  // addToFavorite={this.props.addToFavorite}
-                  // addToCustomLists={this.props.addToCustomLists}
-                  addToList={this.props.addToList}
+                  addItemToList={this.props.addItemToList}
+                  addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -65,12 +63,8 @@ class Router extends React.Component {
             <Details
               ActionPannel={
                 <ActionPannel
-                  // addToWatchList={this.props.addToWatchList}
-                  // addToArchives={this.props.addToArchives}
-                  // addToFavorite={this.props.addToFavorite}
-                  // addToCustomLists={this.props.addToCustomLists}
-                  addToList={this.props.addToList}
-
+                  addItemToList={this.props.addItemToList}
+                  addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -83,68 +77,14 @@ class Router extends React.Component {
               list={this.props.calendar}
               ActionPannel={
                 <ActionPannel
-                addToList={this.props.addToList}
-
-                  // addToWatchList={this.props.addToWatchList}
-                  // addToArchives={this.props.addToArchives}
-                  // addToFavorite={this.props.addToFavorite}
-                  // addToCustomLists={this.props.addToCustomLists}
+                addItemToList={this.props.addItemToList}
+                addToCustomList={this.props.addToCustomList}
                 />
               }
             />
           )}
         />
         <Route component={NotFound} />
-        {/* <Route
-          path="/favorites"
-          render={() => (
-            <ListOne
-              list={this.props.favorites}
-              ActionPannel={
-                <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
-                />
-              }
-            />
-          )}
-        />
-        <Route
-          path="/towatchlist"
-          render={() => (
-            <ListOne
-              list={this.props.toWatchList}
-              results={this.props.toWatchList.results}
-              iconName={this.props.toWatchList.iconName}
-              ActionPannel={
-                <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
-                />
-              }
-            />
-          )}
-        />
-        <Route
-          path="/archives"
-          render={() => (
-            <ListOne
-              list={this.props.archives}
-              ActionPannel={
-                <ActionPannel
-                  addToWatchList={this.props.addToWatchList}
-                  addToArchives={this.props.addToArchives}
-                  addToFavorite={this.props.addToFavorite}
-                  addToCustomLists={this.props.addToCustomLists}
-                />
-              }
-            />
-          )}
-        /> */}
       </Switch>
     );
   }

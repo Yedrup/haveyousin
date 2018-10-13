@@ -24,21 +24,21 @@ class Menu extends React.Component {
         title: "toWatchList",
         link: "/list/1",
         state: {
-          list: this.props.lists["List-1"]
+          list: this.props.lists["List1"]
         }
       },
       {
         title: "archives",
         link: "/list/2",
         state: {
-          list: this.props.lists["List-2"]
+          list: this.props.lists["List2"]
         }
       },
       {
         title: "favorites",
         link: "/list/3",
         state: {
-          list: this.props.lists["List-3"]
+          list: this.props.lists["List3"]
         }
         // ,
         // state: this.props.favorites
@@ -68,9 +68,6 @@ class Menu extends React.Component {
           exact
           strict
           to={"/"}
-          activeStyle={{
-            color: "var(--color-active)"
-          }}
         >
           <h1 className="c-logo c-logo--menu"> HaveYouSin </h1>
         </NavLink>
@@ -103,8 +100,10 @@ class Menu extends React.Component {
                   <IconService
                     nameIcon={iconName}
                     iconStyleContext={{
-                      color: "var(--iconNavColor)"
-                    }}
+                      color:
+                      currentPath === menuItem.link
+                        ? "var(--color-active)"
+                        : "var(--iconNavColor)"                    }}
                   />
                   <span className="c-menu__item__title">{menuItem.title}</span>
                 </NavLink>
