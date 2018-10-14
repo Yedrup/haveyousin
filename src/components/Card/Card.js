@@ -4,12 +4,14 @@ import Truncate from "react-truncate";
 import { Link } from "react-router-dom";
 import ImageService from "../../services/ImageService";
 import "./card.css";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Card extends React.Component {
   render() {
     let ActionPannel = this.props.ActionPannel;
-    // console.log("props from card", this.props);
+    let hysId = this.props.hysId;
+    console.log("props from card", this.props);
+    console.log("props hysId card", hysId);
     if (this.props.contentType !== "person") {
       return (
         <article className="c-card">
@@ -21,6 +23,7 @@ class Card extends React.Component {
                 }`,
                 state: {
                   contentId: this.props.contentId,
+                  hysId,
                   contentType: this.props.contentType
                 }
               }}
@@ -41,6 +44,7 @@ class Card extends React.Component {
                       }`,
                       state: {
                         contentId: this.props.contentId,
+                        hysId,
                         contentType: this.props.contentType
                       }
                     }}
@@ -66,11 +70,11 @@ class Card extends React.Component {
                 Actors: Tom Ellis, Lauren German , Lesley-Ann Brandt...
               </p>
               <footer>
-                {React.cloneElement(
-                  ActionPannel,
-                  { contentId: this.props.contentId },
-                  { contentType: this.props.contentType }
-                )}
+                {React.cloneElement(ActionPannel, {
+                  contentId: this.props.contentId,
+                  hysId,
+                  contentType: this.props.contentType
+                })}
                 {/* <ActionPannel contentId={this.props.contentId} /> */}
               </footer>
             </div>
@@ -84,6 +88,7 @@ class Card extends React.Component {
                 }`,
                 state: {
                   contentId: this.props.contentId,
+                  hysId,
                   contentType: this.props.contentType
                 }
               }}
@@ -109,11 +114,11 @@ class Card extends React.Component {
                 contentId={this.props.contentId}
                 contentType={this.props.contentType}
               /> */}
-              {React.cloneElement(
-                ActionPannel,
-                { contentId: this.props.contentId },
-                { contentType: this.props.contentType }
-              )}
+              {React.cloneElement(ActionPannel, {
+                contentId: this.props.contentId,
+                hysId,
+                contentType: this.props.contentType
+              })}
             </footer>
           </MediaQuery>
         </article>
@@ -129,6 +134,7 @@ class Card extends React.Component {
               }`,
               state: {
                 contentId: this.props.contentId,
+                hysId,
                 contentType: this.props.contentType
               }
             }}
@@ -144,11 +150,11 @@ class Card extends React.Component {
             contentId={this.props.contentId}
             contentType={this.props.contentType}
           /> */}
-          {React.cloneElement(
-            ActionPannel,
-            { contentId: this.props.contentId },
-            { contentType: this.props.contentType }
-          )}
+          {React.cloneElement(ActionPannel, {
+            contentId: this.props.contentId,
+            hysId,
+            contentType: this.props.contentType
+          })}
         </figure>
       );
     }

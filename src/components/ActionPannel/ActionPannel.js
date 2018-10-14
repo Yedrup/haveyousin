@@ -5,46 +5,32 @@ import { withRouter } from "react-router-dom";
 
 class ActionPannel extends React.Component {
   render() {
-    // console.log(this.props);
-    // let TestFav = {
-    //   poster_path: "tatapoutoutou",
-    //   overview:
-    //     "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
-    //   release_date: "2016-08-03",
-    //   genre_ids: [14, 28, 80],
-    //   id: 297761,
-    //   original_title: "Suicide Squad",
-    //   original_language: "en",
-    //   title: "Suicide Squad",
-    //   backdrop_path: "/ndlQ2Cuc3cjTL7lTynw6I4boP4S.jpg",
-    //   popularity: 48.261451,
-    //   vote_count: 1466,
-    //   video: false,
-    //   vote_average: 5.91
-    // };
-
+    console.log("ActionPannel this.props", this.props);
+    const {addItemToList,addToCustomList } = this.props;
     let contentId = this.props.contentId;
+    let hysId = this.props.hysId;
+    console.log("hysId", hysId)
     let listId;
     if(this.props.match.params.listId) {
-      listId = `${this.props.match.params.listId}`;
+      listId = this.props.match.params.listId;
       console.log(listId)
     }
     const actionPannelItems = [
       {
         title: "toWatchList",
-        action: () => this.props.addItemToList(contentId,1)
+        action: () => addItemToList(hysId,1)
       },
       {
         title: "archives",
-        action: () => this.props.addItemToList(contentId,2)
+        action: () => addItemToList(hysId,2)
       },
       {
         title: "favorites",
-        action: () => this.props.addItemToList(contentId,3)
+        action: () => addItemToList(hysId,3)
       },
       {
         title: "customLists",
-        action: () => this.props.addtoCustomList(contentId,"custom")
+        action: () => addToCustomList(hysId,"custom")
       }
     ];
     if (this.props.contentType !== "person") {
@@ -67,7 +53,7 @@ class ActionPannel extends React.Component {
       );
     } else {
       return (
-        <span onClick={() => this.addToFavorite(contentId,listId)}>
+        <span onClick={() => this.addToCustomList(hysId,listId)}>
           <IconService
             nameIcon={"favorites"}
             iconStyleContext={{

@@ -4,13 +4,24 @@ import IconService from "../../services/IconService";
 import { NavLink, withRouter } from "react-router-dom";
 
 class Menu extends React.Component {
-  componentDidMount() {
-    let test = this.props.lists;
-    console.log("test", test);
-  }
+
+  //TODO : add it in helpers' functions
+  getOneList = (state, idToFound) => {
+    let content = { ...this.props.lists.byId[idToFound] };
+    // console.log("content from getOneList", content);
+    return content;
+  };
 
   render() {
-    // console.log(this.props.lists);
+    let getToWatchList;
+    let getArchiveList;
+    let getFavoritesList;
+    if (this.props.lists && this.props.lists.byId) {
+      getToWatchList = this.getOneList(this.props.lists.byId, "1");
+      getArchiveList = this.getOneList(this.props.lists.byId, "2");
+      getFavoritesList = this.getOneList(this.props.lists.byId, "3");
+    }
+
     const menuItems = [
       {
         title: "home",
@@ -24,30 +35,27 @@ class Menu extends React.Component {
         title: "toWatchList",
         link: "/list/1",
         state: {
-          list: this.props.lists["List1"]
+          list: getToWatchList
         }
       },
       {
         title: "archives",
         link: "/list/2",
         state: {
-          list: this.props.lists["List2"]
+          list: getArchiveList
         }
       },
       {
         title: "favorites",
         link: "/list/3",
         state: {
-          list: this.props.lists["List3"]
+          list: getFavoritesList
         }
-        // ,
-        // state: this.props.favorites
       },
       {
         title: "customLists",
         link: "/listHome",
         state: {
-          customLists: this.props.customLists,
           list: this.props.lists
         }
       },
@@ -62,13 +70,10 @@ class Menu extends React.Component {
     ];
     // console.log(this.props.location.pathname); // outputs currently active route
     let currentPath = this.props.location.pathname;
+    let itemsInList =  this.props.itemsInList;
     return (
       <div className="c-menu">
-        <NavLink
-          exact
-          strict
-          to={"/"}
-        >
+        <NavLink exact strict to={"/"}>
           <h1 className="c-logo c-logo--menu"> HaveYouSin </h1>
         </NavLink>
         <ul className="c-menu__items">
@@ -89,7 +94,8 @@ class Menu extends React.Component {
                       customLists:
                         menuItem.state && menuItem.state.customLists
                           ? menuItem.state.customLists
-                          : ""
+                          : "",
+                      itemsInList : itemsInList
                     }
                   }}
                   activeStyle={{
@@ -101,9 +107,10 @@ class Menu extends React.Component {
                     nameIcon={iconName}
                     iconStyleContext={{
                       color:
-                      currentPath === menuItem.link
-                        ? "var(--color-active)"
-                        : "var(--iconNavColor)"                    }}
+                        currentPath === menuItem.link
+                          ? "var(--color-active)"
+                          : "var(--iconNavColor)"
+                    }}
                   />
                   <span className="c-menu__item__title">{menuItem.title}</span>
                 </NavLink>

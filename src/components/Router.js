@@ -15,7 +15,7 @@ class Router extends React.Component {
     console.log(this.props.location.pathname); // outputs currently active route
     // console.log(this.props.testMovies);
     console.log(this.props.lists?"yeah" : "nope");
-    // console.log(this.props.toWatchList);
+    // console.log(this.props);
     // console.log(this.props.customLists);
     return (
       <Switch>
@@ -25,13 +25,8 @@ class Router extends React.Component {
           path="/list/:listId"
           render={() => (
             <ListOne
-            // lists={this.props.lists}
               ActionPannel={
                 <ActionPannel
-                  // addToWatchList={this.props.addToWatchList}
-                  // addToArchives={this.props.addToArchives}
-                  // addToFavorite={this.props.addToFavorite}
-                  // addToCustomLists={this.props.addToCustomLists}
                   addItemToList={this.props.addItemToList}
                   addToCustomList={this.props.addToCustomList}
                 />
@@ -46,7 +41,6 @@ class Router extends React.Component {
           path="/listHome"
           render={() => (
             <ListHome
-              // customLists={this.props.customLists}
               ActionPannel={
                 <ActionPannel
                   addItemToList={this.props.addItemToList}

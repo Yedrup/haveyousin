@@ -95,6 +95,7 @@ class Details extends React.Component {
   }
   render() {
     console.log("detail this state", this.state);
+    console.log("detail this this.props", this.props);
     let ActionPannel = this.props.ActionPannel;
     return (
       <section className="c-details">
@@ -113,13 +114,10 @@ class Details extends React.Component {
         <div className="c-detail__pannel">
           {React.cloneElement(
             ActionPannel,
-            { contentId: this.state.contentId },
-            { contentType: this.props.location.state.contentType }
+            { contentId: this.state.contentId ,
+            hysId : this.props.location.state.hysId,
+            contentType: this.props.location.state.contentType }
           )}
-          {/* <ActionPannel
-            contentId={this.state.contentId}
-            contentType={this.props.location.state.contentType}
-          /> */}
         </div>
       </section>
     );
