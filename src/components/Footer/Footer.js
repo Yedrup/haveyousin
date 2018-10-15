@@ -4,28 +4,53 @@ import { NavLink, withRouter } from "react-router-dom";
 import IconService from "../../services/IconService";
 
 class Footer extends React.Component {
+  getOneList = (state, idToFound) => {
+    let content = { ...this.props.lists.byId[idToFound] };
+    // console.log("content from getOneList", content);
+    return content;
+  };
   render() {
+    let getToWatchList;
+    let getArchiveList;
+    let getFavoritesList;
+    if (this.props.lists && this.props.lists.byId) {
+      getToWatchList = this.getOneList(this.props.lists.byId, "1");
+      getArchiveList = this.getOneList(this.props.lists.byId, "2");
+      getFavoritesList = this.getOneList(this.props.lists.byId, "3");
+    }
     const footerItems = [
       { title: "calendar", link: "/calendar" },
       {
         title: "toWatchList",
         link: "/list/1",
-        state: this.props.lists["List1"]
+        state: {
+          list: getToWatchList
+        }
       },
       {
         title: "archives",
         link: "/list/2",
-        state: this.props.lists["List2"]
+        state: {
+          list: getArchiveList
+        }
       },
       {
         title: "favorites",
         link: "/list/3",
-        state: this.props.lists["List3"]
+        state: {
+          list: getFavoritesList
+        }
       },
-      { title: "customLists", link: "/listHome" }
+      {
+        title: "customLists",
+        link: "/listHome",
+        state: {
+          list: this.props.lists
+        }
+      }
     ];
     let currentPath = this.props.location.pathname;
-
+    let itemsInList =  this.props.itemsInList
     return (
       <div className="c-footer">
         <ul className="c-footer__items">
@@ -34,9 +59,11 @@ class Footer extends React.Component {
             return (
               <li key={index}>
                 <NavLink
-                  to={{pathname: footerItem.link,
+                  to={{
+                    pathname: footerItem.link,
                     state: {
-                      list: footerItem.state ? footerItem.state : ""
+                      list: footerItem.state && footerItem.state.list? footerItem.state.list : "",
+                      itemsInList : itemsInList
                     }
                   }}
                   activeStyle={{

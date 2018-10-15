@@ -105,6 +105,7 @@ class App extends Component {
             </div>
             <Footer
               lists={lists}
+              itemsInList={itemsInList}
             />
           </div>
         </div>
