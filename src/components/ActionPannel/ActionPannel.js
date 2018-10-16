@@ -5,15 +5,15 @@ import { withRouter } from "react-router-dom";
 
 class ActionPannel extends React.Component {
   render() {
-    console.log("ActionPannel this.props", this.props);
+    // console.log("ActionPannel this.props", this.props);
     const {addItemToList,addToCustomList } = this.props;
     let contentId = this.props.contentId;
     let hysId = this.props.hysId;
-    console.log("hysId", hysId)
+    // console.log("hysId", hysId)
     let listId;
     if(this.props.match.params.listId) {
       listId = this.props.match.params.listId;
-      console.log(listId)
+      // console.log(listId)
     }
     const actionPannelItems = [
       {

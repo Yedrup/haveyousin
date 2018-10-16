@@ -7,6 +7,7 @@ import {
   getFromLocalStorage
 } from "../../services/localStorageService";
 import "./listOne.css";
+import { getOneList, getThisListItems } from "../../services/listServiceHelper";
 
 class ListOne extends React.Component {
   state = {
@@ -14,28 +15,14 @@ class ListOne extends React.Component {
     results: [],
     nameIcon: ""
   };
-
-  //TODO: service/helper with this function
-  getItemForThisList = (itemsInThisList, listOfItems) => {
-    console.log(" listOfItems", listOfItems);
-    console.log(" itemsInThisList", itemsInThisList);
-
-    const filtered = Object.keys(listOfItems)
-      .filter(key => itemsInThisList.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = listOfItems[key];
-        return obj;
-      }, {});
-    console.log(filtered);
-    return filtered;
-  };
-
   componentDidMount() {
-    console.log(this.props.location);
     console.log("this.props ListOne", this.props);
 
     if (this.props.location.state && this.props.location.state.list) {
-      let itemsFromThisList = this.getItemForThisList(
+      console.log( "this.props.location.state.list.itemsInList",  this.props.location.state.list.itemsInList,
+      );
+      console.log("this.props.location.state.list.itemsInList.byId",this.props.location.state.itemsInList.byId);
+      let itemsFromThisList = getThisListItems(
         this.props.location.state.list.itemsInList,
         this.props.location.state.itemsInList.byId
       );
@@ -52,13 +39,18 @@ class ListOne extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("prevProps", prevProps);
+    // console.log("prevProps", prevProps);
     console.log(this.props.location);
     if (
       this.props.match.params.listId !== prevProps.match.params.listId &&
       (this.props.location.state && this.props.location.state.list)
     ) {
-      let itemsFromThisList = this.getItemForThisList(
+      console.log(
+        this.props.location.state.list.itemsInList,
+        this.props.location.state.itemsInList.byId
+      );
+
+      let itemsFromThisList = getThisListItems(
         this.props.location.state.list.itemsInList,
         this.props.location.state.itemsInList.byId
       );
@@ -90,8 +82,7 @@ class ListOne extends React.Component {
         </header>
         <div className="o-list__cards">
           {Object.values(results).map(content => {
-            console.log("content", content.hysId);
-            //TODO : recreate service for list regarding type :/
+            // console.log("content", content.hysId);
             let contentType;
             if (content.first_air_date) contentType = "tv";
             else if (content.release_date) contentType = "movie";

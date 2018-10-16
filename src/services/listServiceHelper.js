@@ -19,6 +19,20 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
     return filtered;
   };
 
+export const getCustomLists = (customListIds, allLists) => {
+  console.log(" customListIds", customListIds);
+  console.log(" allLists", allLists);
+
+  const filtered = Object.keys(allLists)
+    .filter(key => customListIds.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = allLists[key];
+      return obj;
+    }, {});
+  console.log(filtered);
+  return filtered;
+};
+
   export const createHysIdForItems = (itemTmdbId, itemType) => {
     console.log("itemTmdbId", itemTmdbId);
     console.log(" itemType", itemType);
@@ -34,3 +48,20 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
     return `${itemTmdbId}${suffixToConstructId}`;
 
 }
+
+export const defineContentType = (objecContent) => {
+  console.log("objecContent", objecContent);
+  let contentType;
+  if (objecContent.first_air_date) {
+    contentType = "tv";
+  } else if (objecContent.release_date) {
+    contentType = "movie";
+  } else {
+    contentType = "person";
+  }
+
+  return contentType;
+
+}
+
+//function check if content present in one list

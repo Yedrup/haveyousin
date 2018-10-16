@@ -2,21 +2,17 @@ import React from "react";
 import "./footer.css";
 import { NavLink, withRouter } from "react-router-dom";
 import IconService from "../../services/IconService";
+import {getOneList} from "../../services/listServiceHelper";
 
 class Footer extends React.Component {
-  getOneList = (state, idToFound) => {
-    let content = { ...this.props.lists.byId[idToFound] };
-    // console.log("content from getOneList", content);
-    return content;
-  };
   render() {
     let getToWatchList;
     let getArchiveList;
     let getFavoritesList;
     if (this.props.lists && this.props.lists.byId) {
-      getToWatchList = this.getOneList(this.props.lists.byId, "1");
-      getArchiveList = this.getOneList(this.props.lists.byId, "2");
-      getFavoritesList = this.getOneList(this.props.lists.byId, "3");
+      getToWatchList = getOneList(this.props.lists.byId, "1");
+      getArchiveList = getOneList(this.props.lists.byId, "2");
+      getFavoritesList = getOneList(this.props.lists.byId, "3");
     }
     const footerItems = [
       { title: "calendar", link: "/calendar" },

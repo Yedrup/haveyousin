@@ -10,8 +10,8 @@ class Card extends React.Component {
   render() {
     let ActionPannel = this.props.ActionPannel;
     let hysId = this.props.hysId;
-    console.log("props from card", this.props);
-    console.log("props hysId card", hysId);
+    // console.log("props from card", this.props);
+    // console.log("props hysId card", hysId);
     if (this.props.contentType !== "person") {
       return (
         <article className="c-card">

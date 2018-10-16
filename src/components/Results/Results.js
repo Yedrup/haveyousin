@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./results.css";
 import ImageService from "../../services/ImageService";
 import { withRouter } from "react-router-dom";
+import {createHysIdForItems, defineContentType} from "../../services/listServiceHelper";
 
 class Results extends React.Component {
   render() {
@@ -13,16 +14,7 @@ class Results extends React.Component {
       return (
         <div className="c-searchResults">
           {searchResults.map(result => {
-            let suffixToConstructId;
-            if (result.media_type === "tv") {
-              suffixToConstructId = "s";
-            } else if (result.media_type === "movie") {
-              suffixToConstructId = "m";
-            } else {
-              suffixToConstructId = "p";
-            }
-
-            let hysId = `${result.id}${suffixToConstructId}`;
+          let hysId = createHysIdForItems(result.id,result.media_type);
 
             return (
               <Link

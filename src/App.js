@@ -30,8 +30,8 @@ class App extends Component {
 
   // use new file lists
   componentDidMount() {
-    console.log("Mounted!");
-    console.log(fakeState);
+    // console.log("Mounted!");
+    // console.log(fakeState);
     // const customList=fakeState.filter(list=>(list.canBeErased === true))
     // console.table(customList)
     this.setState({

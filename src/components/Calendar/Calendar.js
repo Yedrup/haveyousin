@@ -4,6 +4,7 @@ import "../ListOne/listOne.css";
 import { discoverMoviesLaps } from "../../services/tmdbService";
 import Card from "../Card/Card";
 import { withRouter } from "react-router-dom";
+import {createHysIdForItems, defineContentType} from "../../services/listServiceHelper";
 
 class Calendar extends React.Component {
   state = {
@@ -41,23 +42,10 @@ class Calendar extends React.Component {
         </header>
         <div className="o-list__cards">
           {this.state.datas.map(function(content, index) {
-            console.log("content", content);
-            //TODO : recreate service for list regarding type :/
-            let contentType;
-            let suffixToConstructId;
-            if (content.first_air_date) {
-              contentType = "tv";
-              suffixToConstructId = "s";
-            } else if (content.release_date) {
-              contentType = "movie";
-              suffixToConstructId = "m";
-            } else {
-              contentType = "person";
-              suffixToConstructId = "p";
-            }
-
-            let hysId = `${content.id}${suffixToConstructId}`;
-
+            // console.log("content", content);
+            let contentType =defineContentType(content);
+            let hysId = createHysIdForItems(content.id,contentType);
+            // console.log(`${hysId} and ${contentType}`)
             return (
               <Card
                 key={content.id}

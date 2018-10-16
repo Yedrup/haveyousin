@@ -3,6 +3,7 @@ import "./listHome.css";
 import MediaQuery from "react-responsive";
 import Truncate from "react-truncate";
 import { Link, withRouter } from "react-router-dom";
+import {getCustomLists, getOneList} from "../../services/listServiceHelper";
 
 class ListHome extends React.Component {
   state = {
@@ -10,29 +11,10 @@ class ListHome extends React.Component {
     lists: {}
   };
 
-  getOneList = (state, idToFound) => {
-    let content = { ...this.props.location.state.list.byId[idToFound] };
-    return content;
-  };
-
-  getCustomLists = (customListIds, allLists) => {
-    console.log(" customListIds", customListIds);
-    console.log(" allLists", allLists);
-
-    const filtered = Object.keys(allLists)
-      .filter(key => customListIds.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = allLists[key];
-        return obj;
-      }, {});
-    console.log(filtered);
-    return filtered;
-  };
-
   componentDidMount() {
-    console.log(this.props);
-    if (this.props.location.state && this.props.location.state.list) {
-      let customLists = this.getCustomLists(
+    console.log("this.props from ListHome",this.props);
+    if (this.props.location.state && this.props.location.state.list && this.props.location.state.itemsInList ) {
+      let customLists = getCustomLists(
         this.props.location.state.list.customListIds,
         this.props.location.state.list.byId
       );
@@ -46,19 +28,21 @@ class ListHome extends React.Component {
   }
 
   render() {
-    let getThisList;
-    const { customLists} = this.state;
-    console.log(this.state.lists);
+    const { customLists, lists} = this.state;
+    console.log("lists in listhome",lists);
     return (
       <div>
         <h2>ListHome</h2>
         <div className="c-listHome__list">
           {Object.values(customLists).map(customList => {
-            getThisList = this.getOneList(
-              this.props.location.state.itemsInList,
+            let getThisList;
+            console.log('this.state.customLists',customLists)
+            getThisList = getOneList(
+              customLists,
               customList.id
-            );
-            console.log(getThisList);
+            )
+            console.log("getThisList", getThisList);
+            console.log("this.props.location.state.itemsInList",this.props.location.state.itemsInList)
 
             return (
               <Link

@@ -2,24 +2,25 @@ import React from "react";
 import "./menu.css";
 import IconService from "../../services/IconService";
 import { NavLink, withRouter } from "react-router-dom";
+import {getCustomLists, getOneList} from "../../services/listServiceHelper";
 
 class Menu extends React.Component {
 
-  //TODO : add it in helpers' functions
-  getOneList = (state, idToFound) => {
-    let content = { ...this.props.lists.byId[idToFound] };
-    // console.log("content from getOneList", content);
-    return content;
-  };
+  // //TODO : add it in helpers' functions
+  // getOneList = (state, idToFound) => {
+  //   let content = { ...this.props.lists.byId[idToFound] };
+  //   // console.log("content from getOneList", content);
+  //   return content;
+  // };
 
   render() {
     let getToWatchList;
     let getArchiveList;
     let getFavoritesList;
     if (this.props.lists && this.props.lists.byId) {
-      getToWatchList = this.getOneList(this.props.lists.byId, "1");
-      getArchiveList = this.getOneList(this.props.lists.byId, "2");
-      getFavoritesList = this.getOneList(this.props.lists.byId, "3");
+      getToWatchList = getOneList(this.props.lists.byId, "1");
+      getArchiveList = getOneList(this.props.lists.byId, "2");
+      getFavoritesList = getOneList(this.props.lists.byId, "3");
     }
 
     const menuItems = [
@@ -71,6 +72,7 @@ class Menu extends React.Component {
     // console.log(this.props.location.pathname); // outputs currently active route
     let currentPath = this.props.location.pathname;
     let itemsInList =  this.props.itemsInList;
+    console.log("itemsInList from Menu", itemsInList)
     return (
       <div className="c-menu">
         <NavLink exact strict to={"/"}>
