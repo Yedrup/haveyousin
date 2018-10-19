@@ -79,7 +79,6 @@ class App extends Component {
     //   }
     // };
     // const FindList = listToUpdate => {
-    //   // return icon.title === iconToFind
     // }
   };
 
