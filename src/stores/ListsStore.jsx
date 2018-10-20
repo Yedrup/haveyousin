@@ -12,7 +12,7 @@
      }
  } 
 
- const store = window.store = new ListsStore;
+ const store = window.store = new ListsStore();
 
  export default store; 
 

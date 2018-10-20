@@ -1,27 +1,26 @@
- import {autorun, observable} from "mobx"
-import { boolean } from "mobx-state-tree/dist/internal";
+ import {autorun, observable, computed, action} from "mobx"
 
  class ListStore {
-     @observable itemsInThisList = []
      id = String 
-     dateOfCreation = Date
-     @observable dateLastModified= Date
      @observable name = String
+     @observable itemsInThisList = []
+     @observable isPrivate = Boolean
+     @observable dateLastModified= Date
+     @observable colorAssociated = String
+     @computed numberOfItems = Number
      canBeErased =  Boolean 
      isStyleEditable =  Boolean 
-     @computed numberOfItems = Number
-     @observable isPrivate = Boolean
+     dateOfCreation = Date
      //default grey
-     @observable colorAssociated = String
  } 
 
- const store = window.store = new ListStore;
+ const singleList = window.singleList = new ListStore();
 
- export default store; 
+ export default singleList; 
 
  autorun(() => {
-    console.log(store.lists)
+    console.log(singleList.itemsInThisList)
 
  })
 
- // in that way => ItemModel (id, hysid, item Current)
+ // in that way => ItemModel (id, hysid, item Current) 

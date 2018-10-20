@@ -19,11 +19,11 @@ class ListOne extends React.Component {
     console.log("this.props ListOne", this.props);
 
     if (this.props.location.state && this.props.location.state.list) {
-      console.log( "this.props.location.state.list.itemsInList",  this.props.location.state.list.itemsInList,
+      console.log( "this.props.location.state.list.itemsInThisList",  this.props.location.state.list.itemsInThisList,
       );
       console.log("this.props.location.state.list.itemsInList.byId",this.props.location.state.itemsInList.byId);
       let itemsFromThisList = getThisListItems(
-        this.props.location.state.list.itemsInList,
+        this.props.location.state.list.itemsInThisList,
         this.props.location.state.itemsInList.byId
       );
 
@@ -46,12 +46,12 @@ class ListOne extends React.Component {
       (this.props.location.state && this.props.location.state.list)
     ) {
       console.log(
-        this.props.location.state.list.itemsInList,
+        this.props.location.state.list.itemsInThisList,
         this.props.location.state.itemsInList.byId
       );
 
       let itemsFromThisList = getThisListItems(
-        this.props.location.state.list.itemsInList,
+        this.props.location.state.list.itemsInThisList,
         this.props.location.state.itemsInList.byId
       );
       this.setState({

@@ -12,7 +12,7 @@ class UiStore {
     @observable colorsAvailableInApp = [] 
 } 
 
-const store = window.store = new UiStore;
+const store = window.store = new UiStore();
 
 export default store; 
 

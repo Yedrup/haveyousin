@@ -1,6 +1,7 @@
 import "normalize.css";
 import { BrowserRouter } from "react-router-dom";
 import React, { Component } from "react";
+import { Provider } from 'mobx-react';
 import Router from "./components/Router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -14,6 +15,7 @@ import "./css/App.css";
 import "./css/variables.css";
 
 import fakeState from "./listsfakedata.newpattern.js";
+import ListStore from './stores/ListStore';
 
 //TODO : declare all functions modification here + firebase management
 
@@ -31,12 +33,12 @@ class App extends Component {
   // use new file lists
   componentDidMount() {
     // console.log("Mounted!");
-    // console.log(fakeState);
+    console.log(fakeState);
     // const customList=fakeState.filter(list=>(list.canBeErased === true))
     // console.table(customList)
     this.setState({
       lists: fakeState.lists,
-      itemsInList: fakeState.itemsInList,
+      itemsInList: fakeState.allItems,
       calendar: {
         nameList: "calendar",
         nameIcon: "calendar"

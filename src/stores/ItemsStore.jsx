@@ -10,7 +10,7 @@ class ItemsStore {
     }
 } 
 
-const store = window.store = new ItemsStore;
+const store = window.store = new ItemsStore();
 
 export default store; 
 

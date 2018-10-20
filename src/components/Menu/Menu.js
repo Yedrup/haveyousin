@@ -6,13 +6,6 @@ import {getCustomLists, getOneList} from "../../services/listServiceHelper";
 
 class Menu extends React.Component {
 
-  // //TODO : add it in helpers' functions
-  // getOneList = (state, idToFound) => {
-  //   let content = { ...this.props.lists.byId[idToFound] };
-  //   // console.log("content from getOneList", content);
-  //   return content;
-  // };
-
   render() {
     let getToWatchList;
     let getArchiveList;
