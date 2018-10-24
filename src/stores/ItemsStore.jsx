@@ -1,11 +1,13 @@
-import {autorun, observable, action} from "mobx"
+import {autorun, observable, action, computed} from "mobx"
 
 class ItemsStore {
     @observable allIds = []
-    hysId = String 
-    @computed numberOfItems = Number
+    @observable allItems = []
+    // @computed get numberOfItems = func
     @action addItemInList = (listId, item) => {
         console.log("new item added",item )
+        //TODO => add new item, need to create a class
+        //TODO create hysID
         this.itemsInThisList.push(item)
     }
 } 

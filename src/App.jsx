@@ -1,49 +1,38 @@
 import "normalize.css";
 import { BrowserRouter } from "react-router-dom";
 import React, { Component } from "react";
-import { Provider } from 'mobx-react';
+import { Provider } from "mobx-react";
 import Router from "./components/Router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Menu from "./components/Menu/Menu";
-import {
-  setInLocalStorage
-  // getFromLocalStorage
-} from "./services/localStorageService";
 
 import "./css/App.css";
 import "./css/variables.css";
 
-import fakeState from "./listsfakedata.newpattern.js";
-import ListStore from './stores/ListStore';
+// import fakeState from "./listsfakedata.newpattern.js";
+import fakeState from "./listsfakedata.mobx";
+import listsStore from "./stores/ListsStore";
+import itemsStore from "./stores/ItemsStore";
 
 //TODO : declare all functions modification here + firebase management
 
 class App extends Component {
-  //initialize state
-  state = {
-    lists: {},
-    itemsInList: {},
-    calendar: {},
-    userIsConnect: false,
-    userId: 0,
-    lastResearchMade: ""
-  };
 
-  // use new file lists
   componentDidMount() {
-    // console.log("Mounted!");
-    console.log(fakeState);
-    // const customList=fakeState.filter(list=>(list.canBeErased === true))
-    // console.table(customList)
-    this.setState({
-      lists: fakeState.lists,
-      itemsInList: fakeState.allItems,
-      calendar: {
-        nameList: "calendar",
-        nameIcon: "calendar"
-      }
-    });
+    listsStore.lists = fakeState.lists.byId;
+    listsStore.allIds = fakeState.lists.allIds;
+    listsStore.customListIds = fakeState.lists.customListIds;
+    listsStore.defaultListIds = fakeState.lists.defaultListIds;
+    listsStore.numberOfLists = fakeState.lists.numberOfLists;
+
+    itemsStore.allItems = fakeState.allItemsInLists.byId;
+    itemsStore.allIds = fakeState.allItemsInLists.allIds;
+
+    console.log("component did mount app");
+    console.log("listsStore", listsStore);
+    console.log("itemsStore", itemsStore);
+
   }
 
   addToCustomList = (itemId, listId) => {
@@ -55,61 +44,26 @@ class App extends Component {
     console.log(
       `log from function addItemToList listId : ${listId} , item id: ${itemId}`
     );
-    // const listToUpdate = listId;
-    // const itemToAdd = itemId;
-    // const index = this.state.lists.find(list => {
-    //   return list === listToUpdate;
-    // });
-    // console.log(this.state.lists[index]);
-    // const currentStateList = this.state.lists[listToUpdate];
-    // console.log(currentStateList)
-    // console.log(listToUpdate)
-
-    // const newStateList = {...currentStateList,results: [...currentStateList.results]}
-    // newStateList.rsesults.push({test:"hell yeah"})
-    // console.log(newStateList.results);
-    // this.setState(prevState =>({
-    //   lists: {
-    //     ...prevState, [list][listToUpdate][results] : newStateList
-    //   }
-    // }))
-    // const newStateList = {
-    //   ...lists,
-    //   results: {
-    //     ...lists.listToUpdate.results,
-    //     results
-    //   }
-    // };
-    // const FindList = listToUpdate => {
-    // }
   };
 
   render() {
-    const {lists,itemsInList} = this.state;
-    console.log("this.state", this.state);
+    console.log(listsStore);
     return (
       <BrowserRouter>
-        <div className="App">
-          <Menu 
-          lists={lists}
-          itemsInList={itemsInList}
-          />
-          <div className="content">
-            <Header />
-            <div className="main">
-              <Router
-                lists={lists}
-                calendar={this.state.calendar}
-                addItemToList={this.addItemToList}
-                addToCustomList={this.addToCustomList}
+        <Provider ListsStore={listsStore} ItemsStore={itemsStore}>
+          <div className="App">
+            <Menu
+            />
+            <div className="content">
+              <Header />
+              <div className="main">
+                <Router/>
+              </div>
+              <Footer
               />
             </div>
-            <Footer
-              lists={lists}
-              itemsInList={itemsInList}
-            />
           </div>
-        </div>
+        </Provider>
       </BrowserRouter>
     );
   }

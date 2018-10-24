@@ -3,18 +3,21 @@ import "./menu.css";
 import IconService from "../../services/IconService";
 import { NavLink, withRouter } from "react-router-dom";
 import {getCustomLists, getOneList} from "../../services/listServiceHelper";
-
+import { inject, observer } from "mobx-react";
+@inject('ListsStore') 
+@observer
 class Menu extends React.Component {
-
   render() {
-    let getToWatchList;
-    let getArchiveList;
-    let getFavoritesList;
-    if (this.props.lists && this.props.lists.byId) {
-      getToWatchList = getOneList(this.props.lists.byId, "1");
-      getArchiveList = getOneList(this.props.lists.byId, "2");
-      getFavoritesList = getOneList(this.props.lists.byId, "3");
-    }
+    const {ListsStore} = this.props;
+    console.log("menu",ListsStore);
+    // let getToWatchList;
+    // let getArchiveList;
+    // let getFavoritesList;
+    // if (this.props.lists && this.props.lists.byId) {
+    //   getToWatchList = getOneList(this.props.lists.byId, "1");
+    //   getArchiveList = getOneList(this.props.lists.byId, "2");
+    //   getFavoritesList = getOneList(this.props.lists.byId, "3");
+    // }
 
     const menuItems = [
       {
@@ -28,23 +31,23 @@ class Menu extends React.Component {
       {
         title: "toWatchList",
         link: "/list/1",
-        state: {
-          list: getToWatchList
-        }
+        // state: {
+        //   list: getToWatchList
+        // }
       },
       {
         title: "archives",
         link: "/list/2",
-        state: {
-          list: getArchiveList
-        }
+        // state: {
+        //   list: getArchiveList
+        // }
       },
       {
         title: "favorites",
         link: "/list/3",
-        state: {
-          list: getFavoritesList
-        }
+        // state: {
+        //   list: getFavoritesList
+        // }
       },
       {
         title: "customLists",
@@ -64,8 +67,8 @@ class Menu extends React.Component {
     ];
     // console.log(this.props.location.pathname); // outputs currently active route
     let currentPath = this.props.location.pathname;
-    let itemsInList =  this.props.itemsInList;
-    console.log("itemsInList from Menu", itemsInList)
+    // let itemsInList =  this.props.itemsInList;
+    // console.log("itemsInList from Menu", itemsInList)
     return (
       <div className="c-menu">
         <NavLink exact strict to={"/"}>
@@ -89,8 +92,8 @@ class Menu extends React.Component {
                       customLists:
                         menuItem.state && menuItem.state.customLists
                           ? menuItem.state.customLists
-                          : "",
-                      itemsInList : itemsInList
+                          : ""
+                      // itemsInList : itemsInList
                     }
                   }}
                   activeStyle={{

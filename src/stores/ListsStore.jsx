@@ -1,4 +1,6 @@
  import {autorun, observable, action} from "mobx"
+// import  from "/src/listsfakedata.mobx"
+import fakeState from "../listsfakedata.mobx.js";
 
  class ListsStore {
      @observable lists = []
@@ -8,16 +10,17 @@
      @observable numberOfLists = Number
      @action addNewList = (newList) => {
          console.log("new list added",newList )
-         this.lists.push(newList)
+         this.allIds.push(newList)
      }
  } 
 
- const store = window.store = new ListsStore();
+ const listsStore = window.listsStore = new ListsStore();
 
- export default store; 
+
+export default listsStore; 
 
  autorun(() => {
-    console.log(store.lists)
+    console.log(listsStore)
 
  })
 

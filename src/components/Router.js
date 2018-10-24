@@ -27,8 +27,8 @@ class Router extends React.Component {
             <ListOne
               ActionPannel={
                 <ActionPannel
-                  addItemToList={this.props.addItemToList}
-                  addToCustomList={this.props.addToCustomList}
+                //   addItemToList={this.props.addItemToList}
+                //   addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -43,8 +43,8 @@ class Router extends React.Component {
             <ListHome
               ActionPannel={
                 <ActionPannel
-                  addItemToList={this.props.addItemToList}
-                  addToCustomList={this.props.addToCustomList}
+                  // addItemToList={this.props.addItemToList}
+                  // addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -57,8 +57,8 @@ class Router extends React.Component {
             <Details
               ActionPannel={
                 <ActionPannel
-                  addItemToList={this.props.addItemToList}
-                  addToCustomList={this.props.addToCustomList}
+                  // addItemToList={this.props.addItemToList}
+                  // addToCustomList={this.props.addToCustomList}
                 />
               }
             />
@@ -68,11 +68,11 @@ class Router extends React.Component {
           path="/calendar"
           render={() => (
             <Calendar
-              list={this.props.calendar}
+              // list={this.props.calendar}
               ActionPannel={
                 <ActionPannel
-                addItemToList={this.props.addItemToList}
-                addToCustomList={this.props.addToCustomList}
+                // addItemToList={this.props.addItemToList}
+                // addToCustomList={this.props.addToCustomList}
                 />
               }
             />
