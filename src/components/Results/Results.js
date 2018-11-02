@@ -26,7 +26,10 @@ class Results extends React.Component {
                   state: {
                     contentId: result.id,
                     contentType: result.media_type,
-                    hysId
+                    hysId,
+                    poster: result.media_type === "person" ? result.profile_path : result.backdrop_path,
+                    release: result.media_type  === "tv" ? this.props.first_air_date : this.props.release_date,
+                    title: this.props.title
                   }
                 }}
                 onClick={this.props.clearResults}

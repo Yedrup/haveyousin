@@ -12,8 +12,9 @@ import ImageService from "../../services/ImageService";
 class Details extends React.Component {
   state = {
     details: [],
-    photo: "",
-    name: "",
+    poster: "",
+    title: "",
+    release:"",
     loaded: false
   };
   getDetails = async (id, type) => {
@@ -25,9 +26,9 @@ class Details extends React.Component {
         console.log("details : ", details);
         this.setState({
           details,
-          photo: details.profile_path,
+          poster: details.profile_path,
           contentId: details.id,
-          name: details.name,
+          title: details.name,
           loaded: true
         });
       } catch (error) {
@@ -40,8 +41,9 @@ class Details extends React.Component {
         console.log("details : ", details);
         this.setState({
           details,
-          photo: details.poster_path,
-          name: details.name,
+          poster: details.poster_path,
+          title: details.name,
+          release: details.first_air_date,
           contentId: details.id,
           loaded: true
         });
@@ -55,8 +57,9 @@ class Details extends React.Component {
         console.log("details : ", details);
         this.setState({
           details,
-          photo: details.poster_path,
-          name: details.title,
+          poster: details.poster_path,
+          title: details.title,
+          release: details.release_date,
           contentId: details.id,
           loaded: true
         });
@@ -75,8 +78,10 @@ class Details extends React.Component {
   componentWillUnmount() {
     this.setState({
       details: [],
-      photo: "",
-      name: "",
+      poster: "",
+      release:"",
+      title: "",
+      contentId:"",
       loaded: false
     });
   }
@@ -93,30 +98,31 @@ class Details extends React.Component {
   }
   render() {
     let ActionPannel = this.props.ActionPannel;
+    let {poster, title, contentId, release} = this.state;
+    console.log("this.stateee",this.state)
     return (
       <section className="c-details">
         <header className="c-detail__header">
           <ImageService
             size="185"
-            photoPath={this.state.photo}
-            imageTitle={this.state.name}
+            photoPath={poster}
+            imageTitle={title}
           />
-          <h1 className="c-detail__title">{this.state.name}</h1>
+          <h1 className="c-detail__title">{title}</h1>
         </header>
         <p>
-          DETAILS of content id {this.state.contentId} and named
-          {this.state.name}
+          DETAILS of content id {contentId} and titled {title}
         </p>
         <div className="c-detail__pannel">
           {React.cloneElement(
             ActionPannel,
             { 
-            contentId: this.state.contentId ,
+            contentId: contentId ,
             hysId : this.props.location.state.hysId,
             contentType: this.props.location.state.contentType, 
-            poster: this.props.location.state.poster,
-            release: this.props.location.state.release,
-            title: this.props.location.state.title
+            poster: poster,
+            release: release,
+            title: title
           }
           )}
         </div>

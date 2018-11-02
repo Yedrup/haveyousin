@@ -10,7 +10,6 @@ class ItemsStore {
         //TODO => add new item, need to create a class
         //TODO create hysID
         this.allIds.push(item.hysId);
-        let hysId = item.hysId;
         let iteem = {[item.hysId]:item};
         this.allItems = {...this.allItems, ...iteem}
     }
