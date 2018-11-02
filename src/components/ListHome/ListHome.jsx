@@ -13,7 +13,7 @@ import {
 @observer
 class ListHome extends React.Component {
   componentDidMount() {
-    console.log("this.props from ListHome", this.props);
+    // console.log("this.props from ListHome", this.props);
   }
 
   render() {

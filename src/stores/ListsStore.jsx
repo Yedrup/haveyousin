@@ -8,9 +8,13 @@ import fakeState from "../listsfakedata.mobx.js";
      @observable customListIds = []
      @observable defaultListIds = []
      @observable numberOfLists = Number
-     @action addNewList = (newList) => {
-         console.log("new list added",newList )
+     @action.bound
+     addNewList = (newList) => {
          this.allIds.push(newList)
+     }
+     @action.bound
+     addItemInThisList = (listId, itemId) => {
+         return this.lists[listId].itemsInThisList.push(itemId);
      }
  } 
 
@@ -20,7 +24,7 @@ import fakeState from "../listsfakedata.mobx.js";
 export default listsStore; 
 
  autorun(() => {
-    console.log(listsStore)
+    console.log("autorun listsStore ",listsStore)
 
  })
 

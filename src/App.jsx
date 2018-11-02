@@ -29,10 +29,6 @@ class App extends Component {
     itemsStore.allItems = fakeState.allItemsInLists.byId;
     itemsStore.allIds = fakeState.allItemsInLists.allIds;
 
-    console.log("component did mount app");
-    console.log("listsStore", listsStore);
-    console.log("itemsStore", itemsStore);
-
   }
 
   addToCustomList = (itemId, listId) => {

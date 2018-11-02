@@ -10,7 +10,6 @@ class Header extends React.Component {
     isSearchFieldOpenSmallDevice: false
   };
   openSearchOnSmall = () => {
-    console.log("test from search small");
     this.setState({
       isSearchFieldOpenSmallDevice: !this.state.isSearchFieldOpenSmallDevice
     });

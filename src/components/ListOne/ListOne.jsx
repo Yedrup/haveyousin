@@ -17,8 +17,7 @@ class ListOne extends React.Component {
  
   //idea : not passing by router anymore, use store
   componentDidMount() {
-    console.log("this.props ListOne", this.props);
-    console.log("this.props.match.params", this.props.match.params.listId);
+    // console.log("this.props ListOne", this.props);
   }
 
   render() {
@@ -52,8 +51,8 @@ class ListOne extends React.Component {
           {Object.values(itemsFromThisList).map(content => {
             // console.log("content", content.hysId);
             let contentType;
-            if (content.first_air_date) contentType = "tv";
-            else if (content.release_date) contentType = "movie";
+            if (content.first_air_date || content.contentType === "tv" ) contentType = "tv";
+            else if (content.release_date || content.contentType === "movie" ) contentType = "movie";
             else contentType = "person";
             return (
               <Card
@@ -61,12 +60,8 @@ class ListOne extends React.Component {
                 contentId={content.id}
                 hysId={content.hysId}
                 title={content.title}
-                release={content.release_date}
-                poster={
-                  content.media_type === "person"
-                    ? content.profile_path
-                    : content.poster_path
-                }
+                release={content.release}
+                poster={content.poster}
                 contentType={contentType}
                 ActionPannel={ActionPannel}
               />

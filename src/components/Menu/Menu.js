@@ -9,15 +9,6 @@ import { inject, observer } from "mobx-react";
 class Menu extends React.Component {
   render() {
     const {ListsStore} = this.props;
-    console.log("menu",ListsStore);
-    // let getToWatchList;
-    // let getArchiveList;
-    // let getFavoritesList;
-    // if (this.props.lists && this.props.lists.byId) {
-    //   getToWatchList = getOneList(this.props.lists.byId, "1");
-    //   getArchiveList = getOneList(this.props.lists.byId, "2");
-    //   getFavoritesList = getOneList(this.props.lists.byId, "3");
-    // }
 
     const menuItems = [
       {
@@ -31,23 +22,14 @@ class Menu extends React.Component {
       {
         title: "toWatchList",
         link: "/list/1",
-        // state: {
-        //   list: getToWatchList
-        // }
       },
       {
         title: "archives",
         link: "/list/2",
-        // state: {
-        //   list: getArchiveList
-        // }
       },
       {
         title: "favorites",
         link: "/list/3",
-        // state: {
-        //   list: getFavoritesList
-        // }
       },
       {
         title: "customLists",
@@ -65,10 +47,7 @@ class Menu extends React.Component {
         link: "/about"
       }
     ];
-    // console.log(this.props.location.pathname); // outputs currently active route
     let currentPath = this.props.location.pathname;
-    // let itemsInList =  this.props.itemsInList;
-    // console.log("itemsInList from Menu", itemsInList)
     return (
       <div className="c-menu">
         <NavLink exact strict to={"/"}>

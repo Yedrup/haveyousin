@@ -18,7 +18,6 @@ class Calendar extends React.Component {
   discoverMovies = async () => {
     let datas = await discoverMoviesLaps();
     if (!datas) return null;
-    console.log("datas :", datas);
     this.setState({
       datas: datas.results
     });
@@ -30,7 +29,6 @@ class Calendar extends React.Component {
 
   render() {
     const { ActionPannel } = this.props;
-    console.log(this.state.datas);
     // test if offline
     // if (this.state.datas && this.state.datas.length <= 0) {
     //   return <div>Nothing there</div>;
@@ -46,7 +44,6 @@ class Calendar extends React.Component {
             // console.log("content", content);
             let contentType = defineContentType(content);
             let hysId = createHysIdForItems(content.id, contentType);
-            // console.log(`${hysId} and ${contentType}`)
             return (
               <Card
                 key={content.id}
