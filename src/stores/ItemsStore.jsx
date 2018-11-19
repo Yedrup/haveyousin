@@ -23,32 +23,31 @@ class ItemsStore {
 
 const store = (window.store = new ItemsStore());
 let firstStoreItemsrun;
-let initStoreItemsFinished = false;
+let initStoreItemsFinished;
 
-const init = async () => {
-  let isExistingProperty = await isExistingInLocalStorage("firstStoreItemsrun");
+const init = () => {
+  let isExistingProperty = isExistingInLocalStorage("firstStoreItemsrun");
   if (isExistingProperty) {
-    firstStoreItemsrun = await getFromLocalStorage("firstStoreItemsrun");
+    firstStoreItemsrun = getFromLocalStorage("firstStoreItemsrun");
   } else {
-    console.log("ITEMSTORE - property firstStoreItemsrun doesn't exist");
     setInLocalStorage("firstStoreItemsrun", true);
     isExistingProperty = true;
     firstStoreItemsrun = true;
   }
-  console.log("firstStoreItemsrun init function", firstStoreItemsrun);
+  // console.log("firstStoreItemsrun init function", firstStoreItemsrun);
   if (isExistingProperty && firstStoreItemsrun) {
-    console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
+    // console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
     store.allItems = fakeState.allItemsInLists.byId;
     store.allIds = fakeState.allItemsInLists.allIds;
     setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
     setInLocalStorage("hysItems", fakeState.allItemsInLists.byId);
     setInLocalStorage("firstStoreItemsrun", false);
   } else {
-    console.log("ITEMSTORE - need to get data from localstorage, because is firstrun = ", firstStoreItemsrun);
+    // console.log("ITEMSTORE - need to get data from localstorage, because is firstrun = ", firstStoreItemsrun);
     store.allItems = getFromLocalStorage("hysItems");
     store.allIds = getFromLocalStorage("itemsIds");
     setInLocalStorage("firstStoreItemsrun", false);
-    console.log("ITEMSTORE - already data returns :", store.allItems, store.allIds);
+    // console.log("ITEMSTORE - already data returns :", store.allItems, store.allIds);
   }
   initStoreItemsFinished = true;
 };
@@ -57,8 +56,8 @@ init();
 
 export default store;
 autorun( () => {
-  console.log("ITEMSTORE - autorun yahou")
-  console.log("ITEMSTORE - is initStoreItemsFinished autorun", initStoreItemsFinished)
+  console.log("ITEMSTORE - autorun")
+  // console.log("ITEMSTORE - is initStoreItemsFinished autorun", initStoreItemsFinished)
   if(initStoreItemsFinished) {
     console.log("ITEMSTORE -  passing by update function")
     updateDataItemStore(store)

@@ -38,21 +38,21 @@ class ListsStore {
 
 const listsStore = (window.listsStore = new ListsStore());
 let firstStoreListsrun;
-let initStoreListFinished = false;
+let initStoreListFinished;
 
-const init = async () => {
-  let isExistingProperty = await isExistingInLocalStorage("firstStoreListsrun");
+const init = () => {
+  let isExistingProperty =  isExistingInLocalStorage("firstStoreListsrun");
   if (isExistingProperty) {
-    firstStoreListsrun = await getFromLocalStorage("firstStoreListsrun");
+    firstStoreListsrun =  getFromLocalStorage("firstStoreListsrun");
   } else {
-    console.log("LISTSSTORE - firstRun property doesn't exist");
+    // console.log("LISTSSTORE - firstRun property doesn't exist");
     setInLocalStorage("firstStoreListsrun", true);
     firstStoreListsrun = true;
     isExistingProperty = true;
   }
-  console.log("LISTSSTORE - firstStoreListsrun init function ", firstStoreListsrun);
+  // console.log("LISTSSTORE - firstStoreListsrun init function ", firstStoreListsrun);
   if (isExistingProperty && firstStoreListsrun) {
-    console.log("it's first run ", firstStoreListsrun);
+    // console.log("it's first run ", firstStoreListsrun);
     listsStore.lists = fakeState.lists.byId;
     listsStore.allIds = fakeState.lists.allIds;
     listsStore.customListIds = fakeState.lists.customListIds;
@@ -63,13 +63,13 @@ const init = async () => {
      setInLocalStorage("defaultListIds", listsStore.defaultListIds);
      setInLocalStorage("firstStoreListsrun", false);
   } else {
-    console.log("LISTSSTORE - need to get data from localstorage, because is firstrun = ", firstStoreListsrun);
+    // console.log("LISTSSTORE - need to get data from localstorage, because is firstrun = ", firstStoreListsrun);
     listsStore.lists =  getFromLocalStorage("hysLists");
     listsStore.allIds =  getFromLocalStorage("listAllIds");
     listsStore.customListIds =  getFromLocalStorage("customListIds");
     listsStore.defaultListIds =  getFromLocalStorage("defaultListIds");
     setInLocalStorage("firstStoreListsrun", false);
-    console.log("LISTSSTORE - already data returns liststore :", listsStore.lists);
+    // console.log("LISTSSTORE - already data returns liststore :", listsStore.lists);
   }
   initStoreListFinished = true;
 }
@@ -78,8 +78,8 @@ init();
 export default listsStore;
 
 autorun(() => {
-  console.log("LISTSSTORE - autorun yahou ")
-  console.log("LISTSSTORE - is initStoreListFinished autorun listsSTORE", initStoreListFinished)
+  console.log("LISTSSTORE - autorun")
+  // console.log("LISTSSTORE - is initStoreListFinished autorun listsSTORE", initStoreListFinished)
   if(initStoreListFinished) {
     console.log("LISTSSTORE -  passing by update function")
     updateDataListsStore(listsStore)

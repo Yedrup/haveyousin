@@ -30,6 +30,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "mobx": "^5.5.0",
+    "mobx-localstorage": "^1.1.0",
     "mobx-react": "^5.3.1",
     "mobx-state-tree": "^3.5.0",
     "normalize.css": "^8.0.0",
@@ -96,7 +97,9 @@
     ]
   },
   "babel": {
-    "plugins": ["babel-plugin-transform-decorators-legacy"],
+    "plugins": [
+      "babel-plugin-transform-decorators-legacy"
+    ],
     "presets": [
       "react-app"
     ]
