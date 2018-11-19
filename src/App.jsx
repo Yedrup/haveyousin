@@ -20,14 +20,6 @@ import itemsStore from "./stores/ItemsStore";
 class App extends Component {
 
   componentDidMount() {
-    listsStore.lists = fakeState.lists.byId;
-    listsStore.allIds = fakeState.lists.allIds;
-    listsStore.customListIds = fakeState.lists.customListIds;
-    listsStore.defaultListIds = fakeState.lists.defaultListIds;
-    listsStore.numberOfLists = fakeState.lists.numberOfLists;
-
-    itemsStore.allItems = fakeState.allItemsInLists.byId;
-    itemsStore.allIds = fakeState.allItemsInLists.allIds;
 
   }
 

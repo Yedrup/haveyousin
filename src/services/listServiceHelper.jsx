@@ -1,14 +1,13 @@
 export const getOneList = (listArray, idToFound) => {
-    let content = { ...listArray[idToFound]
-    };
-    console.log("content from getOneList", content);
-    return content;
+  let content = { ...listArray[idToFound] };
+  console.log("content from getOneList", content);
+  return content;
 };
 
 export const getThisListItems = (itemsInThisList, AllItems) => {
-    console.log(" itemsInThisList", itemsInThisList);
-    console.log(" AllItems", AllItems);
-
+  console.log(" itemsInThisList", itemsInThisList);
+  console.log(" AllItems", AllItems);
+  if (itemsInThisList !== undefined) {
     const filtered = Object.keys(AllItems)
       .filter(key => itemsInThisList.includes(key))
       .reduce((obj, key) => {
@@ -17,7 +16,8 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
       }, {});
     console.log(filtered);
     return filtered;
-  };
+  }
+};
 
 export const getCustomLists = (customListIds, allLists) => {
   console.log(" customListIds", customListIds);
@@ -33,24 +33,23 @@ export const getCustomLists = (customListIds, allLists) => {
   return filtered;
 };
 
-  export const createHysIdForItems = (itemTmdbId, itemType) => {
-    console.log("itemTmdbId", itemTmdbId);
-    console.log(" itemType", itemType);
+export const createHysIdForItems = (itemTmdbId, itemType) => {
+  // console.log("itemTmdbId", itemTmdbId);
+  // console.log(" itemType", itemType);
 
-    let suffixToConstructId;
-    if (itemType === "tv") {
-      suffixToConstructId = "s";
-    } else if (itemType === "movie") {
-      suffixToConstructId = "m";
-    } else {
-      suffixToConstructId = "p";
-    }
-    return `${itemTmdbId}${suffixToConstructId}`;
+  let suffixToConstructId;
+  if (itemType === "tv") {
+    suffixToConstructId = "s";
+  } else if (itemType === "movie") {
+    suffixToConstructId = "m";
+  } else {
+    suffixToConstructId = "p";
+  }
+  return `${itemTmdbId}${suffixToConstructId}`;
+};
 
-}
-
-export const defineContentType = (objecContent) => {
-  console.log("objecContent", objecContent);
+export const defineContentType = objecContent => {
+  // console.log("objecContent", objecContent);
   let contentType;
   if (objecContent.first_air_date) {
     contentType = "tv";
@@ -61,7 +60,6 @@ export const defineContentType = (objecContent) => {
   }
 
   return contentType;
-
-}
+};
 
 //function check if content present in one list

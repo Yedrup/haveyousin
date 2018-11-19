@@ -45,6 +45,7 @@
     .c-card {
         margin-right: 1rem;
         flex-direction: column;
+        justify-content: space-between;
         flex: none;
         width: 185px;
     }

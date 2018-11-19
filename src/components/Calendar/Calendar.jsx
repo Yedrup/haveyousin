@@ -68,3 +68,9 @@ class Calendar extends React.Component {
 }
 
 export default withRouter(Calendar);
+
+// listsStore.lists = fakeState.lists.byId;
+// listsStore.allIds = fakeState.lists.allIds;
+// listsStore.customListIds = fakeState.lists.customListIds;
+// listsStore.defaultListIds = fakeState.lists.defaultListIds;
+// listsStore.numberOfLists = fakeState.lists.numberOfLists;

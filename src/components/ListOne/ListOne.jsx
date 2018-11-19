@@ -21,7 +21,6 @@ class ListOne extends React.Component {
   }
 
   render() {
-    this.props.ListsStore.addNewList("414");
     let getThisList = getOneList(
       this.props.ListsStore.lists,
       this.props.match.params.listId

@@ -11,7 +11,6 @@ class ImageService extends React.Component {
         else if(this.props.size === "185")event.target.src = ImageDefault185
     }
   render() {
-    console.log(this.props.photoPath)
     return (
         <div className={"c-image-background c-image-background--"+this.props.size}>
          <img className="c-image"
