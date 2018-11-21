@@ -8,12 +8,14 @@
     background-color: var(--headerBackgroundColor);
     color: var(--headerTextColor);
     min-height: var(--headerHeight);
+    align-items: flex-end;
 }
 .c-header__main {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    width: 65%;
 }
 
 .c-logo {

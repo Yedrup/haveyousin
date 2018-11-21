@@ -24,12 +24,12 @@ class Header extends React.Component {
       <header className="c-header">
         <div className="c-header__main">
           <MediaQuery maxWidth={1024}>
-            <span onClick={this.openMenu}>
+            {/* <span onClick={this.openMenu}>
               <IconService
                   nameIcon={"menu"}
                   iconStyleContext={{ color: "var(--color-silver)", className: "c-header__menu-icon" }}
                 />
-            </span>
+            </span> */}
             <Link to={"/"}>
               <h1 className="c-logo c-logo--header ">HaveYouSin</h1>
             </Link>

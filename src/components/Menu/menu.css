@@ -1,10 +1,75 @@
-.c-menu {
-    background: var(--menuBackgroundColor);
-    width:var(--menuWidth);
+/*BURGER Menu*/
+.bm-burger-bars {
+    background: var(--color-silver);
+  }
+  
+  .bm-burger-button {
     position: fixed;
-    height: 100%;
+    width: 15px;
+    height: 15px;
+    left: 36px;
+    top: calc(var(--headerHeight)/2 - 7.5px);
+  }
+
+
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: var(--button-close-color);
+  }
+  
+  /* General sidebar styles */
+  .bm-menu[class] {
+    background: var(--menuBackgroundColor);
+    /* padding: 2.5em 1.5em 0; */
     padding: 0 0 0 .5rem;
-    z-index: 800;
+    font-size: 1.15em;
+    overflow: unset!important;
+    /* background: lightblue; */
+    height: 100%;
+    /* height: calc(100vh - var(--footerHeight))!important; */
+}
+.bm-menu-wrap {
+    height: calc(100vh - var(--footerHeight))!important;
+    background: red
+
+}
+
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+  
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
+  
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+  
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+/*****/
+
+.c-menu {
+    /* background: var(--menuBackgroundColor); */
+    /* width:var(--menuWidth); */
+    /* position: fixed; */
+    height: 100%;
+    /* padding: 0 0 0 .5rem; */
+    /* z-index: 800; */
 }
 .c-logo--menu {
     height: var(--headerHeight);
@@ -39,11 +104,24 @@
 }
 
 
+.testtest {
+    color:red
+}
+
 @media screen and (max-width:1024px) {
-    .c-menu { 
+    /*TODO: manage this by react mediaqueries*/
+    /* .c-menu { 
       display:none;
-     }
+     } */
      .c-menu__button { 
         display:flex;
+    }
+}
+@media screen and (min-width:1024px) {
+
+      .bm-menu-wrap {
+        height: 100vh;
+        background: red
+    
     }
 }

@@ -5,7 +5,8 @@ import { Provider } from "mobx-react";
 import Router from "./components/Router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Menu from "./components/Menu/Menu";
+// import Menu from "./components/Menu/Menu";
+import NewMenu from "./components/Menu/NewMenu";
 
 import "./css/App.css";
 import "./css/variables.css";
@@ -18,10 +19,7 @@ import itemsStore from "./stores/ItemsStore";
 //TODO : declare all functions modification here + firebase management
 
 class App extends Component {
-
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   addToCustomList = (itemId, listId) => {
     console.log(
@@ -40,15 +38,14 @@ class App extends Component {
       <BrowserRouter>
         <Provider ListsStore={listsStore} ItemsStore={itemsStore}>
           <div className="App">
-            <Menu
-            />
+            {/* <Menu /> */}
+            <NewMenu/>
             <div className="content">
               <Header />
               <div className="main">
-                <Router/>
+                <Router />
               </div>
-              <Footer
-              />
+              <Footer />
             </div>
           </div>
         </Provider>

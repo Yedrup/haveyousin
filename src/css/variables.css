@@ -19,10 +19,11 @@
 
     --iconNavColor: var(--color-silver);
     --menuTexColor: var( --color-scorpion);
+    /* --menuBackgroundColor: var(--color-boulder); */
     --menuBackgroundColor: var(--color-carbon);
     --menuMarginTop : var(--headerHeight);
-    --button-close-color : var(---color-boulder);
-    --menuWidth : 20%;
+    --button-close-color : var(--color-boulder);
+    --menuWidth : 20%; /*DELETE*/
 
     --bodyBackgroundColor: var(--color-codGrey-darker);
     --bodyTextColor: var(--color-boulder);
