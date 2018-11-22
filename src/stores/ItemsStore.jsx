@@ -1,4 +1,4 @@
-import { autorun, observable, action, computed } from "mobx";
+import { autorun, observable, action } from "mobx";
 import fakeState from "../listsfakedata.mobx.js";
 import {
   setInLocalStorage,
@@ -9,15 +9,17 @@ import {updateDataItemStore} from "../services/storeService";
 
 class ItemsStore {
   @observable allIds = [];
+
   @observable allItems = {};
+
   @action.bound
   addItemInItemsList(listId, item) {
     console.log("new item added", item, "in list ", listId);
     //TODO => add new item, need to create a class
     //TODO create hysID
     this.allIds.push(item.hysId);
-    let iteem = { [item.hysId]: item };
-    this.allItems = { ...this.allItems, ...iteem };
+    let newItem = { [item.hysId]: item };
+    this.allItems = { ...this.allItems, ...newItem };
   }
 }
 
@@ -25,29 +27,30 @@ const store = (window.store = new ItemsStore());
 let firstStoreItemsrun;
 let initStoreItemsFinished;
 
-const init = () => {
-  let isExistingProperty = isExistingInLocalStorage("firstStoreItemsrun");
+const init =  () => {
+  let isExistingProperty =  isExistingInLocalStorage("firstStoreItemsrun");
   if (isExistingProperty) {
     firstStoreItemsrun = getFromLocalStorage("firstStoreItemsrun");
   } else {
     setInLocalStorage("firstStoreItemsrun", true);
-    isExistingProperty = true;
     firstStoreItemsrun = true;
+    isExistingProperty = true;
   }
-  console.log("firstStoreItemsrun init function", firstStoreItemsrun);
+  // console.log("firstStoreItemsrun init function", firstStoreItemsrun);
   if (isExistingProperty && firstStoreItemsrun) {
-    console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
+    // console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
+    console.log("fakeState",fakeState.allItemsInLists.byId,  fakeState.allItemsInLists.byId)
     store.allItems = fakeState.allItemsInLists.byId;
     store.allIds = fakeState.allItemsInLists.allIds;
     setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
     setInLocalStorage("hysItems", fakeState.allItemsInLists.byId);
     setInLocalStorage("firstStoreItemsrun", false);
   } else {
-    console.log("ITEMSTORE - need to get data from localstorage, because is firstrun = ", firstStoreItemsrun);
+    // console.log("ITEMSTORE - need to get data from localstorage, because is firstrun = ", firstStoreItemsrun);
+    setInLocalStorage("firstStoreItemsrun", false);
     store.allItems = getFromLocalStorage("hysItems");
     store.allIds = getFromLocalStorage("itemsIds");
-    setInLocalStorage("firstStoreItemsrun", false);
-    console.log("ITEMSTORE - already data returns :", store.allItems, store.allIds);
+    // console.log("ITEMSTORE - already data returns :", store.allItems, store.allIds);
   }
   initStoreItemsFinished = true;
 };
@@ -63,6 +66,6 @@ autorun( () => {
     updateDataItemStore(store)
   }
   console.log("autorun itemsStore", store);
-  console.log("listsStore.allItems autorrun", store.allItems);
+  // console.log("listsStore.allItems autorrun", store);
 });
 

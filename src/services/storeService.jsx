@@ -11,9 +11,8 @@ export const updateDataItemStore =  (store) => {
       // console.log("!firstStoreItemsrun", firstStoreItemsrun);
       setInLocalStorage("hysItems", store.allItems);
       setInLocalStorage("itemsIds", store.allIds);
-      setInLocalStorage("firstStoreItemsrun", false);
     } else {
-      console.log("falling in else because : isExistingProperty ",isExistingProperty, "and : firstStoreItemsrun ", firstStoreItemsrun );
+      console.log("falling in else of UpdateData item store called in autorun because : isExistingProperty ",isExistingProperty, "and : firstStoreItemsrun ", firstStoreItemsrun );
     }
   }
 export const updateDataListsStore =  (store) => {
@@ -25,9 +24,8 @@ export const updateDataListsStore =  (store) => {
       setInLocalStorage("listAllIds", store.allIds);
       setInLocalStorage("customListIds", store.customListIds);
       setInLocalStorage("defaultListIds", store.defaultListIds);
-      setInLocalStorage("firstStoreItemsrun", false);
     } else {
-      console.log("falling in else because : isExistingProperty ",isExistingProperty, "and : firstStoreListsrun ", firstStoreListsrun );
+      console.log("falling in else of UpdateData item store called in autorun because : isExistingProperty ",isExistingProperty, "and : firstStoreListsrun ", firstStoreListsrun );
 
     }
   }

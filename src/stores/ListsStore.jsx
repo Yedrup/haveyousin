@@ -1,5 +1,4 @@
 import { autorun, observable, action } from "mobx";
-// import  from "/src/listsfakedata.mobx"
 import fakeState from "../listsfakedata.mobx.js";
 import {
   setInLocalStorage,
