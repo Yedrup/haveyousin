@@ -1,65 +1,68 @@
+/***BURGER MENU - small -medium only**/
+
+.bm-menu-wrap {
+    height: calc(100vh - var(--footerHeight)) !important;
+    /* background: var(--menuBackgroundColor); */
+    background: var(--menuBackgroundColor);
+
+}
+
 /*BURGER Menu*/
 .bm-burger-bars {
     background: var(--color-silver);
-  }
-  
-  .bm-burger-button {
+}
+
+.bm-burger-button {
     position: fixed;
     width: 15px;
     height: 15px;
     left: 36px;
     top: calc(var(--headerHeight)/2 - 7.5px);
-  }
+}
 
 
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
     height: 2rem;
     width: 2rem;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
     background: var(--button-close-color);
-  }
-  
-  /* General sidebar styles */
-  .bm-menu[class] {
-    background: var(--menuBackgroundColor);
+}
+
+/* General sidebar styles */
+.bm-menu[class] {
     /* padding: 2.5em 1.5em 0; */
     padding: 0 0 0 .5rem;
     font-size: 1.15em;
-    overflow: unset!important;
+    overflow: unset !important;
     /* background: lightblue; */
     height: 100%;
     /* height: calc(100vh - var(--footerHeight))!important; */
 }
-.bm-menu-wrap {
-    height: calc(100vh - var(--footerHeight))!important;
-    background: red
 
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
 }
 
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: #373a47;
-  }
-  
-  /* Wrapper for item list */
-  .bm-item-list {
+/* Wrapper for item list */
+.bm-item-list {
     color: #b8b7ad;
     padding: 0.8em;
-  }
-  
-  /* Individual item */
-  .bm-item {
+}
+
+/* Individual item */
+.bm-item {
     display: inline-block;
-  }
-  
-  /* Styling of overlay */
-  .bm-overlay {
+}
+
+/* Styling of overlay */
+.bm-overlay {
     background: rgba(0, 0, 0, 0.3);
-  }
+}
 
 /*****/
 
@@ -67,16 +70,18 @@
     /* background: var(--menuBackgroundColor); */
     /* width:var(--menuWidth); */
     /* position: fixed; */
-    height: 100%;
+    /* height: 100%; */
     /* padding: 0 0 0 .5rem; */
     /* z-index: 800; */
 }
+
 .c-logo--menu {
     height: var(--headerHeight);
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
+
 .c-menu__items {
     display: flex;
     flex-direction: column;
@@ -84,19 +89,22 @@
     align-items: flex-start;
     margin: 0;
 }
+
 .c-menu__item {
     display: flex;
-    margin : .35rem 0;
+    margin: .35rem 0;
 }
+
 .c-menu__item__title {
     margin-left: .5rem;
 }
+
 .c-menu__item__link__text {
     color: var(--menuTexColor);
 }
 
 .c-menu__button {
-    display:none;
+    display: none;
     position: absolute;
     top: 1rem;
     right: 0;
@@ -104,24 +112,32 @@
 }
 
 
-.testtest {
-    color:red
-}
-
 @media screen and (max-width:1024px) {
+
     /*TODO: manage this by react mediaqueries*/
     /* .c-menu { 
       display:none;
      } */
-     .c-menu__button { 
-        display:flex;
+    .c-menu__button {
+        display: flex;
     }
 }
-@media screen and (min-width:1024px) {
 
-      .bm-menu-wrap {
-        height: 100vh;
-        background: red
-    
-    }
+@media screen and (min-width:1024px) {
+     /* .c-logo--menu {
+        display: none;
+    } 
+
+    .bm-menu-wrap {
+        height: 100vh !important;
+        position: relative !important;
+        background-color: lightblue
+    } */
+
+    .c-menu {
+        width: var(--menuWidth);
+        position: relative;
+        padding: 0 0 0 .5rem;
+        background: var(--menuBackgroundColor);
+    } 
 }

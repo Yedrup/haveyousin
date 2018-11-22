@@ -5,14 +5,14 @@ import { Provider } from "mobx-react";
 import Router from "./components/Router";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-// import Menu from "./components/Menu/Menu";
+import Menu from "./components/Menu/Menu";
 import NewMenu from "./components/Menu/NewMenu";
+import MediaQuery from "react-responsive";
 
 import "./css/App.css";
 import "./css/variables.css";
 
 // import fakeState from "./listsfakedata.newpattern.js";
-import fakeState from "./listsfakedata.mobx";
 import listsStore from "./stores/ListsStore";
 import itemsStore from "./stores/ItemsStore";
 
@@ -39,7 +39,12 @@ class App extends Component {
         <Provider ListsStore={listsStore} ItemsStore={itemsStore}>
           <div className="App">
             {/* <Menu /> */}
-            <NewMenu/>
+            <MediaQuery maxWidth={1024}>
+              <NewMenu />
+            </MediaQuery>
+            <MediaQuery minWidth={1024}>
+              <Menu />
+            </MediaQuery>
             <div className="content">
               <Header />
               <div className="main">

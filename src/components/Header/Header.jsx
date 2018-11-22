@@ -4,7 +4,6 @@ import IconService from "../../services/IconService";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 import MediaQuery from "react-responsive";
-
 class Header extends React.Component {
   state = {
     isSearchFieldOpenSmallDevice: false
@@ -14,9 +13,6 @@ class Header extends React.Component {
       isSearchFieldOpenSmallDevice: !this.state.isSearchFieldOpenSmallDevice
     });
   };
-  openMenu = () => {
-    console.log("test");
-  };
 
   render() {
     const { isSearchFieldOpenSmallDevice } = this.state;
@@ -24,12 +20,6 @@ class Header extends React.Component {
       <header className="c-header">
         <div className="c-header__main">
           <MediaQuery maxWidth={1024}>
-            {/* <span onClick={this.openMenu}>
-              <IconService
-                  nameIcon={"menu"}
-                  iconStyleContext={{ color: "var(--color-silver)", className: "c-header__menu-icon" }}
-                />
-            </span> */}
             <Link to={"/"}>
               <h1 className="c-logo c-logo--header ">HaveYouSin</h1>
             </Link>
