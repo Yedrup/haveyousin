@@ -48,12 +48,12 @@ export const createHysIdForItems = (itemTmdbId, itemType) => {
   return `${itemTmdbId}${suffixToConstructId}`;
 };
 
-export const defineContentType = objecContent => {
-  // console.log("objecContent", objecContent);
+export const defineContentType = objectContent => {
+  // console.log("objectContent", objectContent);
   let contentType;
-  if (objecContent.first_air_date) {
+  if (objectContent.first_air_date) {
     contentType = "tv";
-  } else if (objecContent.release_date) {
+  } else if (objectContent.release_date) {
     contentType = "movie";
   } else {
     contentType = "person";

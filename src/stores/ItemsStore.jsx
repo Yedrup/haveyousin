@@ -16,9 +16,21 @@ class ItemsStore {
   addItemInItemsList(listId, item) {
     console.log("new item added", item, "in list ", listId);
     //TODO => add new item, need to create a class
+    // let navigation = {
+    //   1:true,
+    //   2:false,
+    //   3: false,
+    //   4: true
+    // }
+    
     //TODO create hysID
     this.allIds.push(item.hysId);
     let newItem = { [item.hysId]: item };
+    console.log(newItem);
+    newItem[item.hysId].navigation =  {};
+    newItem[item.hysId].navigation[listId] = true;
+    console.log(newItem);
+
     this.allItems = { ...this.allItems, ...newItem };
   }
 }
@@ -39,7 +51,7 @@ const init =  () => {
   // console.log("firstStoreItemsrun init function", firstStoreItemsrun);
   if (isExistingProperty && firstStoreItemsrun) {
     // console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
-    console.log("fakeState",fakeState.allItemsInLists.byId,  fakeState.allItemsInLists.byId)
+    // console.log("fakeState",fakeState.allItemsInLists.byId,  fakeState.allItemsInLists.byId)
     store.allItems = fakeState.allItemsInLists.byId;
     store.allIds = fakeState.allItemsInLists.allIds;
     setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
@@ -60,9 +72,9 @@ init();
 export default store;
 autorun( () => {
   console.log("ITEMSTORE - autorun")
-  console.log("ITEMSTORE - is initStoreItemsFinished autorun", initStoreItemsFinished)
+  // console.log("ITEMSTORE - is initStoreItemsFinished autorun", initStoreItemsFinished)
   if(initStoreItemsFinished) {
-    console.log("ITEMSTORE -  passing by update function")
+    // console.log("ITEMSTORE -  passing by update function")
     updateDataItemStore(store)
   }
   console.log("autorun itemsStore", store);

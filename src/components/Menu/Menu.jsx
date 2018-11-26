@@ -13,7 +13,6 @@ class Menu extends React.Component {
         </NavLink>
         <ul className="c-menu__items">
           {Object.values(MENU_ITEMS).map((menuItem, index) => {
-            console.log("menuItem", menuItem )
             let iconName = menuItem.title;
             return (
               <li key={index}>

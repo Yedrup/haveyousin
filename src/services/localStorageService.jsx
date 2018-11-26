@@ -10,8 +10,6 @@ export const getFromLocalStorage =  nameKey => {
   return value;
 };
 export const isExistingInLocalStorage =   (nameKey) => {
-
   let isExistingInLS = localStorage.hasOwnProperty(nameKey);
-  console.log(nameKey, "isExistingInLocalStorage: ", isExistingInLS )
   return isExistingInLS;
 };

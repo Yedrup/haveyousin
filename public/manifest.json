@@ -1,6 +1,7 @@
 {
   "short_name": "HaveYouSin",
   "name": "HaveYouSin",
+  "scope": "/playground/pwa",
   "icons": [
     {
       "src": "favicon.ico",

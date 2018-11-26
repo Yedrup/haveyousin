@@ -22,7 +22,7 @@ class ListsStore {
     let isThisItemInThisList = this.lists[listId].itemsInThisList.some(
       item => itemId === item
     );
-    console.log("isThisItemInThisList", isThisItemInThisList);
+    // console.log("isThisItemInThisList", isThisItemInThisList);
     if (isThisItemInThisList) {
       console.log("need to be removed from list");
       const index = this.lists[listId].itemsInThisList.indexOf(itemId);
@@ -80,7 +80,7 @@ autorun(() => {
   console.log("LISTSSTORE - autorun")
   // console.log("LISTSSTORE - is initStoreListFinished autorun listsSTORE", initStoreListFinished)
   if(initStoreListFinished) {
-    console.log("LISTSSTORE -  passing by update function")
+    // console.log("LISTSSTORE -  passing by update function")
     updateDataListsStore(listsStore)
   }
   console.log("LISTSSTORE - autorun listStore", listsStore);
