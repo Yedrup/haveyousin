@@ -26,8 +26,7 @@ class ListHome extends React.Component {
 
     return (
       <div>
-        <h2>ListHome</h2>
-        <div className="c-listHome__list">
+                <div className="c-listHome__list">
           {Object.values(itemsFromThisList).map(customList => {
             return (
               <Link

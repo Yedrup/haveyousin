@@ -11,6 +11,7 @@ export const updateDataItemStore =  (store) => {
       // console.log("!firstStoreItemsrun", firstStoreItemsrun);
       setInLocalStorage("hysItems", store.allItems);
       setInLocalStorage("itemsIds", store.allIds);
+      setInLocalStorage("itemsPannelAction", store.itemsPannelAction);
     } else {
       console.log("falling in else of UpdateData item store called in autorun because : isExistingProperty ",isExistingProperty, "and : firstStoreItemsrun ", firstStoreItemsrun );
     }

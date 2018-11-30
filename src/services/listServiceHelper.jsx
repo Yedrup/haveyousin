@@ -1,12 +1,12 @@
 export const getOneList = (listArray, idToFound) => {
   let content = { ...listArray[idToFound] };
-  console.log("content from getOneList", content);
+  // console.log("content from getOneList", content);
   return content;
 };
 
 export const getThisListItems = (itemsInThisList, AllItems) => {
-  console.log(" itemsInThisList", itemsInThisList);
-  console.log(" AllItems", AllItems);
+  // console.log(" itemsInThisList", itemsInThisList);
+  // console.log(" AllItems", AllItems);
   if (itemsInThisList !== undefined) {
     const filtered = Object.keys(AllItems)
       .filter(key => itemsInThisList.includes(key))
@@ -14,7 +14,7 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
         obj[key] = AllItems[key];
         return obj;
       }, {});
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
   }
 };
@@ -29,7 +29,7 @@ export const getCustomLists = (customListIds, allLists) => {
       obj[key] = allLists[key];
       return obj;
     }, {});
-  console.log(filtered);
+  // console.log(filtered);
   return filtered;
 };
 

@@ -12,9 +12,8 @@ import ActionPannel from "./ActionPannel/ActionPannel";
 
 class Router extends React.Component {
   render() {
-    console.log(this.props.location.pathname); // outputs currently active route
+    // console.log(this.props.location.pathname); // outputs currently active route
     // console.log(this.props.testMovies);
-    console.log(this.props.lists?"yeah" : "nope");
     // console.log(this.props);
     // console.log(this.props.customLists);
     return (

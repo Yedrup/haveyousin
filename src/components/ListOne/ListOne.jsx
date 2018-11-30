@@ -30,8 +30,8 @@ class ListOne extends React.Component {
       getThisList.itemsInThisList,
       this.props.ItemsStore.allItems
     );
-    console.log("listOne get this list",getThisList);
-    console.log("listOne get items",itemsFromThisList);
+    // console.log("listOne get this list",getThisList);
+    // console.log("listOne get items",itemsFromThisList);
 
     let ActionPannel = this.props.ActionPannel;
 

@@ -12,9 +12,19 @@ class ActionPannel extends React.Component {
     console.log("OPEN CUSTOMPANNEL")
   }
   render() {
-   const {addItemInItemsList} = this.props.ItemsStore;
-   const {addItemInThisList} = this.props.ListsStore;
+    const {addItemInItemsList, setItemPannelActionByList,itemsPannelAction} = this.props.ItemsStore;
+    const {addItemInThisList} = this.props.ListsStore;
     let hysId = this.props.hysId;
+  const getItemAction = item => {
+    return item.hysId === hysId;
+  }
+  let thisItemActions = itemsPannelAction.find(getItemAction);
+  let thisItemActionsObj;
+  if(thisItemActions) {
+    console.log("thisItemActions",thisItemActions.pannelActionByList);
+    thisItemActionsObj = thisItemActions.pannelActionByList;
+    console.log("thisItemActionsObj",thisItemActionsObj)
+  }
     let thisItem = {
       hysId : this.props.hysId,
       poster: this.props.poster,
@@ -23,36 +33,42 @@ class ActionPannel extends React.Component {
       release : this.props.release,
       contentType: this.props.contentType
     }
-    let listId;
-    if(this.props.match.params.listId) {
-      listId = this.props.match.params.listId;
-    }
     const actionPannelItems = [
       {
         title: "toWatchList",
+        isInThisList : thisItemActions? thisItemActionsObj["1"]:null,
         action: () => 
         {
-          addItemInItemsList(1,thisItem);
-          addItemInThisList(1,hysId);
+          addItemInItemsList("1",thisItem);
+          setItemPannelActionByList("1",hysId);
+          addItemInThisList("1",hysId);
         }
       },
       {
         title: "archives",
+        isInThisList : thisItemActions? thisItemActionsObj["2"]:null,
         action: () => {
-          addItemInItemsList(2,thisItem);
-          addItemInThisList(2,hysId);
+          addItemInItemsList("2",thisItem);
+          setItemPannelActionByList("2",hysId);
+          addItemInThisList("2",hysId);
         }
       },
       {
         title: "favorites",
+        isInThisList : thisItemActions? thisItemActionsObj["3"]:null,
         action: () => {
-          addItemInItemsList(3,thisItem);
-          addItemInThisList(3,hysId);
+          addItemInItemsList("3",thisItem);
+          setItemPannelActionByList("3",hysId);
+          addItemInThisList("3",hysId);
         }
       },
       {
         title: "customLists",
-        action: () => this.openCustomPannel()
+        isInThisList : thisItemActions? thisItemActionsObj["4"]:null,
+        action: () => {
+          setItemPannelActionByList("4",hysId);
+          this.openCustomPannel()
+        }
       }
     ];
     if (this.props.contentType !== "person") {
@@ -65,7 +81,7 @@ class ActionPannel extends React.Component {
                 <IconService
                   nameIcon={buttonName}
                   iconStyleContext={{
-                    color: ""
+                    color: pannelItem.isInThisList ? "var(--color-active)" : ""
                   }}
                 />
               </li>
@@ -81,7 +97,7 @@ class ActionPannel extends React.Component {
             iconStyleContext={{
               color: ""
             }}
-          />
+          /> 
         </span>
       );
     }
