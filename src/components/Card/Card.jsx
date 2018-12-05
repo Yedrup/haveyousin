@@ -16,6 +16,7 @@ class Card extends React.Component {
         <article className="c-card">
           <MediaQuery maxWidth={767}>
             <Link
+              className=""
               to={{
                 pathname: `/details/${this.props.contentId}/${
                   this.props.contentType
@@ -38,22 +39,22 @@ class Card extends React.Component {
             </Link>
             <div className="c-card__body--small">
               <header className="c-card__header">
-                <h2 className="c-card__title">
-                  <Link
-                    to={{
-                      pathname: `/details/${this.props.contentId}/${
-                        this.props.contentType
-                      }`,
-                      state: {
-                        contentId: this.props.contentId,
-                        hysId,
-                        contentType: this.props.contentType,
-                        poster: this.props.poster,
-                        release: this.props.release,
-                        title: this.props.title
-                      }
-                    }}
-                  >
+                <Link
+                  to={{
+                    pathname: `/details/${this.props.contentId}/${
+                      this.props.contentType
+                    }`,
+                    state: {
+                      contentId: this.props.contentId,
+                      hysId,
+                      contentType: this.props.contentType,
+                      poster: this.props.poster,
+                      release: this.props.release,
+                      title: this.props.title
+                    }
+                  }}
+                >
+                  <h2 className="c-card__title">
                     <Truncate
                       lines={1}
                       ellipsis={"..."}
@@ -62,8 +63,8 @@ class Card extends React.Component {
                     >
                       {this.props.title}
                     </Truncate>
-                  </Link>
-                </h2>
+                  </h2>
+                </Link>
                 <span className="c-card__secondary-info c-card__date">
                   {this.props.release}
                 </span>

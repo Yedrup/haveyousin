@@ -11,13 +11,17 @@
 
 .c-result {
     margin-bottom: 1rem;
-    border-bottom: 1px solid green;
+    border-bottom: 1px solid var(--searchSeparationLine);
     width: 100%;
 }
 
 .c-result__inner {
     display: flex;
 }
+.c-result__title {
+    color: var(--searchResultTitle)
+}
+
 @media screen and (max-width:1024px) {
     .c-searchResults {
         padding-bottom: var(--footerHeight);

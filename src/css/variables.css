@@ -18,7 +18,7 @@
     --color-active: var(--color-yellow);
 
     --iconNavColor: var(--color-silver);
-    --menuTexColor: var( --color-scorpion);
+    --menuTexColor: var(--color-scorpion);
     /* --menuBackgroundColor: var(--color-boulder); */
     --menuBackgroundColor: var(--color-carbon);
     --menuMarginTop : var(--headerHeight);
@@ -30,7 +30,6 @@
 
     --listTitle: var(--color-yellow);
 
-
     --headerBackgroundColor: var(--color-carbon);
     --headerTextColor: var(--color-silver);
     --headerHeight :5rem;
@@ -40,10 +39,13 @@
     
     --cardLinesBackgroundColor: var(--color-black);
     --cardMainBackgroundColor: var(--color-carbon);
-    --cardTitleTextColor: var(--color-mercury);
+    --cardTitleTextColor: var(--color-silver);
+    --cardTitleTextColorDate: var(--color-boulder);
     --cardSubinfoTextColor: var(--color-scorpion);
 
     --inputBackgroundColor: var(--color-mercury);
 
+    --searchResultTitle: var(--color-silver);
+    --searchSeparationLine: var(--color-scorpion);
 
 }

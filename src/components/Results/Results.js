@@ -46,7 +46,7 @@ class Results extends React.Component {
                       result.media_type === "movie" ? result.title : result.name
                     }
                   />
-                  <p>
+                  <p className="c-result__title">
                     {result.media_type === "movie" ? result.title : result.name}
                   </p>
                 </div>
