@@ -1,0 +1,25 @@
+
+
+/* ul */
+.c-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .5rem 0 0 0; 
+    /* background: black; */
+    text-align: left;
+    z-index: 800;
+    font-size: 1.5rem;
+}
+
+
+/* li */
+.c-list__item {
+    margin-bottom: 1.5rem;
+    /* border-bottom: .02rem solid var(--searchSeparationLine); */
+    width: 100%;
+}
+
+/* @media screen and (max-width:1024px) {
+
+} */

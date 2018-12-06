@@ -14,8 +14,10 @@
     --color-black: #000000; /*rgb(0,0,0)*/
 
 
-
+    /* Generic */
+    --title: var(--color-silver);
     --color-active: var(--color-yellow);
+    --link:  var(--color-active);
 
     --iconNavColor: var(--color-silver);
     --menuTexColor: var(--color-scorpion);
@@ -47,5 +49,5 @@
 
     --searchResultTitle: var(--color-silver);
     --searchSeparationLine: var(--color-scorpion);
-
+    --searchRequestColor: var(--color-active);
 }

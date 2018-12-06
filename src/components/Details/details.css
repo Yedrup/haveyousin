@@ -3,40 +3,50 @@
     flex-direction: column;
     align-items: center;
 }
-.c-details__header__infos {
-    margin: 0 1rem;
-    text-align: left;
-}
 .c-detail__header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+.c-details__header__infos {
+    margin: 0 1rem;
+    text-align: left;
 }
 .c-detail__title {
     margin-bottom: 1rem;
-    font-size:2rem;
+    font-size: 2rem;
+    text-align: center;
+    color:var(--cardTitleTextColor);
 }
 
 .c-detail__sinopsis {
     font-size: 1.25rem;
+}
+.c-detail__release {
+    white-space: nowrap;
+    font-size: 1rem;
+    color:var(--cardTitleTextColorDate);
 }
 
 .c-detail__pannel {
     width: 50%;
 }
 
+.c-details__main {
+    width: 100%;
+}
 
 @media screen and (min-width:767px) {
     .c-details {
         align-items: flex-start;
+        flex-direction: column;
     }
     .c-detail__header {
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-    }
-    .c-detail__pannel {
-        width: 20%;
     }
     .c-detail__pannel .c-actionPannel {
         justify-content: space-between

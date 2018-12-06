@@ -21,9 +21,9 @@ class ActionPannel extends React.Component {
   let thisItemActions = itemsPannelAction.find(getItemAction);
   let thisItemActionsObj;
   if(thisItemActions) {
-    console.log("thisItemActions",thisItemActions.pannelActionByList);
+    // console.log("thisItemActions",thisItemActions.pannelActionByList);
     thisItemActionsObj = thisItemActions.pannelActionByList;
-    console.log("thisItemActionsObj",thisItemActionsObj)
+    // console.log("thisItemActionsObj",thisItemActionsObj)
   }
     let thisItem = {
       hysId : this.props.hysId,
@@ -91,7 +91,7 @@ class ActionPannel extends React.Component {
       );
     } else {
       return (
-        <span onClick={() => this.addItemInItemsList(3,hysId)}>
+        <span onClick={() => addItemInThisList("3",hysId)}>
           <IconService
             nameIcon={"favorites"}
             iconStyleContext={{
