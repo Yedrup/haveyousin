@@ -189,9 +189,7 @@ class Details extends React.Component {
                       className="c-cast__list__item"
                       key={character.credit_id}
                     >
-                      <p className="c-people__name--text-only">
-                        {character.character}
-                      </p>
+                      <p className="c-people__name--text-only c-people__name--text-only--character">{character.character}</p>
                       <Link
                         className="c-people__name--text-only"
                         to={{
