@@ -74,15 +74,14 @@ li {
     margin-top: 2rem;
   }
 }
+@media screen and (min-width:1024px) {
+  .content {
+    margin-left: var(--menuWidth);;
+  }
+}
 
 @media screen and (min-width:767px) {
   .main {
     padding: 1rem;
   }
 }
-
-/* @media screen and (min-width:1024px) {
-  .main, .c-header {
-    margin-left: var(--menuWidth)
-  }
-} */

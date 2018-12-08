@@ -15,39 +15,46 @@
 
 
     /* Generic */
+    --bodyBackgroundColor: var(--color-codGrey-darker);
+    --bodyTextColor: var(--color-boulder);
     --title: var(--color-silver);
     --color-active: var(--color-yellow);
     --link:  var(--color-active);
+    --inputBackgroundColor: var(--color-mercury);
 
+    /*Header*/
+    --headerBackgroundColor: var(--color-carbon);
+    --headerTextColor: var(--color-silver);
+    --headerHeight :5rem;
+    /*Footer*/
+    --footerBackgroundColor: var(--color-mineShaft);
+    --footerHeight: 60px;
+
+
+    /* Menu */
     --iconNavColor: var(--color-silver);
     --menuTexColor: var(--color-scorpion);
     /* --menuBackgroundColor: var(--color-boulder); */
     --menuBackgroundColor: var(--color-carbon);
     --menuMarginTop : var(--headerHeight);
     --button-close-color : var(--color-boulder);
-    --menuWidth : 20%; /*DELETE*/
+    
+    --menuWidth : 20%; /*fixed large*/
 
-    --bodyBackgroundColor: var(--color-codGrey-darker);
-    --bodyTextColor: var(--color-boulder);
 
+     /* List */
     --listTitle: var(--color-yellow);
 
-    --headerBackgroundColor: var(--color-carbon);
-    --headerTextColor: var(--color-silver);
-    --headerHeight :5rem;
-
-    --footerBackgroundColor: var(--color-mineShaft);
-    --footerHeight: 60px;
-    
+    /* Card */
     --cardLinesBackgroundColor: var(--color-black);
     --cardMainBackgroundColor: var(--color-carbon);
     --cardTitleTextColor: var(--color-silver);
     --cardTitleTextColorDate: var(--color-boulder);
     --cardSubinfoTextColor: var(--color-scorpion);
-
-    --inputBackgroundColor: var(--color-mercury);
-
+    
+    /* Search */
     --searchResultTitle: var(--color-silver);
     --searchSeparationLine: var(--color-scorpion);
     --searchRequestColor: var(--color-active);
+
 }

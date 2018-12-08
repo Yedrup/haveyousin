@@ -17,8 +17,10 @@ import listsStore from "./stores/ListsStore";
 import itemsStore from "./stores/ItemsStore";
 
 //TODO : declare all functions modification here + firebase management
+console.log("navigator online?", navigator.onLine)
 
 class App extends Component {
+  
   componentDidMount() {}
 
   addToCustomList = (itemId, listId) => {

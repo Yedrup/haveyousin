@@ -5,7 +5,7 @@
     right: 0;
     bottom: 0;
     height:var(--footerHeight);
-    z-index: 999;
+    z-index: 2000;
 }
 
 .c-footer__items {

@@ -9,17 +9,18 @@
     /* background: black; */
     text-align: left;
     z-index: 800;
-    font-size: 1.5rem;
+    font-size: 1.15rem;
 }
 
 
 /* li */
 .c-list__item {
     margin-bottom: 1.5rem;
-    /* border-bottom: .02rem solid var(--searchSeparationLine); */
     width: 100%;
 }
-
+.c-list__item > * {
+    margin-right: .25rem;
+}
 /* @media screen and (max-width:1024px) {
 
 } */

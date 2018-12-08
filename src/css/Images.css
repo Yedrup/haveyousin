@@ -7,6 +7,9 @@
     position: relative;
     z-index: 44;
     background: black;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -16,12 +19,12 @@
 }
 .c-image-background--185 {
     width: 185px;
-    max-height: 278px;
+    height: 278px;
 }
 
 .c-image-background--92 {
     width: 92px;
-    max-height: 138px;
+    height: 138px;
 }
 
 
@@ -44,9 +47,9 @@
 
 .c-image-background--92:before {
     content: "HYS";
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .c-image-background--185:before {
     content: "HaveYouSin";
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }

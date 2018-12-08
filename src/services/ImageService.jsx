@@ -15,7 +15,7 @@ class ImageService extends React.Component {
         <div className={"c-image-background c-image-background--"+this.props.size}>
          <img className="c-image"
           onError={this.addDefaultImage}
-          alt={this.props.imageTitle}
+           alt={this.props.imageTitle}
           src={
             "https://image.tmdb.org/t/p/w" +this.props.size +
             this.props.photoPath

@@ -108,7 +108,7 @@ class Details extends React.Component {
         let contentId = this.state.details.id;
         let overview = this.state.details.overview;
 
-        let mainCharacters = cast.splice(0, 9);
+        let mainCharacters = cast.splice(0, 10);
         let secondaryCharacters = cast.splice(0, cast.length);
 
         return (
@@ -147,14 +147,31 @@ class Details extends React.Component {
                   );
                   return (
                     <li className="c-cast-main__item" key={character.credit_id}>
-                      <ImageService
-                        size="92"
-                        photoPath={character.profile_path}
-                        imageTitle={character.character}
-                      />
-                      <p className="c-people__name c-people__name--character">
-                        {character.character}
-                      </p>
+                      <Link
+                        to={{
+                          pathname: `/details/${character.id}/person`,
+                          state: {
+                            contentId: character.id,
+                            hysId,
+                            contentType: "person",
+                            poster: character.poster,
+                            release: release,
+                            title: title
+                          }
+                        }}
+                      >
+                        <ImageService
+                          size="92"
+                          photoPath={character.profile_path}
+                          imageTitle={character.character}
+                        />
+                        <p className="c-people__name c-people__name--character">
+                          {character.character}
+                          <span className="c-people__name__actor">
+                            {character.name}
+                          </span>
+                        </p>
+                      </Link>
                     </li>
                   );
                 })}
@@ -204,6 +221,18 @@ class Details extends React.Component {
         let poster = this.state.details.profile_path;
         let contentId = this.state.details.id;
         let overview = this.state.details.overview;
+        //TODO ListHelper
+        const orderedPlayedInList = playedInList.sort((a, b) => {
+          let aNum = a.release_date ? a.release_date : a.first_air_date;
+          let bNum = b.release_date ? b.release_date : b.first_air_date;
+          if (aNum === undefined) {
+            aNum = "0000-00-00";
+          }
+          if (bNum === undefined) {
+            bNum = "0000-00-00";
+          }
+          return aNum <= bNum ? 1 : -1;
+        });
         return (
           <section className="c-details">
             <header className="c-detail__header">
@@ -246,10 +275,13 @@ class Details extends React.Component {
       }
     } else {
       //TODO : check if has network, after 2 sec without response => display message network status + loop
-      return <p>Loading</p>;
+      if (navigator.onLine) {
+        return <p>Loading...</p>;
+      } else {
+        return <p>It seems you don't have network...</p>;
+      }
     }
   }
 }
 
 export default withRouter(Details);
-

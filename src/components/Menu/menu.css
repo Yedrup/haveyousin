@@ -9,7 +9,10 @@
 
 /*BURGER Menu*/
 .bm-burger-bars {
-    background: var(--color-silver);
+    background: var(--color-codGrey-darker);
+}
+.bm-burger-bars:hover {
+    background: var(--color-red)!important;
 }
 
 .bm-burger-button {
@@ -20,7 +23,17 @@
     top: calc(var(--headerHeight)/2 - 7.5px);
 }
 
-
+.bm-burger-button:after {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    background: var(--color-active);
+    top: -8px;
+    left: -9px;
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+}
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
     height: 2rem;
@@ -34,46 +47,15 @@
 
 /* General sidebar styles */
 .bm-menu[class] {
-    /* padding: 2.5em 1.5em 0; */
     padding: 0 0 0 .5rem;
     font-size: 1.15em;
     overflow: unset !important;
-    /* background: lightblue; */
     height: 100%;
-    /* height: calc(100vh - var(--footerHeight))!important; */
 }
 
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-    fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
-}
-
-/* Individual item */
-.bm-item {
-    display: inline-block;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
 
 /*****/
 
-.c-menu {
-    /* background: var(--menuBackgroundColor); */
-    /* width:var(--menuWidth); */
-    /* position: fixed; */
-    /* height: 100%; */
-    /* padding: 0 0 0 .5rem; */
-    /* z-index: 800; */
-}
 
 .c-logo--menu {
     height: var(--headerHeight);
@@ -114,29 +96,16 @@
 
 @media screen and (max-width:1024px) {
 
-    /*TODO: manage this by react mediaqueries*/
-    /* .c-menu { 
-      display:none;
-     } */
     .c-menu__button {
         display: flex;
     }
 }
 
 @media screen and (min-width:1024px) {
-     /* .c-logo--menu {
-        display: none;
-    } 
-
-    .bm-menu-wrap {
-        height: 100vh !important;
-        position: relative !important;
-        background-color: lightblue
-    } */
-
     .c-menu {
         width: var(--menuWidth);
-        position: relative;
+        position: fixed;
+        height: 100%;
         padding: 0 0 0 .5rem;
         background: var(--menuBackgroundColor);
     } 
