@@ -1,7 +1,8 @@
 {
   "short_name": "HaveYouSin",
   "name": "HaveYouSin",
-  "scope": "/playground/pwa",
+  "scope": "/haveyousin",
+  "start_url": "/haveyousin/",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,8 +20,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display": "minimal-ui",
+  "theme_color": "#060404",
+  "background_color": "#060404"
 }

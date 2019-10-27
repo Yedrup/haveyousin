@@ -2,7 +2,6 @@
 
 .bm-menu-wrap {
     height: calc(100vh - var(--footerHeight)) !important;
-    /* background: var(--menuBackgroundColor); */
     background: var(--menuBackgroundColor);
 
 }

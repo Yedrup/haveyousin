@@ -12,6 +12,7 @@
 # misc
 .DS_Store
 .env.local
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -20,8 +21,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-cimetery.js
 data-pattern.js
 data-pattern.graphql.js
 listsfakedata.json
 .vscode/
+
+fakedata.json
+listsfakedata.js
+listsfakedata.json
+listsfakedata.mobx.js
+listsfakedata.newpattern.js

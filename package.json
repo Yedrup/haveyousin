@@ -2,7 +2,7 @@
   "name": "haveyousin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://purdeychambraud.com/playground/pwa",
+  "homepage": "https://purdeychambraud.com/haveyousin",
   "description": "HaveYouSin is a web app on which you receive feed of movies released or about to be released in order to create lists with content you want to see. You can create custom lists with older movies and series.",
   "dependencies": {
     "autoprefixer": "7.1.6",

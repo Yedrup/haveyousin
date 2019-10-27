@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     console.log(listsStore);
     return (
-      <BrowserRouter   basename={"/playground/pwa"}      >
+      <BrowserRouter basename={"/haveyousin"}      >
         <Provider ListsStore={listsStore} ItemsStore={itemsStore}>
           <div className="App">
             {/* <Menu /> */}
