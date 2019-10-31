@@ -2,26 +2,45 @@ import React from "react";
 import "./menu.css";
 import IconService from "../../services/IconService";
 import { NavLink, withRouter } from "react-router-dom";
-import { slide as YeahMenu } from "react-burger-menu";
-import {MENU_ITEMS} from "../../services/navigationService";
+import { slide as SlideMenu } from "react-burger-menu";
+import { MENU_ITEMS } from "../../services/navigationService";
 
 class NewMenu extends React.Component {
+  state = {
+    menuOpen: false,
+  }
+
+  closeMenu = () => {
+    if (this.state.menuOpen) {
+      this.setState({ menuOpen: false })
+    }
+  }
+
+  isMenuOpen = state => {
+    this.setState({ menuOpen: state.isOpen })
+  }
+
   render() {
 
     let currentPath = this.props.location.pathname;
+
     return (
-      <YeahMenu role="navigation">
-        <NavLink exact strict to={"/"}>
+      <SlideMenu role="navigation"
+        isOpen={this.state.menuOpen}
+        onStateChange={this.isMenuOpen}
+      >
+        <NavLink exact strict to={"/"} onClick={this.closeMenu}>
           <h1 className="c-logo c-logo--menu"> HaveYouSin </h1>
         </NavLink>
         <ul className="c-menu__items">
-        {Object.values(MENU_ITEMS).map((menuItem, index) => {
+          {Object.values(MENU_ITEMS).map((menuItem, index) => {
             let iconName = menuItem.title;
             return (
               <li key={index}>
                 <NavLink
                   exact
                   strict
+                  onClick={this.closeMenu}
                   to={{
                     pathname: menuItem.link
                   }}
@@ -45,7 +64,7 @@ class NewMenu extends React.Component {
             );
           })}
         </ul>
-      </YeahMenu>
+      </SlideMenu>
     );
   }
 }
