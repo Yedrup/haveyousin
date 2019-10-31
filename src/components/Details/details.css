@@ -7,11 +7,20 @@
 .c-detail__header {
     display: flex;
     flex-direction: column;
+    width: 100%;
     align-items: center;
     overflow: hidden;
     margin-bottom: 1rem;
 }
+
+.c-detail__image {
+    margin-bottom: 2rem;
+}
+
 .c-details__header__infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     margin: 0 1rem;
     text-align: left;
 }
@@ -25,14 +34,14 @@
 .c-detail__sinopsis {
     font-size: 1.25rem;
 }
-.c-detail__release {
+.c-detail__header__date {
     white-space: nowrap;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color:var(--cardTitleTextColorDate);
 }
 
 .c-detail__pannel {
-    width: 50%;
+    width: 10%;
 }
 
 .c-details__main {
@@ -156,6 +165,9 @@
     /*detail*/
     .c-cast-main {
         justify-content: flex-start;
+    }
+    .c-detail__image {
+        margin-top: 3.5rem;
     }
     /* .c-detail__header {
         flex-direction: row;

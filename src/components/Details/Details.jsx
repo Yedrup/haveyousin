@@ -22,22 +22,23 @@ class Details extends React.Component {
     details: {}
   };
   getDetails = async (id, type) => {
-    let contentId = id;
     let contentType = type;
+    ///FIXME : on refresh id and type are 'tv' 'tv' (for tv content only);
+    let contentId = id !== type ? id : window.location.pathname.split("/")[3];
+    if (!contentType) {
+      contentType = window.location.pathname.split("/").pop();
+    }
     if (contentType === "person") {
       try {
         let details = await getDetailsPeople(contentId, "combined_credits");
-        console.log("details : ", details);
         this.setState({
           details
         });
       } catch (error) {
         console.log(error);
-        // this.setState({ details: {}, loaded: false });
       }
     } else if (contentType === "tv") {
       try {
-        console.log(contentType);
         let details = await getDetailsTV(contentId, "credits,videos");
         console.log("details : ", details);
         this.setState({
@@ -48,7 +49,6 @@ class Details extends React.Component {
       }
     } else if (contentType === "movie") {
       try {
-        // console.log(contentType);
         let details = await getDetailsMovie(contentId, "credits,videos");
         console.log("details : ", details);
         this.setState({
@@ -88,10 +88,7 @@ class Details extends React.Component {
   }
   render() {
     let contentType = this.props.location.state.contentType;
-    console.log("contentType", contentType);
     let ActionPannel = this.props.ActionPannel;
-    console.log("this.stateee", this.state);
-    console.log("this.props", this.props);
 
     if (
       this.state.details &&
@@ -99,9 +96,8 @@ class Details extends React.Component {
       this.state.details.id !== undefined
     ) {
       if (contentType !== "person") {
-        let title = this.state.details.title;
+        let title = contentType === 'tv' ? this.state.details.name : this.state.details.title;
         let release = this.state.details.release_date;
-        // let release = this.state.details.first_air_date;
         let cast = this.state.details.credits.cast;
         let crew = this.state.details.credits.crew;
         let poster = this.state.details.poster_path;
@@ -109,12 +105,108 @@ class Details extends React.Component {
         let overview = this.state.details.overview;
 
         let mainCharacters = cast.splice(0, 10);
+        let isMainCharacters = mainCharacters.length > 0;
         let secondaryCharacters = cast.splice(0, cast.length);
+        let isSecondaryCharacter = secondaryCharacters.length > 0;
+
+        const SecondaryCharacters = () => {
+          if (isSecondaryCharacter) {
+            return (
+              <div>
+                <h4>Secondary characters</h4>
+                <ul className="c-cast__list">
+                  {/* TODO:  create component for ul display*/}
+                  {secondaryCharacters.map(character => {
+                    let hysId = createHysIdForItems(
+                      character.credit_id,
+                      "person"
+                    );
+                    return (
+                      <li
+                        className="c-cast__list__item"
+                        key={character.credit_id}
+                      >
+                        <p className="c-people__name--text-only c-people__name--text-only--character">{character.character}</p>
+                        <Link
+                          className="c-people__name--text-only"
+                          to={{
+                            pathname: `/details/${character.id}/person`,
+                            state: {
+                              contentId: character.id,
+                              hysId,
+                              contentType: "person",
+                              poster: character.poster,
+                              release: release,
+                              title: title
+                            }
+                          }}
+                        >
+                          {character.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )
+          } else {
+            return false
+          }
+        }
+
+        const MainCharacters = () => {
+          if (isMainCharacters) {
+            return (
+              <div>
+                <h4>Main characters</h4>
+                <ul className="c-cast-main">
+                  {mainCharacters.map(character => {
+                    let hysId = createHysIdForItems(
+                      character.credit_id,
+                      "person"
+                    );
+                    return (
+                      <li className="c-cast-main__item" key={character.credit_id}>
+                        <Link
+                          to={{
+                            pathname: `/details/${character.id}/person`,
+                            state: {
+                              contentId: character.id,
+                              hysId,
+                              contentType: "person",
+                              poster: character.poster,
+                              release: release,
+                              title: title
+                            }
+                          }}
+                        >
+                          <ImageService
+                            size="92"
+                            photoPath={character.profile_path}
+                            imageTitle={character.character}
+                          />
+                          <p className="c-people__name c-people__name--character">
+                            {character.character}
+                            <span className="c-people__name__actor">
+                              {character.name}
+                            </span>
+                          </p>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )
+          } else {
+            return false
+          }
+        }
 
         return (
           <section className="c-details">
             <header className="c-detail__header">
-              <div>
+              <div className="c-detail__image">
                 <ImageService
                   size="185"
                   photoPath={poster}
@@ -131,85 +223,14 @@ class Details extends React.Component {
               </div>
               <div className="c-details__header__infos">
                 <h1 className="c-detail__title">
-                  {title} <span className="c-detail__release">({release})</span>
+                  {title} <span className="c-detail__header__date">{release ? `(${release})` : ""}</span>
                 </h1>
                 <p className="c-detail__sinopsis">{overview}</p>
               </div>
             </header>
             <main>
-              <h4>Main characters</h4>
-              {/* TODO:  use component for ul display*/}
-              <ul className="c-cast-main">
-                {mainCharacters.map(character => {
-                  let hysId = createHysIdForItems(
-                    character.credit_id,
-                    "person"
-                  );
-                  return (
-                    <li className="c-cast-main__item" key={character.credit_id}>
-                      <Link
-                        to={{
-                          pathname: `/details/${character.id}/person`,
-                          state: {
-                            contentId: character.id,
-                            hysId,
-                            contentType: "person",
-                            poster: character.poster,
-                            release: release,
-                            title: title
-                          }
-                        }}
-                      >
-                        <ImageService
-                          size="92"
-                          photoPath={character.profile_path}
-                          imageTitle={character.character}
-                        />
-                        <p className="c-people__name c-people__name--character">
-                          {character.character}
-                          <span className="c-people__name__actor">
-                            {character.name}
-                          </span>
-                        </p>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-              <h4>Secondary characters</h4>
-              <ul className="c-cast__list">
-                {/* TODO:  create component for ul display*/}
-                {secondaryCharacters.map(character => {
-                  let hysId = createHysIdForItems(
-                    character.credit_id,
-                    "person"
-                  );
-                  return (
-                    <li
-                      className="c-cast__list__item"
-                      key={character.credit_id}
-                    >
-                      <p className="c-people__name--text-only c-people__name--text-only--character">{character.character}</p>
-                      <Link
-                        className="c-people__name--text-only"
-                        to={{
-                          pathname: `/details/${character.id}/person`,
-                          state: {
-                            contentId: character.id,
-                            hysId,
-                            contentType: "person",
-                            poster: character.poster,
-                            release: release,
-                            title: title
-                          }
-                        }}
-                      >
-                        {character.name}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+              <MainCharacters />
+              <SecondaryCharacters />
             </main>
           </section>
         );
@@ -219,7 +240,6 @@ class Details extends React.Component {
         let poster = this.state.details.profile_path;
         let contentId = this.state.details.id;
         let overview = this.state.details.overview;
-        //TODO ListHelper
         const orderedPlayedInList = playedInList.sort((a, b) => {
           let aNum = a.release_date ? a.release_date : a.first_air_date;
           let bNum = b.release_date ? b.release_date : b.first_air_date;
@@ -234,17 +254,18 @@ class Details extends React.Component {
         return (
           <section className="c-details">
             <header className="c-detail__header">
-              <ImageService
-                size="185"
-                photoPath={this.state.details.profile_path}
-                imageTitle={name}
-              />
+              <div className="c-detail__image">
+                <ImageService
+                  size="185"
+                  photoPath={this.state.details.profile_path}
+                  imageTitle={name}
+                />
+              </div>
               <div className="c-details__header__infos">
-                <h1 className="c-detail__title">{name}</h1>
+                <h1 className="c-detail__title ">{name} <span className="c-detail__header__date">{this.state.details.birthday} {this.state.details.deathday ? `- ${this.state.details.deathday}` : ""} </span> </h1>
                 <p className="c-detail__sinopsis">
                   {this.state.details.biography}
                 </p>
-                <p className="">{this.state.details.birthday}</p>
               </div>
               <div className="c-detail__pannel">
                 {React.cloneElement(ActionPannel, {
@@ -261,7 +282,6 @@ class Details extends React.Component {
               <h3 className="c-list__title">Actoring</h3>
               <ul className="c-list">
                 {playedInList.map(role => {
-                  // console.log(role)
                   return (
                     <ListDiplay type="role" key={role.credit_id} data={role} />
                   );
@@ -272,7 +292,6 @@ class Details extends React.Component {
         );
       }
     } else {
-      //TODO : check if has network, after 2 sec without response => display message network status + loop
       if (navigator.onLine) {
         return <p>Loading...</p>;
       } else {
