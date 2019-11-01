@@ -12,18 +12,20 @@ class ActionPannel extends React.Component {
     console.log("OPEN CUSTOMPANNEL")
   }
   render() {
-    const {addItemInItemsList, setItemPannelActionByList,itemsPannelAction} = this.props.ItemsStore;
+    const {addItemInItemsList, allItems} = this.props.ItemsStore;
     const {addItemInThisList} = this.props.ListsStore;
     let hysId = this.props.hysId;
-    const getItemAction = item => {
-      return item.hysId === hysId;
-    }
-    let thisItemActions = itemsPannelAction.find(getItemAction);
-    let thisItemActionsObj;
-    if(thisItemActions) {
-      // console.log("thisItemActions",thisItemActions.pannelActionByList);
-      thisItemActionsObj = thisItemActions.pannelActionByList;
-      // console.log("thisItemActionsObj",thisItemActionsObj)
+    let thisItemActions;
+    let itemAsHys = allItems[hysId];
+    if(itemAsHys) {
+      thisItemActions =  itemAsHys.itemStatusByList;
+    } else {
+      thisItemActions = {
+          "1": null,
+          "2": null,
+          "3": null,
+          "4": null
+      } 
     }
     let thisItem = {
       hysId : this.props.hysId,
@@ -37,37 +39,33 @@ class ActionPannel extends React.Component {
     const actionPannelItems = [
       {
         title: "toWatchList",
-        isInThisList : thisItemActions? thisItemActionsObj["1"]:null,
+        isInThisList : thisItemActions["1"],
         action: () => 
         {
           addItemInItemsList("1",thisItem);
-          setItemPannelActionByList("1",hysId);
           addItemInThisList("1",hysId);
         }
       },
       {
         title: "archives",
-        isInThisList : thisItemActions? thisItemActionsObj["2"]:null,
+        isInThisList : thisItemActions["2"],
         action: () => {
           addItemInItemsList("2",thisItem);
-          setItemPannelActionByList("2",hysId);
           addItemInThisList("2",hysId);
         }
       },
       {
         title: "favorites",
-        isInThisList : thisItemActions? thisItemActionsObj["3"]:null,
+        isInThisList : thisItemActions["3"],
         action: () => {
           addItemInItemsList("3",thisItem);
-          setItemPannelActionByList("3",hysId);
           addItemInThisList("3",hysId);
         }
       },
       {
         title: "customLists",
-        isInThisList : thisItemActions? thisItemActionsObj["4"]:null,
+        isInThisList : thisItemActions["4"],
         action: () => {
-          setItemPannelActionByList("4",hysId);
           this.openCustomPannel()
         }
       }

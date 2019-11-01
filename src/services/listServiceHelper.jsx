@@ -5,7 +5,7 @@ export const getOneList = (listArray, idToFound) => {
 };
 
 export const getThisListItems = (itemsInThisList, AllItems) => {
-  // console.log(" itemsInThisList", itemsInThisList);
+   // console.log(" itemsInThisList", itemsInThisList);
   // console.log(" AllItems", AllItems);
   if (itemsInThisList !== undefined) {
     const filtered = Object.keys(AllItems)
@@ -14,7 +14,6 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
         obj[key] = AllItems[key];
         return obj;
       }, {});
-    // console.log(filtered);
     return filtered;
   }
 };
@@ -33,17 +32,16 @@ export const changeKeyObject =  (objectOrigin, keyOrigin, keyNew) => {
   return objectNew;
 }
 
-export const getCustomLists = (customListIds, allLists) => {
-  console.log(" customListIds", customListIds);
-  console.log(" allLists", allLists);
-
+export const getCustomLists = (defaultListIds, allLists) => {
+  function isCustom(key) {
+    return !defaultListIds.includes(key);
+  }
   const filtered = Object.keys(allLists)
-    .filter(key => customListIds.includes(key))
+    .filter(isCustom)
     .reduce((obj, key) => {
       obj[key] = allLists[key];
       return obj;
     }, {});
-  // console.log(filtered);
   return filtered;
 };
 
@@ -75,5 +73,3 @@ export const defineContentType = objectContent => {
 
   return contentType;
 };
-
-//function check if content present in one list

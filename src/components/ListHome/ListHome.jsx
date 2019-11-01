@@ -5,9 +5,7 @@ import Truncate from "react-truncate";
 import { Link, withRouter } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import {
-  getCustomLists,
-  getOneList,
-  getThisListItems
+  getCustomLists
 } from "../../services/listServiceHelper";
 @inject("ListsStore")
 @observer
@@ -17,17 +15,11 @@ class ListHome extends React.Component {
   }
 
   render() {
-    let itemsFromThisList = getThisListItems(
-      this.props.ListsStore.customListIds,
-      this.props.ListsStore.lists
-    );
-
-    console.log("itemsFromThisList", itemsFromThisList);
-
+    let customLists = getCustomLists(this.props.ListsStore.defaultListIds, this.props.ListsStore.lists);
     return (
       <div>
-                <div className="c-listHome__list">
-          {Object.values(itemsFromThisList).map(customList => {
+        <div className="c-listHome__list">
+          {Object.values(customLists).map(customList => {
             return (
               <Link
                 key={customList.id}

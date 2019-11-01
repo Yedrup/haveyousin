@@ -3,36 +3,25 @@ import { inject, observer } from "mobx-react";
 import Card from "../Card/Card";
 import IconService from "../../services/IconService";
 import { withRouter } from "react-router-dom";
-import {
-  setInLocalStorage,
-  getFromLocalStorage
-} from "../../services/localStorageService";
 import "./listOne.css";
-import { getOneList, getThisListItems } from "../../services/listServiceHelper";
+import { getThisListItems } from "../../services/listServiceHelper";
 
 @inject("ListsStore")
 @inject("ItemsStore")
 @observer
 class ListOne extends React.Component {
- 
-  //idea : not passing by router anymore, use store
-  componentDidMount() {
+   componentDidMount() {
     // console.log("this.props ListOne", this.props);
   }
 
   render() {
-    let getThisList = getOneList(
-      this.props.ListsStore.lists,
-      this.props.match.params.listId
-    );
-    //get items to render
+    console.log("this.props.ListsStore.lists", this.props.ListsStore.lists, "this.props.match.params.listId", this.props.match.params.listId)
+    let getThisList = this.props.ListsStore.lists[this.props.match.params.listId];
     let itemsFromThisList = getThisListItems(
       getThisList.itemsInThisList,
       this.props.ItemsStore.allItems
     );
-    // console.log("listOne get this list",getThisList);
-    // console.log("listOne get items",itemsFromThisList);
-
+  
     let ActionPannel = this.props.ActionPannel;
 
     return (
@@ -48,7 +37,6 @@ class ListOne extends React.Component {
         </header>
         <div className="o-list__cards">
           {Object.values(itemsFromThisList).map(content => {
-             // console.log("content", content.hysId);
             let contentType;
             if (content.first_air_date || content.contentType === "tv" ) contentType = "tv";
             else if (content.release_date || content.contentType === "movie" ) contentType = "movie";

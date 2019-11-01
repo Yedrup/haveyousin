@@ -1,6 +1,6 @@
-import { decorate, autorun, observable, action, computed } from "mobx";
+import { autorun, observable, action } from "mobx";
 import fakeState from "../listsfakedata.mobx.js";
-import { changeKeyObject, removeKeyObject } from "../services/listServiceHelper";
+import { changeKeyObject } from "../services/listServiceHelper";
 import {
   setInLocalStorage,
   getFromLocalStorage,
@@ -12,7 +12,7 @@ let initStoreItemsFinished;
 class ItemActionPannelStatus {
   constructor(itemId) {
     this.hysId = itemId;
-    this.pannelActionByList = {
+    this.itemStatusByList = {
       "1": null,
       "2": null,
       "3": null,
@@ -22,116 +22,38 @@ class ItemActionPannelStatus {
 }
 
 class ItemsStore {
-  // @observable allIds = [];
 
   @observable allItems = {};
-
-  @observable itemsPannelAction = [];
-
-  @action.bound
-  setItemPannelActionByList(listId, itemId) {
-    const getItemAction = item => {
-      return item.hysId === itemId;
-    };
-    if (this.itemsPannelAction.length > 0) {
-      // if (this.itemsPannelAction[itemId][listId] !== null) {
-      console.log(
-        "lenght of this.itemsPannelAction: ",
-        this.itemsPannelAction.length
-      );
-      let isThisItemExisting = this.itemsPannelAction.some(
-        item => itemId === item.hysId
-      );
-      console.log(isThisItemExisting);
-      if (isThisItemExisting) {
-        let itemToModify = this.itemsPannelAction.find(getItemAction);
-        console.log("it already exists", isThisItemExisting, itemToModify);
-
-        let currentItemPannelActionByList =
-          itemToModify.pannelActionByList[listId];
-
-        if (currentItemPannelActionByList === null) {
-          itemToModify.pannelActionByList[listId] = true;
-        } else if (currentItemPannelActionByList) {
-          itemToModify.pannelActionByList[listId] = null;
-        } else {
-          itemToModify.pannelActionByList[listId] = true;
-        }
-        //Remove item from observer if not remaining in any list
-        let isThisItemRemainingInList = Object.values(itemToModify.pannelActionByList).some(
-          item => true === item
-        );
-        let safeSave;
-        if(!isThisItemRemainingInList) {
-          safeSave = [...this.itemsPannelAction];
-          let thisItemIndex = safeSave.findIndex(item => item.hysId === itemId);
-          safeSave.splice(thisItemIndex, 1);
-        } else {
-          safeSave = [...this.itemsPannelAction];
-          let thisItemIndex = safeSave.findIndex(item => item.hysId === itemId);
-          safeSave.splice(thisItemIndex, 1);
-          safeSave.push(itemToModify);
-  
-        }
-        this.itemsPannelAction = safeSave;
-      } else {
-        let newItemPannelAction = new ItemActionPannelStatus(itemId);
-        let safeSave;
-        newItemPannelAction.pannelActionByList[listId] = true;
-        safeSave = [...this.itemsPannelAction, newItemPannelAction];
-        this.itemsPannelAction = safeSave;
-      }
-      console.log(
-        "------> this.itemsPannelAction",
-        this.itemsPannelAction
-      );
-    } else {
-      console.log(
-        "this.itemsPannelAction.length est égal à 0",
-        this.itemsPannelAction.length
-      );
-      let newItemPannelAction = new ItemActionPannelStatus(itemId);
-      newItemPannelAction.pannelActionByList[listId] = true;
-      let safeSave;
-      safeSave = [...this.itemsPannelAction, newItemPannelAction];
-      this.itemsPannelAction = safeSave;
-      console.log(
-        "------> this.itemsPannelAction",
-        this.itemsPannelAction
-      );
-    }
-  }
 
   @action.bound
   addItemInItemsList(listId, item) {
     console.log("addItemInItemsList", item, "in list ", listId);
-    
     let hysId = item.hysId;
-       // allIds
-    // let isExistingItemId = this.allIds.includes(hysId);
-    // if (!isExistingItemId) {
-    //   console.log("this item doesn't exist")
-    //   this.allIds.push(hysId);
-    // }
 
-
-    // is HYS item exisists in allItems
+    // is item exists in HYS items 
     let isExistingItemAsHysItem = this.allItems.hasOwnProperty(hysId);
+
     if (isExistingItemAsHysItem) {
       let itemToUpdate = this.allItems[hysId];
-
       if (itemToUpdate.lists) {
         if (itemToUpdate.lists.length > 0 && itemToUpdate.lists.includes(listId)) {
-          //Modify listsId of item. If listID exists it's a removal
+          //Removal listsId && itemStatusByList because listId exists in array
           const index = itemToUpdate.lists.indexOf(listId);
           itemToUpdate.lists.splice(index, 1);
+          itemToUpdate.itemStatusByList[listId] = null;
+          console.log("itemToUpdate ====> null", itemToUpdate);
         } else {
+          //Add listId && itemStatusByList because it doesn't exist in array
           itemToUpdate.lists.push(listId);
+          itemToUpdate.itemStatusByList[listId] = true;
+          console.log("itemToUpdate ====> true", itemToUpdate);
         }
       } else {
-        // there is no lists array yet
+        // create listsId  && itemStatusByList 
         itemToUpdate.lists = [];
+        itemToUpdate.itemStatusByList = {};
         itemToUpdate.lists.push(listId);
+        itemToUpdate.itemStatusByList[listId] = true;
       }
 
       if (itemToUpdate.lists.length === 0) {
@@ -140,18 +62,21 @@ class ItemsStore {
         let isObjectRemoved = delete updateItemsWithRemovalOfCurrentItem[hysId];
         this.allItems = updateItemsWithRemovalOfCurrentItem;
       } else {
-        //Modification of the items
+        //Item is still in at least one list => modify obversable
         this.allItems = changeKeyObject(this.allItems, hysId, itemToUpdate);
       }
     } else {
+      // Add new item in itemsList, create its listsId  && its itemStatusByList 
       item.lists = [];
+      item.itemStatusByList = {};
       item.lists.push(listId);
+      item.itemStatusByList[listId] = true;
       let newItem = { [hysId]: item };
       return this.allItems = { ...this.allItems, ...newItem };
     }
 
     if (initStoreItemsFinished) {
-      //Save all current modification 
+      //Save all current modifications 
       updateDataItemStore(store);
     }
   }
@@ -173,20 +98,12 @@ const init = () => {
   }
   if (isExistingProperty && firstStoreItemsrun) {
     store.allItems = fakeState.allItemsInLists.byId;
-    // store.allIds = fakeState.allItemsInLists.allIds;
     store.itemsPannelAction = fakeState.allItemsInLists.itemsPannelAction;
-    // setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
     setInLocalStorage("hysItems", fakeState.allItemsInLists.byId);
-    setInLocalStorage(
-      "itemsPannelAction",
-      fakeState.allItemsInLists.itemsPannelAction
-    );
     setInLocalStorage("firstStoreItemsrun", false);
   } else {
     setInLocalStorage("firstStoreItemsrun", false);
     store.allItems = getFromLocalStorage("hysItems");
-    // store.allIds = getFromLocalStorage("itemsIds");
-    store.itemsPannelAction = getFromLocalStorage("itemsPannelAction");
   }
   initStoreItemsFinished = true;
 };

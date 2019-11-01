@@ -25,7 +25,7 @@ class Search extends React.Component {
   }
 
   saveSearchResults = results => {
-    console.log(results);
+    // console.log(results);
     let currentResults = results;
     this.setState({
       currentSearchResults: currentResults
@@ -60,7 +60,7 @@ class Search extends React.Component {
   render() {
     const isSearchFieldOpenSmallDevice = this.props.isSearchFieldOpenSmallDevice;
     const searchBarMobileField = this.props.searchBarMobileField;
-    console.log("isSearchFieldOpenSmallDevice", isSearchFieldOpenSmallDevice);
+    // console.log("isSearchFieldOpenSmallDevice", isSearchFieldOpenSmallDevice);
 
     if (!searchBarMobileField) {
       return (
