@@ -19,6 +19,20 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
   }
 };
 
+
+export const changeKeyObject =  (objectOrigin, keyOrigin, keyNew) => {
+  let objectNew = { ...objectOrigin };
+  Object.keys(objectNew).map((item) => {
+    if (keyOrigin === item) {
+      let mem = item[keyOrigin];
+      delete item[keyOrigin];
+      item[keyNew] = mem;
+    }
+    return item;
+  });
+  return objectNew;
+}
+
 export const getCustomLists = (customListIds, allLists) => {
   console.log(" customListIds", customListIds);
   console.log(" allLists", allLists);

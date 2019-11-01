@@ -15,20 +15,21 @@ class ActionPannel extends React.Component {
     const {addItemInItemsList, setItemPannelActionByList,itemsPannelAction} = this.props.ItemsStore;
     const {addItemInThisList} = this.props.ListsStore;
     let hysId = this.props.hysId;
-  const getItemAction = item => {
-    return item.hysId === hysId;
-  }
-  let thisItemActions = itemsPannelAction.find(getItemAction);
-  let thisItemActionsObj;
-  if(thisItemActions) {
-    // console.log("thisItemActions",thisItemActions.pannelActionByList);
-    thisItemActionsObj = thisItemActions.pannelActionByList;
-    // console.log("thisItemActionsObj",thisItemActionsObj)
-  }
+    const getItemAction = item => {
+      return item.hysId === hysId;
+    }
+    let thisItemActions = itemsPannelAction.find(getItemAction);
+    let thisItemActionsObj;
+    if(thisItemActions) {
+      // console.log("thisItemActions",thisItemActions.pannelActionByList);
+      thisItemActionsObj = thisItemActions.pannelActionByList;
+      // console.log("thisItemActionsObj",thisItemActionsObj)
+    }
     let thisItem = {
       hysId : this.props.hysId,
       poster: this.props.poster,
       id: this.props.contentId,
+      overview : this.props.overview,
       title : this.props.title,
       release : this.props.release,
       contentType: this.props.contentType
@@ -97,7 +98,7 @@ class ActionPannel extends React.Component {
             iconStyleContext={{
               color: ""
             }}
-          /> 
+          />
         </span>
       );
     }

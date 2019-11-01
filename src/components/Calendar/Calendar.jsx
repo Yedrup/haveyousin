@@ -51,6 +51,7 @@ class Calendar extends React.Component {
                 hysId={hysId}
                 title={content.title}
                 release={content.release_date}
+                overview={content.overview}
                 poster={
                   content.media_type === "person"
                     ? content.profile_path

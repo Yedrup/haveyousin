@@ -1,4 +1,4 @@
-import { autorun, observable, action } from "mobx";
+import { autorun, observable, action, trace } from "mobx";
 import fakeState from "../listsfakedata.mobx.js";
 import {
   setInLocalStorage,
@@ -6,10 +6,12 @@ import {
   isExistingInLocalStorage
 } from "../services/localStorageService";
 import {updateDataListsStore} from "../services/storeService";
+let firstStoreListsrun;
+let initStoreListFinished;
 
 class ListsStore {
   @observable lists = [];
-  @observable allIds = [];
+  // @observable allIds = [];
   @observable customListIds = [];
   @observable defaultListIds = [];
   @observable numberOfLists = Number;
@@ -27,17 +29,19 @@ class ListsStore {
       console.log("need to be removed from list");
       const index = this.lists[listId].itemsInThisList.indexOf(itemId);
       //TODO: manage change of color of icons list
-      return this.lists[listId].itemsInThisList.splice(index, 1);
+      this.lists[listId].itemsInThisList.splice(index, 1);
     } else {
-      return this.lists[listId].itemsInThisList.push(itemId);
+      this.lists[listId].itemsInThisList.push(itemId);
+    }
+    if(initStoreListFinished) {
+      // console.log("LISTSSTORE addItemInThisList --- updateDataListsStore")
+      updateDataListsStore(listsStore)
     }
   };
 
 }
 
 const listsStore = (window.listsStore = new ListsStore());
-let firstStoreListsrun;
-let initStoreListFinished;
 
 const init = () => {
   let isExistingProperty =  isExistingInLocalStorage("firstStoreListsrun");
@@ -53,18 +57,18 @@ const init = () => {
   if (isExistingProperty && firstStoreListsrun) {
     // console.log("it's first run ", firstStoreListsrun);
     listsStore.lists = fakeState.lists.byId;
-    listsStore.allIds = fakeState.lists.allIds;
+    // listsStore.allIds = fakeState.lists.allIds;
     listsStore.customListIds = fakeState.lists.customListIds;
     listsStore.defaultListIds = fakeState.lists.defaultListIds;
      setInLocalStorage("hysLists", listsStore.lists);
-     setInLocalStorage("listAllIds", listsStore.allIds);
+    //  setInLocalStorage("listAllIds", listsStore.allIds);
      setInLocalStorage("customListIds", listsStore.customListIds);
      setInLocalStorage("defaultListIds", listsStore.defaultListIds);
      setInLocalStorage("firstStoreListsrun", false);
   } else {
     // console.log("LISTSSTORE - need to get data from localstorage, because is firstrun = ", firstStoreListsrun);
     listsStore.lists =  getFromLocalStorage("hysLists");
-    listsStore.allIds =  getFromLocalStorage("listAllIds");
+    // listsStore.allIds =  getFromLocalStorage("listAllIds");
     listsStore.customListIds =  getFromLocalStorage("customListIds");
     listsStore.defaultListIds =  getFromLocalStorage("defaultListIds");
     setInLocalStorage("firstStoreListsrun", false);

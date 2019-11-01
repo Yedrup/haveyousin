@@ -12,6 +12,7 @@ class Card extends React.Component {
     let hysId = this.props.hysId;
     // console.log("props from card", this.props);
     if (this.props.contentType !== "person") {
+      let overview = this.props.overview;
       return (
         <article className="c-card">
           <MediaQuery maxWidth={767}>
@@ -20,7 +21,7 @@ class Card extends React.Component {
               to={{
                 pathname: `/details/${this.props.contentId}/${
                   this.props.contentType
-                }`,
+                  }`,
                 state: {
                   contentId: this.props.contentId,
                   hysId,
@@ -43,7 +44,7 @@ class Card extends React.Component {
                   to={{
                     pathname: `/details/${this.props.contentId}/${
                       this.props.contentType
-                    }`,
+                      }`,
                     state: {
                       contentId: this.props.contentId,
                       hysId,
@@ -59,7 +60,7 @@ class Card extends React.Component {
                       lines={1}
                       ellipsis={"..."}
                       trimWhitespace
-                      width={200}
+                      width={210}
                     >
                       {this.props.title}
                     </Truncate>
@@ -70,10 +71,14 @@ class Card extends React.Component {
                 </span>
               </header>
               <p className="c-card__secondary-info c-card__secondary-info-text">
-                genre
-              </p>
-              <p className="c-card__secondary-info c-card__secondary-info-text">
-                Actors: Tom Ellis, Lauren German , Lesley-Ann Brandt...
+                <Truncate
+                  lines={2}
+                  ellipsis={"..."}
+                  trimWhitespace
+                  width={0}
+                >
+                  {overview}
+                </Truncate>
               </p>
               <footer>
                 {React.cloneElement(ActionPannel, {
@@ -81,6 +86,7 @@ class Card extends React.Component {
                   hysId,
                   contentType: this.props.contentType,
                   poster: this.props.poster,
+                  overview,
                   release: this.props.release,
                   title: this.props.title
                 })}
@@ -94,7 +100,7 @@ class Card extends React.Component {
               to={{
                 pathname: `/details/${this.props.contentId}/${
                   this.props.contentType
-                }`,
+                  }`,
                 state: {
                   contentId: this.props.contentId,
                   hysId,
@@ -146,7 +152,7 @@ class Card extends React.Component {
             to={{
               pathname: `/details/${this.props.contentId}/${
                 this.props.contentType
-              }`,
+                }`,
               state: {
                 contentId: this.props.contentId,
                 hysId,

@@ -1,12 +1,14 @@
 import { decorate, autorun, observable, action, computed } from "mobx";
 import fakeState from "../listsfakedata.mobx.js";
+import { changeKeyObject, removeKeyObject } from "../services/listServiceHelper";
 import {
   setInLocalStorage,
   getFromLocalStorage,
   isExistingInLocalStorage
 } from "../services/localStorageService";
 import { updateDataItemStore } from "../services/storeService";
-
+let firstStoreItemsrun;
+let initStoreItemsFinished;
 class ItemActionPannelStatus {
   constructor(itemId) {
     this.hysId = itemId;
@@ -20,13 +22,12 @@ class ItemActionPannelStatus {
 }
 
 class ItemsStore {
-  @observable allIds = [];
+  // @observable allIds = [];
 
   @observable allItems = {};
 
   @observable itemsPannelAction = [];
 
-  //TODO: get computed for navigation
   @action.bound
   setItemPannelActionByList(listId, itemId) {
     const getItemAction = item => {
@@ -52,16 +53,26 @@ class ItemsStore {
         if (currentItemPannelActionByList === null) {
           itemToModify.pannelActionByList[listId] = true;
         } else if (currentItemPannelActionByList) {
-          itemToModify.pannelActionByList[listId] = false;
+          itemToModify.pannelActionByList[listId] = null;
         } else {
           itemToModify.pannelActionByList[listId] = true;
         }
-        let safeSave = [...this.itemsPannelAction];
-
-        let thisItemIndex = safeSave.findIndex(item => item.hysId === itemId);
-        safeSave.splice(thisItemIndex, 1);
-        safeSave.push(itemToModify);
-
+        //Remove item from observer if not remaining in any list
+        let isThisItemRemainingInList = Object.values(itemToModify.pannelActionByList).some(
+          item => true === item
+        );
+        let safeSave;
+        if(!isThisItemRemainingInList) {
+          safeSave = [...this.itemsPannelAction];
+          let thisItemIndex = safeSave.findIndex(item => item.hysId === itemId);
+          safeSave.splice(thisItemIndex, 1);
+        } else {
+          safeSave = [...this.itemsPannelAction];
+          let thisItemIndex = safeSave.findIndex(item => item.hysId === itemId);
+          safeSave.splice(thisItemIndex, 1);
+          safeSave.push(itemToModify);
+  
+        }
         this.itemsPannelAction = safeSave;
       } else {
         let newItemPannelAction = new ItemActionPannelStatus(itemId);
@@ -69,9 +80,7 @@ class ItemsStore {
         newItemPannelAction.pannelActionByList[listId] = true;
         safeSave = [...this.itemsPannelAction, newItemPannelAction];
         this.itemsPannelAction = safeSave;
-        console.log(newItemPannelAction);
       }
-
       console.log(
         "------> this.itemsPannelAction",
         this.itemsPannelAction
@@ -95,18 +104,63 @@ class ItemsStore {
 
   @action.bound
   addItemInItemsList(listId, item) {
-    console.log("new item added", item, "in list ", listId);
-    if (!this.allIds[item.hysId]) this.allIds.push(item.hysId);
+    console.log("addItemInItemsList", item, "in list ", listId);
+    
     let hysId = item.hysId;
-    let newItem = { [hysId]: item };
-    console.log("newItem", newItem);
-    this.allItems = { ...this.allItems, ...newItem };
+       // allIds
+    // let isExistingItemId = this.allIds.includes(hysId);
+    // if (!isExistingItemId) {
+    //   console.log("this item doesn't exist")
+    //   this.allIds.push(hysId);
+    // }
+
+
+    // is HYS item exisists in allItems
+    let isExistingItemAsHysItem = this.allItems.hasOwnProperty(hysId);
+    if (isExistingItemAsHysItem) {
+      let itemToUpdate = this.allItems[hysId];
+
+      if (itemToUpdate.lists) {
+        if (itemToUpdate.lists.length > 0 && itemToUpdate.lists.includes(listId)) {
+          //Modify listsId of item. If listID exists it's a removal
+          const index = itemToUpdate.lists.indexOf(listId);
+          itemToUpdate.lists.splice(index, 1);
+        } else {
+          itemToUpdate.lists.push(listId);
+        }
+      } else {
+        // there is no lists array yet
+        itemToUpdate.lists = [];
+        itemToUpdate.lists.push(listId);
+      }
+
+      if (itemToUpdate.lists.length === 0) {
+        //check if there is still a listId associated to this item
+        let updateItemsWithRemovalOfCurrentItem = { ...this.allItems };
+        let isObjectRemoved = delete updateItemsWithRemovalOfCurrentItem[hysId];
+        this.allItems = updateItemsWithRemovalOfCurrentItem;
+      } else {
+        //Modification of the items
+        this.allItems = changeKeyObject(this.allItems, hysId, itemToUpdate);
+      }
+    } else {
+      item.lists = [];
+      item.lists.push(listId);
+      let newItem = { [hysId]: item };
+      return this.allItems = { ...this.allItems, ...newItem };
+    }
+
+    if (initStoreItemsFinished) {
+      //Save all current modification 
+      updateDataItemStore(store);
+    }
   }
+
 }
 
+
 const store = (window.store = new ItemsStore());
-let firstStoreItemsrun;
-let initStoreItemsFinished;
+
 
 const init = () => {
   let isExistingProperty = isExistingInLocalStorage("firstStoreItemsrun");
@@ -117,14 +171,11 @@ const init = () => {
     firstStoreItemsrun = true;
     isExistingProperty = true;
   }
-  // console.log("firstStoreItemsrun init function", firstStoreItemsrun);
   if (isExistingProperty && firstStoreItemsrun) {
-    // console.log("ITEMSTORE - it's first run ", firstStoreItemsrun);
-    // console.log("fakeState",fakeState.allItemsInLists.byId,  fakeState.allItemsInLists.byId)
     store.allItems = fakeState.allItemsInLists.byId;
-    store.allIds = fakeState.allItemsInLists.allIds;
+    // store.allIds = fakeState.allItemsInLists.allIds;
     store.itemsPannelAction = fakeState.allItemsInLists.itemsPannelAction;
-    setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
+    // setInLocalStorage("itemsIds", fakeState.allItemsInLists.allIds);
     setInLocalStorage("hysItems", fakeState.allItemsInLists.byId);
     setInLocalStorage(
       "itemsPannelAction",
@@ -132,12 +183,10 @@ const init = () => {
     );
     setInLocalStorage("firstStoreItemsrun", false);
   } else {
-    // console.log("ITEMSTORE - need to get data from localstorage, because is firstrun = ", firstStoreItemsrun);
     setInLocalStorage("firstStoreItemsrun", false);
     store.allItems = getFromLocalStorage("hysItems");
-    store.allIds = getFromLocalStorage("itemsIds");
+    // store.allIds = getFromLocalStorage("itemsIds");
     store.itemsPannelAction = getFromLocalStorage("itemsPannelAction");
-    // console.log("ITEMSTORE - already data returns :", store.allItems, store.allIds);
   }
   initStoreItemsFinished = true;
 };

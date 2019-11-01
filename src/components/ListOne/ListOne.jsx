@@ -48,7 +48,7 @@ class ListOne extends React.Component {
         </header>
         <div className="o-list__cards">
           {Object.values(itemsFromThisList).map(content => {
-            // console.log("content", content.hysId);
+             // console.log("content", content.hysId);
             let contentType;
             if (content.first_air_date || content.contentType === "tv" ) contentType = "tv";
             else if (content.release_date || content.contentType === "movie" ) contentType = "movie";
@@ -58,6 +58,7 @@ class ListOne extends React.Component {
                 key={content.hysId}
                 contentId={content.id}
                 hysId={content.hysId}
+                overview={content.overview}
                 title={content.title}
                 release={content.release}
                 poster={content.poster}
