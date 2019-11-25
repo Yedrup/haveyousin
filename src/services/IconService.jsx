@@ -14,7 +14,8 @@ import {
   FaUserCircle,
   FaUser,
   FaQuestionCircle,
-  FaCheck
+  FaCheck,
+  FaArrowAltCircleDown
 } from "react-icons/fa";
 
 class IconService extends React.Component {
@@ -33,7 +34,8 @@ class IconService extends React.Component {
       { title: "customLists", nameIcon: FaList },
       { title: "user", nameIcon: FaUserCircle },
       { title: "people", nameIcon: FaUser },
-      { title: "about", nameIcon: FaQuestionCircle }
+      { title: "about", nameIcon: FaQuestionCircle },
+      { title: "loadMore", nameIcon: FaArrowAltCircleDown }
     ];
     let iconToFind = this.props.nameIcon;
     let iconStyleContext = this.props.iconStyleContext;

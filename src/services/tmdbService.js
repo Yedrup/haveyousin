@@ -2,15 +2,20 @@
     const API_KEY = process.env.REACT_APP_API_KEY;
 
     let today = new Date();
-    let startingDateMovie = today.setMonth(today.getMonth() - 2);
+    let currentDay = today.getTime();
+    let limitUpcomingDate = new Date(today.setMonth(today.getMonth() + 2)).getTime();
+    let startReleaseDate = new Date(today.setMonth(today.getMonth() - 3)).getTime();
+    // console.log("currentDay =>", currentDay, "limitUpcomingDate =>", limitUpcomingDate, "startReleaseDate =>", startReleaseDate)
+
     let maxDateMovie = today.setMonth(today.getMonth() + 3);
+    let startingDateMovie = today.setMonth(today.getMonth() - 2);
 
     let startingDateTv = today.setMonth(today.getMonth() - 6);
     let maxDateTv = today.setMonth(today.getMonth() + 3);
 
 
-//TODO => variable for country available in settings
-//TODO => variable for language
+    //TODO => variable for country available in settings
+    //TODO => variable for language
 
     //* discover tv upcomming (today -x/+x months )
     export const discoverTVLaps = async () => {
@@ -28,11 +33,12 @@
         }
     }
 
-
+    // custom upcoming
     //* discover movie upcomming (today -x/+x months )
-    export const discoverMoviesLaps = async () => {
+    export const discoverMoviesLaps = async (page) => {
+        let pageNum = Number(page);
         try {
-            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_date.gte=${startingDateMovie}&primary_release_date.lte=${maxDateMovie}&region=FR&language=en
+            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_date.gte=${startingDateMovie}&primary_release_date.lte=${maxDateMovie}&page=${pageNum}&region=FR&language=en
             `);
             if (!response.ok) {
                 throw Error(response.statusText);
@@ -43,12 +49,13 @@
             console.log(error);
         }
     }
-   
-    //*DISCOVER MOVIE BY YEAR  
-    //TODO : this is potentilly the part used for filters
-    export const discoverMovieByYear = async (year) => {
+
+    export const getNowPlayingMovies = async (page) => {
+        // console.log("==> ENTER tmdb service getNowPlayingMovies", page);
+        let pageNum = Number(page);
         try {
-            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_year=${year}`);
+            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_date.gte=${startReleaseDate}&release_date.lte=${currentDay}&page=${pageNum}&region=FR&language=en
+            `);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
@@ -59,11 +66,26 @@
         }
     }
 
-    //*UPCOMING movie 
-    //TODO : distinction between movie in theater and movies on netflix, stamp netflix? 
-    export const getUpcomingMovies = async (id, params) => {
+    export const getUpcomingMovies = async (page) => {
+        let pageNum = Number(page);
         try {
-            const response = await fetch(`${API_ENDPOINT_3}discover/upcoming?api_key=${API_KEY}`);
+            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_date.gte=${currentDay}&release_date.lte=${limitUpcomingDate}&page=${pageNum}&region=FR&language=en
+            `);
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            const json = await response.json();
+            return json
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //*DISCOVER MOVIE BY YEAR  
+    //TODO : this is potentilly the part used for filters
+    export const discoverMovieByYear = async (year) => {
+        try {
+            const response = await fetch(`${API_ENDPOINT_3}discover/movie?api_key=${API_KEY}&primary_release_year=${year}`);
             if (!response.ok) {
                 throw Error(response.statusText);
             }
@@ -125,7 +147,7 @@
 
     //*SEARCH
     export const getSearchResults = async (query) => {
-        if(query.length>0) {
+        if (query.length > 0) {
             try {
                 const response = await fetch(`${API_ENDPOINT_3}search/multi?api_key=${API_KEY}&query=${query}&region=FR&language=en`);
                 if (!response.ok) {
@@ -137,6 +159,6 @@
                 console.log(error);
             }
         } else {
-            return 
+            return
         }
     }

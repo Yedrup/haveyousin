@@ -1,0 +1,21 @@
+.c-button-loadMore {
+    /* TODO: variable */
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    padding: 0.35rem 1.5rem;
+}
+
+
+.c-button-loadMore__text {
+    margin: 0 .5rem;
+}
+
+.c-tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.c-tab--selected {
+    color: var(--color-active);
+}

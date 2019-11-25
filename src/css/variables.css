@@ -21,6 +21,7 @@
     --color-active: var(--color-yellow);
     --link:  var(--color-active);
     --inputBackgroundColor: var(--color-mercury);
+    --colorOnActiveColorBg: var(--color-carbon);
 
     /*Header*/
     --headerBackgroundColor: var(--color-carbon);
