@@ -27,7 +27,7 @@ class ItemsStore {
 
   @action.bound
   addItemInItemsList(listId, item) {
-    console.log("addItemInItemsList", item, "in list ", listId);
+    // console.log("addItemInItemsList", item, "in list ", listId);
     let hysId = item.hysId;
 
     // is item exists in HYS items 
@@ -41,12 +41,12 @@ class ItemsStore {
           const index = itemToUpdate.lists.indexOf(listId);
           itemToUpdate.lists.splice(index, 1);
           itemToUpdate.itemStatusByList[listId] = null;
-          console.log("itemToUpdate ====> null", itemToUpdate);
+          // console.log("itemToUpdate ====> null", itemToUpdate);
         } else {
           //Add listId && itemStatusByList because it doesn't exist in array
           itemToUpdate.lists.push(listId);
           itemToUpdate.itemStatusByList[listId] = true;
-          console.log("itemToUpdate ====> true", itemToUpdate);
+          // console.log("itemToUpdate ====> true", itemToUpdate);
         }
       } else {
         // create listsId  && itemStatusByList 
@@ -112,12 +112,12 @@ init();
 
 export default store;
 autorun(() => {
-  console.log("ITEMSTORE - autorun");
+  // console.log("ITEMSTORE - autorun");
   // console.log("ITEMSTORE - is initStoreItemsFinished autorun", initStoreItemsFinished)
   if (initStoreItemsFinished) {
     // console.log("ITEMSTORE -  passing by update function")
     updateDataItemStore(store);
   }
-  console.log("autorun itemsStore", store);
+  // console.log("autorun itemsStore", store);
   // console.log("listsStore.allItems autorrun", store);
 });

@@ -61,14 +61,15 @@ class ActionPannel extends React.Component {
           addItemInItemsList("3",thisItem);
           addItemInThisList("3",hysId);
         }
-      },
-      {
-        title: "customLists",
-        isInThisList : thisItemActions["4"],
-        action: () => {
-          this.openCustomPannel()
-        }
       }
+      // ,
+      // {
+      //   title: "customLists",
+      //   isInThisList : thisItemActions["4"],
+      //   action: () => {
+      //     this.openCustomPannel()
+      //   }
+      // }
     ];
     if (this.props.contentType !== "person") {
       return (

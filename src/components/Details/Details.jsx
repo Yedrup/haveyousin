@@ -16,7 +16,7 @@ import {
 } from "../../services/listServiceHelper";
 
 //TODO: create render function for tv, movie, person test credits
-console.log(this.props);
+// console.log(this.props);
 class Details extends React.Component {
   state = {
     details: {}

@@ -19,13 +19,13 @@ import listsStore from "./stores/ListsStore";
 import itemsStore from "./stores/ItemsStore";
 
 //TODO : declare all functions modification here + firebase management
-console.log("navigator online?", navigator.onLine)
+// console.log("navigator online?", navigator.onLine)
 const history = createBrowserHistory();
 
 
 // detect use of tab to display outline.
 function handleFirstTab(e) {
-  console.log("e", e)
+  // console.log("e", e)
   if (e.keyCode === 9) { 
       document.body.classList.add('user-is-tabbing');
       window.removeEventListener('keydown', handleFirstTab);
@@ -50,9 +50,9 @@ class App extends Component {
   };
 
   render() {
-    console.log(listsStore);
+    // console.log(listsStore);
     return (
-      <BrowserRouter basename={"/testhys"} >
+      <BrowserRouter basename={"/haveyousin"} >
         <Provider ListsStore={listsStore} ItemsStore={itemsStore}>
           <div className="App">
             <ScrollToTop/>

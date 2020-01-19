@@ -15,7 +15,7 @@ class ListOne extends React.Component {
   }
 
   render() {
-    console.log("this.props.ListsStore.lists", this.props.ListsStore.lists, "this.props.match.params.listId", this.props.match.params.listId)
+    // console.log("this.props.ListsStore.lists", this.props.ListsStore.lists, "this.props.match.params.listId", this.props.match.params.listId)
     let getThisList = this.props.ListsStore.lists[this.props.match.params.listId];
     let itemsFromThisList = getThisListItems(
       getThisList.itemsInThisList,

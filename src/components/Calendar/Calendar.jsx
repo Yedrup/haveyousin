@@ -1,7 +1,7 @@
 import React from "react";
 import IconService from "../../services/IconService";
 import "../ListOne/listOne.css";
-import { discoverMoviesLaps, getNowPlayingMovies, getUpcomingMovies } from "../../services/tmdbService";
+import {getNowPlayingMovies, getUpcomingMovies } from "../../services/tmdbService";
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import Card from "../Card/Card";
 import { withRouter } from "react-router-dom";

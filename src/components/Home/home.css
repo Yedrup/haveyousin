@@ -1,0 +1,30 @@
+.c-item__icon--small {
+    font-size: 1rem;
+    margin: 0 1rem;
+}
+.c-tiles--home {
+        --auto-grid-min-size: 15rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+        grid-gap: .5rem;  
+}
+
+.c-tile--home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background : rgba(128, 128, 128, 0.171);
+    color: rgba(255, 255, 255, 0.342);
+    font-size: 1.5rem;
+    height: 5rem;
+    border-radius: 3px;
+}
+
+
+@media screen and (min-width:767px) {
+    .c-tile--home {
+        height: 15rem;
+        display: flex;
+        font-size: 2.5rem;
+    }
+}

@@ -1,8 +1,8 @@
 {
   "short_name": "HaveYouSin",
   "name": "HaveYouSin",
-  "scope": "/testhys",
-  "start_url": "/testhys/",
+  "scope": "/haveyousin",
+  "start_url": "/haveyousin/",
   "icons": [
     {
       "src": "favicon.ico",

@@ -22,14 +22,14 @@ export const MENU_ITEMS = {
         title: "favorites",
         link: "/list/3"
     },
-    CUSTOMLISTS: {
-        title: "customLists",
-        link: "/listHome",
-    },
-    SETTINGS: {
-        title: "user",
-        link: "/settings"
-    },
+    // CUSTOMLISTS: {
+    //     title: "customLists",
+    //     link: "/listHome",
+    // },
+    // SETTINGS: {
+    //     title: "user",
+    //     link: "/settings"
+    // },
     ABOUT: {
         title: "about",
         link: "/about"
@@ -53,9 +53,10 @@ export const FOOTER_ITEMS = {
     FAVORITES: {
         title: "favorites",
         link: "/list/3"
-    },
-    CUSTOMLISTS: {
-        title: "customLists",
-        link: "/listHome",
     }
+    // ,
+    // CUSTOMLISTS: {
+    //     title: "customLists",
+    //     link: "/listHome",
+    // }
 }

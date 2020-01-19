@@ -19,7 +19,7 @@
  export default singleList; 
 
  autorun(() => {
-    console.log(singleList.itemsInThisList)
+    // console.log(singleList.itemsInThisList)
 
  })
 

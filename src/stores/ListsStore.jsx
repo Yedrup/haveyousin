@@ -23,7 +23,7 @@ class ListsStore {
       item => itemId === item
     );
     if (isThisItemInThisList) {
-      console.log("need to be removed from list");
+      // console.log("need to be removed from list");
       const index = this.lists[listId].itemsInThisList.indexOf(itemId);
       this.lists[listId].itemsInThisList.splice(index, 1);
     } else {
@@ -65,12 +65,12 @@ init();
 export default listsStore;
 
 autorun(() => {
-  console.log("LISTSSTORE - autorun")
+  // console.log("LISTSSTORE - autorun")
   // console.log("LISTSSTORE - is initStoreListFinished autorun listsSTORE", initStoreListFinished)
   if(initStoreListFinished) {
     // console.log("LISTSSTORE -  passing by update function")
     updateDataListsStore(listsStore)
   }
-  console.log("LISTSSTORE - autorun listStore", listsStore);
+  // console.log("LISTSSTORE - autorun listStore", listsStore);
 
 });
