@@ -1,61 +1,108 @@
-import React from "react";
-import { inject, observer } from "mobx-react";
-import Card from "../Card/Card";
-import IconService from "../../services/IconService";
-import { withRouter } from "react-router-dom";
-import "./listOne.css";
-import { getThisListItems } from "../../services/listServiceHelper";
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { withRouter, Link } from 'react-router-dom';
+import Card from '../Card/Card';
+import IconService from '../../services/IconService';
+import { getThisListItems } from '../../services/listServiceHelper';
+import './listOne.css';
 
-@inject("ListsStore")
-@inject("ItemsStore")
+@inject('ListsStore')
+@inject('ItemsStore')
 @observer
-class ListOne extends React.Component {
-   componentDidMount() {
-    // console.log("this.props ListOne", this.props);
-  }
-
+class ListOne extends Component {
   render() {
-    // console.log("this.props.ListsStore.lists", this.props.ListsStore.lists, "this.props.match.params.listId", this.props.match.params.listId)
-    let getThisList = this.props.ListsStore.lists[this.props.match.params.listId];
+    const { ListsStore, match, ItemsStore, ActionPanel } = this.props;
+    let currentList = ListsStore.lists[match.params.listId];
+    const { nameIcon, nameList } = currentList;
+
     let itemsFromThisList = getThisListItems(
-      getThisList.itemsInThisList,
-      this.props.ItemsStore.allItems
+      currentList.itemsInThisList,
+      ItemsStore.allItems
     );
-  
-    let ActionPannel = this.props.ActionPannel;
+
+    let isItemsInTheList = Object.values(itemsFromThisList).length;
 
     return (
       <article>
         <header className="o-list__header o-list__title">
           <IconService
-            nameIcon={getThisList.nameIcon}
+            nameIcon={nameIcon}
             iconStyleContext={{
-              color: ""
+              color: '',
             }}
           />
-          <span className="o-list__title__text"> {getThisList.nameIcon} </span>
+          <span className="o-list__title__text">{nameList}</span>
         </header>
         <div className="o-list__cards">
-          {Object.values(itemsFromThisList).map(content => {
-            let contentType;
-            if (content.first_air_date || content.contentType === "tv" ) contentType = "tv";
-            else if (content.release_date || content.contentType === "movie" ) contentType = "movie";
-            else contentType = "person";
-            return (
-              <Card
-                key={content.hysId}
-                contentId={content.id}
-                hysId={content.hysId}
-                overview={content.overview}
-                title={content.title}
-                release={content.release}
-                poster={content.poster}
-                contentType={contentType}
-                ActionPannel={ActionPannel}
-              />
-            );
-          })}
+          {Object.values(itemsFromThisList).map(
+            ({
+              hysId,
+              id,
+              overview,
+              release,
+              poster,
+              title,
+              contentType,
+              first_air_date,
+              release_date,
+            }) => {
+              let contentTypeDef =
+                first_air_date || contentType === 'tv'
+                  ? 'tv'
+                  : release_date || contentType === 'movie'
+                  ? 'movie'
+                  : 'person';
+
+              return (
+                <Card
+                  key={hysId}
+                  contentId={id}
+                  hysId={hysId}
+                  overview={overview}
+                  title={title}
+                  release={release}
+                  poster={poster}
+                  contentType={contentTypeDef}
+                  ActionPanel={ActionPanel}
+                />
+              );
+            }
+          )}
         </div>
+        {!isItemsInTheList && (
+          <div className="empty-lists">
+            <h3 className="empty-list__title">
+              Nothing yet here! Go find content :
+            </h3>
+            <ul className="empty-list__items">
+              <li className="empty-list__item">
+                <Link to="/calendar" className="list__item__link">
+                  <IconService
+                    nameIcon="calendar"
+                    iconStyleContext={{
+                      color: 'var(--color-active)',
+                    }}
+                  />
+                  <span className="highlight">Calendar</span>
+                </Link>
+                to found out what are the movies released or about to be release
+                to complete your lists!
+              </li>
+              <li className="empty-list__item">
+                <IconService
+                  nameIcon="search"
+                  iconStyleContext={{
+                    color: 'var(--color-active)',
+                  }}
+                />
+                <span className="highlight animation-search">Search</span>
+                <span className="secondary__content">
+                  content too from the search bar!
+                </span>
+              </li>
+            </ul>
+          </div>
+        )}
       </article>
     );
   }

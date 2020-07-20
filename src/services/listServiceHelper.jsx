@@ -1,15 +1,12 @@
 export const getOneList = (listArray, idToFound) => {
   let content = { ...listArray[idToFound] };
-  // console.log("content from getOneList", content);
   return content;
 };
 
 export const getThisListItems = (itemsInThisList, AllItems) => {
-   // console.log(" itemsInThisList", itemsInThisList);
-  // console.log(" AllItems", AllItems);
   if (itemsInThisList !== undefined) {
     const filtered = Object.keys(AllItems)
-      .filter(key => itemsInThisList.includes(key))
+      .filter((key) => itemsInThisList.includes(key))
       .reduce((obj, key) => {
         obj[key] = AllItems[key];
         return obj;
@@ -18,8 +15,7 @@ export const getThisListItems = (itemsInThisList, AllItems) => {
   }
 };
 
-
-export const changeKeyObject =  (objectOrigin, keyOrigin, keyNew) => {
+export const changeKeyObject = (objectOrigin, keyOrigin, keyNew) => {
   let objectNew = { ...objectOrigin };
   Object.keys(objectNew).map((item) => {
     if (keyOrigin === item) {
@@ -30,7 +26,7 @@ export const changeKeyObject =  (objectOrigin, keyOrigin, keyNew) => {
     return item;
   });
   return objectNew;
-}
+};
 
 export const getCustomLists = (defaultListIds, allLists) => {
   function isCustom(key) {
@@ -46,29 +42,26 @@ export const getCustomLists = (defaultListIds, allLists) => {
 };
 
 export const createHysIdForItems = (itemTmdbId, itemType) => {
-  // console.log("itemTmdbId", itemTmdbId);
-  // console.log(" itemType", itemType);
-
   let suffixToConstructId;
-  if (itemType === "tv") {
-    suffixToConstructId = "s";
-  } else if (itemType === "movie") {
-    suffixToConstructId = "m";
+  if (itemType === 'tv') {
+    suffixToConstructId = 's';
+  } else if (itemType === 'movie') {
+    suffixToConstructId = 'm';
   } else {
-    suffixToConstructId = "p";
+    suffixToConstructId = 'p';
   }
   return `${itemTmdbId}${suffixToConstructId}`;
 };
 
-export const defineContentType = objectContent => {
+export const defineContentType = ({ first_air_date, release_date }) => {
   // console.log("objectContent", objectContent);
   let contentType;
-  if (objectContent.first_air_date) {
-    contentType = "tv";
-  } else if (objectContent.release_date) {
-    contentType = "movie";
+  if (first_air_date) {
+    contentType = 'tv';
+  } else if (release_date) {
+    contentType = 'movie';
   } else {
-    contentType = "person";
+    contentType = 'person';
   }
 
   return contentType;

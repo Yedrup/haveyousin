@@ -1,71 +1,69 @@
 .c-about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 2rem;
-    padding: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 2rem;
 }
 
 .c-about__title {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .logo-reference {
-    font-family: logoFont;
-    color: var(--colorLogo);
-    margin-right: .5rem;
+  margin-right: 0.5rem;
+  font-family: logoFont;
+  color: var(--colorLogo);
 }
 
 .c-about__presentation {
-    width: 100%;
-    justify-content: flex-start;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
 }
-
 
 .c-about__item,
 .c-about__items {
-    padding: 0;
+  padding: 0;
 }
 
 .c-about__item,
 .c-feature {
-    text-align: left;
-    line-height: 1.75rem;
+  text-align: left;
+  line-height: 1.75rem;
 }
 
 .c-about__items,
 .c-about__features-to-come {
-    flex-direction: column;
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.c-about-item--hilight {
-    font-weight: bold;
-    color: var(--color-active);
+.c-about-item--highlight {
+  font-weight: bold;
+  color: var(--color-active);
 }
 
-.c-about-item--hilight,
-.c-about-item--hilight span {
-    margin-right: 1rem;
+.c-about-item--highlight,
+.c-about-item--highlight span {
+  margin-right: 1rem;
 }
-
-
 
 .c-about__features-to-come {
-    width: 100%;
-    justify-content: flex-start;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .c-feature-title {
-    color: var(--color-active);
-    text-align: left;
-    margin-top: 2rem;
+  margin-top: 2rem;
+  text-align: left;
+  color: var(--color-active);
 }
 
 .c-feature {
-    list-style-type: disc;
+  list-style-type: disc;
 }

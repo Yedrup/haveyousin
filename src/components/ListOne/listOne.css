@@ -1,25 +1,64 @@
 .o-list__cards {
-    display: flex;
-    flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  justify-content: flex-start;
+  grid-gap: 1.5rem;
 }
 
 .o-list__header {
-    display: flex;
+  display: flex;
 }
 
 .o-list__title {
-    color: var(--listTitle);
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: var(--listTitle);
 }
 
 .o-list__title__text {
-    margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
-@media screen and (min-width:767px) {
-    .o-list__cards {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+.empty-lists {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.empty-list__title {
+  margin-bottom: 2.5rem;
+}
+
+.empty-list__items {
+  margin-bottom: 2.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: var(--border-radius);
+}
+
+.empty-list__item {
+  margin: 1.5rem 0;
+  display: flex;
+  list-style: inside;
+}
+.list__item__link {
+  display: flex;
+}
+
+.highlight {
+  margin: 0 0.5rem;
+  display: flex;
+  flex-direction: row;
+  color: var(--color-active);
+}
+
+.animation-search:hover {
+  transition: all 1s ease-in-out;
+  transform: scale(1.25);
+}
+
+@media screen and (min-width: 767px) {
+  .o-list__cards {
+    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 12rem));
+    grid-gap: 2rem;
+  }
 }

@@ -1,16 +1,16 @@
-import React from "react";
-import "./header.css";
-import IconService from "../../services/IconService";
-import { Link } from "react-router-dom";
-import Search from "../Search/Search";
-import MediaQuery from "react-responsive";
+import React from 'react';
+import MediaQuery from 'react-responsive';
+import { Link } from 'react-router-dom';
+import IconService from '../../services/IconService';
+import Search from '../Search/Search';
+import './header.css';
 class Header extends React.Component {
   state = {
-    isSearchFieldOpenSmallDevice: false
+    isSearchFieldOpenSmallDevice: false,
   };
   openSearchOnSmall = () => {
     this.setState({
-      isSearchFieldOpenSmallDevice: !this.state.isSearchFieldOpenSmallDevice
+      isSearchFieldOpenSmallDevice: !this.state.isSearchFieldOpenSmallDevice,
     });
   };
 
@@ -20,14 +20,14 @@ class Header extends React.Component {
       <header className="c-header">
         <div className="c-header__main">
           <MediaQuery maxWidth={1024}>
-            <Link to={"/"}>
+            <Link to={'/'}>
               <h1 className="c-logo c-logo--header ">HaveYouSin</h1>
             </Link>
             <div className="c-header__search">
               <span onClick={this.openSearchOnSmall}>
                 <IconService
-                  nameIcon={"search"}
-                  iconStyleContext={{ color: "var(--color-silver)" }}
+                  nameIcon={'search'}
+                  iconStyleContext={{ color: 'var(--color-silver)' }}
                 />
               </span>
               <Search
@@ -39,9 +39,7 @@ class Header extends React.Component {
           </MediaQuery>
           <MediaQuery minWidth={1024}>
             <div className="c-header__search">
-              <Search
-                searchBarMobileField={false}
-              />
+              <Search searchBarMobileField={false} />
             </div>
           </MediaQuery>
         </div>

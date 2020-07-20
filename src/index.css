@@ -5,8 +5,8 @@ body {
 }
 
 body.user-is-tabbing *:focus {
-  outline: 2px solid #7AACFE !important; /* for non-webkit browsers */
-  outline: 5px auto var( --color-active) !important;
+  outline: 2px solid #7aacfe !important; /* for non-webkit browsers */
+  outline: 5px auto var(--color-active) !important;
 }
 
 body:not(.user-is-tabbing) button:focus,

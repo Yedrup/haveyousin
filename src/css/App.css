@@ -24,22 +24,22 @@ html {
 }
 
 .App {
-  text-align: center;
-  display: flex;
   height: 100vh;
+  display: flex;
+  text-align: center;
 }
 
 .main {
-  background-color: var(--bodyBackgroundColor);
-  flex: 1;
-  padding: 0.25rem;
   margin-bottom: var(--footerHeight);
+  padding: 0 1rem;
+  flex: 1;
+  background-color: var(--bodyBackgroundColor);
 }
 
 .content {
   display: flex;
-  flex-direction: column;
   flex: 1;
+  flex-direction: column;
 }
 
 p,
@@ -54,7 +54,7 @@ h6 {
 
 a {
   text-decoration: none;
-  color:var(--link)
+  color: var(--link);
 }
 
 li {
@@ -69,19 +69,22 @@ li {
   display: none;
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (min-width: 767px) {
+  .main {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .main {
     margin-top: 2rem;
   }
 }
-@media screen and (min-width:1024px) {
+@media screen and (min-width: 1024px) {
   .content {
-    margin-left: var(--menuWidth);;
+    margin-left: var(--menuWidth);
   }
-}
-
-@media screen and (min-width:767px) {
   .main {
-    padding: 1rem;
+    padding: 2rem;
   }
 }

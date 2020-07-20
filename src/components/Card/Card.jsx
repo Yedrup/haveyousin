@@ -1,17 +1,33 @@
-import React from "react";
-import MediaQuery from "react-responsive";
-import Truncate from "react-truncate";
-import { Link } from "react-router-dom";
-import ImageService from "../../services/ImageService";
-import "./card.css";
-import { withRouter } from "react-router-dom";
+import React, { Component, cloneElement } from 'react';
+import MediaQuery from 'react-responsive';
+import Truncate from 'react-truncate';
+import { Link } from 'react-router-dom';
+import ImageService from '../../services/ImageService';
+import './card.css';
+import { withRouter } from 'react-router-dom';
 
-class Card extends React.Component {
+class Card extends Component {
   render() {
-    let ActionPannel = this.props.ActionPannel;
-    let hysId = this.props.hysId;
-    // console.log("props from card", this.props);
-    if (this.props.contentType !== "person") {
+    const {
+      ActionPanel,
+      hysId,
+      contentType,
+      contentId,
+      poster,
+      release,
+      title,
+    } = this.props;
+
+    let stateToPass = {
+      hysId,
+      contentType,
+      contentId,
+      poster,
+      release,
+      title,
+    };
+
+    if (contentType !== 'person') {
       let overview = this.props.overview;
       return (
         <article className="c-card">
@@ -19,126 +35,71 @@ class Card extends React.Component {
             <Link
               className=""
               to={{
-                pathname: `/details/${this.props.contentId}/${
-                  this.props.contentType
-                  }`,
-                state: {
-                  contentId: this.props.contentId,
-                  hysId,
-                  contentType: this.props.contentType,
-                  poster: this.props.poster,
-                  release: this.props.release,
-                  title: this.props.title
-                }
+                pathname: `/details/${contentId}/${contentType}`,
+                state: { ...stateToPass },
               }}
             >
-              <ImageService
-                size="92"
-                photoPath={this.props.poster}
-                imageTitle={this.props.title}
-              />
+              <ImageService size="92" photoPath={poster} imageTitle={title} />
             </Link>
             <div className="c-card__body--small">
               <header className="c-card__header">
                 <Link
                   to={{
-                    pathname: `/details/${this.props.contentId}/${
-                      this.props.contentType
-                      }`,
-                    state: {
-                      contentId: this.props.contentId,
-                      hysId,
-                      contentType: this.props.contentType,
-                      poster: this.props.poster,
-                      release: this.props.release,
-                      title: this.props.title
-                    }
+                    pathname: `/details/${contentId}/${contentType}`,
+                    state: { ...stateToPass },
                   }}
                 >
                   <h2 className="c-card__title">
                     <Truncate
                       lines={1}
-                      ellipsis={"..."}
+                      ellipsis={'...'}
                       trimWhitespace
                       width={210}
                     >
-                      {this.props.title}
+                      {title}
                     </Truncate>
                   </h2>
                 </Link>
                 <span className="c-card__secondary-info c-card__date">
-                  {this.props.release}
+                  {release}
                 </span>
               </header>
               <p className="c-card__secondary-info c-card__secondary-info-text">
-                <Truncate
-                  lines={2}
-                  ellipsis={"..."}
-                  trimWhitespace
-                  width={0}
-                >
+                <Truncate lines={2} ellipsis={'...'} trimWhitespace width={0}>
                   {overview}
                 </Truncate>
               </p>
               <footer>
-                {React.cloneElement(ActionPannel, {
-                  contentId: this.props.contentId,
-                  hysId,
-                  contentType: this.props.contentType,
-                  poster: this.props.poster,
-                  overview,
-                  release: this.props.release,
-                  title: this.props.title
+                {cloneElement(ActionPanel, {
+                  ...stateToPass,
                 })}
-                {/* <ActionPannel contentId={this.props.contentId} /> */}
               </footer>
             </div>
           </MediaQuery>
+
           <MediaQuery minWidth={767}>
             <Link
               className=""
               to={{
-                pathname: `/details/${this.props.contentId}/${
-                  this.props.contentType
-                  }`,
-                state: {
-                  contentId: this.props.contentId,
-                  hysId,
-                  contentType: this.props.contentType,
-                  poster: this.props.poster,
-                  release: this.props.release,
-                  title: this.props.title
-                }
+                pathname: `/details/${contentId}/${contentType}`,
+                state: { ...stateToPass },
               }}
             >
               <header className="c-card__header">
                 <h2 className="c-card__title">
-                  <Truncate lines={1} ellipsis={"..."}>
-                    {this.props.title}
+                  <Truncate lines={1} ellipsis={'...'} width={210}>
+                    {title}
                   </Truncate>
                 </h2>
                 <span className="c-card__secondary-info c-card__date">
-                  {this.props.release}
+                  {release}
                 </span>
               </header>
-              <ImageService
-                size="185"
-                photoPath={this.props.poster}
-                imageTitle={this.props.title}
-              />
+              <ImageService size="185" photoPath={poster} imageTitle={title} />
             </Link>
             <footer>
-              {/* <ActionPannel
-                contentId={this.props.contentId}
-                contentType={this.props.contentType}
-              /> */}
-              {React.cloneElement(ActionPannel, {
-                contentId: this.props.contentId,
-                hysId,
-                contentType: this.props.contentType,
-                poster: this.props.poster,
-                release: this.props.release,
-                title: this.props.title
+              {cloneElement(ActionPanel, {
+                ...stateToPass,
               })}
             </footer>
           </MediaQuery>
@@ -150,37 +111,17 @@ class Card extends React.Component {
           <Link
             className=""
             to={{
-              pathname: `/details/${this.props.contentId}/${
-                this.props.contentType
-                }`,
+              pathname: `/details/${contentId}/${contentType}`,
               state: {
-                contentId: this.props.contentId,
-                hysId,
-                contentType: this.props.contentType,
-                poster: this.props.poster,
-                release: this.props.release,
-                title: this.props.title
-              }
+                ...stateToPass,
+              },
             }}
           >
-            <ImageService
-              size="185"
-              photoPath={this.props.poster}
-              imageTitle={this.props.title}
-            />
+            <ImageService size="185" photoPath={poster} imageTitle={title} />
           </Link>
-          <figcaption>{this.props.title}</figcaption>
-          {/* <ActionPannel
-            contentId={this.props.contentId}
-            contentType={this.props.contentType}
-          /> */}
-          {React.cloneElement(ActionPannel, {
-            contentId: this.props.contentId,
-            hysId,
-            contentType: this.props.contentType,
-            poster: this.props.poster,
-            release: this.props.release,
-            title: this.props.title
+          <figcaption>{title}</figcaption>
+          {cloneElement(ActionPanel, {
+            ...stateToPass,
           })}
         </figure>
       );

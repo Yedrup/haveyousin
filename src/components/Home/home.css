@@ -1,30 +1,82 @@
 .c-item__icon--small {
-    font-size: 1rem;
-    margin: 0 1rem;
+  margin: 0 1rem 0 0;
+  font-size: 1.25rem;
 }
+
 .c-tiles--home {
-        --auto-grid-min-size: 15rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-        grid-gap: .5rem;  
+  --auto-grid-min-size: 22rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
+  grid-gap: 0.85rem;
 }
 
 .c-tile--home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background : rgba(128, 128, 128, 0.171);
-    color: rgba(255, 255, 255, 0.342);
-    font-size: 1.5rem;
-    height: 5rem;
-    border-radius: 3px;
+  position: relative;
+  min-height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
 }
 
+.c-tile--home__filter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(55%);
+}
 
-@media screen and (min-width:767px) {
-    .c-tile--home {
-        height: 15rem;
-        display: flex;
-        font-size: 2.5rem;
-    }
+.c-tile--home__filter::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(185, 26, 74, 0.173);
+}
+
+.c-tile--home__inner {
+  z-index: 60;
+  padding: 0.9rem;
+  background: rgba(0, 0, 0, 0.434);
+  font-size: 1.7rem;
+  color: var(--color-yellow);
+  text-shadow: 1.5px 1.5px rgba(0, 0, 0, 0.797);
+}
+
+@media screen and (min-width: 767px) {
+  .c-tile--home__inner {
+    font-size: 2rem;
+  }
+
+  .c-tiles--home {
+    grid-gap: 2rem;
+  }
+
+  .c-tile--home {
+    min-height: 18rem;
+  }
+
+  .c-item__icon--small {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .c-tiles--home {
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 3rem;
+  }
+  .c-tile--home {
+    min-height: 25rem;
+  }
 }

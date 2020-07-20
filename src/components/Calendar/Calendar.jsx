@@ -1,79 +1,87 @@
-import React from "react";
-import IconService from "../../services/IconService";
-import "../ListOne/listOne.css";
-import {getNowPlayingMovies, getUpcomingMovies } from "../../services/tmdbService";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
-import Card from "../Card/Card";
-import { withRouter } from "react-router-dom";
+import IconService from '../../services/IconService';
+import {
+  getNowPlayingMovies,
+  getUpcomingMovies,
+} from '../../services/tmdbService';
+import Card from '../Card/Card';
 import {
   createHysIdForItems,
-  defineContentType
-} from "../../services/listServiceHelper";
-import "./calendar.css";
+  defineContentType,
+} from '../../services/listServiceHelper';
+import './calendar.css';
+import '../ListOne/listOne.css';
 
-class Calendar extends React.Component {
+class Calendar extends Component {
   state = {
-    nameList: "calendar",
+    nameList: 'Calendar',
     tabIndex: 0,
-    tabs: [{
-      tabName: "upcomingMovies",
-      tabDisplayName: "Upcoming Movies",
-      currentAPIPage: 0,
-      datas: []
-    },
-    {
-      tabName: "nowPlayingMovies",
-      tabDisplayName: "Movies in theaters",
-      currentAPIPage: 0,
-      datas: []
-    }
-    ]
+    tabs: [
+      {
+        tabName: 'upcomingMovies',
+        tabDisplayName: 'Upcoming Movies',
+        currentAPIPage: 0,
+        data: [],
+        isMaxPageReached: false,
+      },
+      {
+        tabName: 'nowPlayingMovies',
+        tabDisplayName: 'Movies in theaters',
+        currentAPIPage: 0,
+        data: [],
+        isMaxPageReached: false,
+      },
+    ],
+  };
+
+  isMaxPageReached = (currentAPIPage, maxAPIPage) => {
+    return currentAPIPage === maxAPIPage || maxAPIPage < currentAPIPage;
   };
 
   discoverMovies = async (fromChangeTab) => {
     const { tabIndex } = this.state;
-    const { datas, currentAPIPage, tabName } = this.state.tabs[tabIndex];
+    const currentTabObj = this.state.tabs[tabIndex];
+    const { currentAPIPage, tabName, isMaxPageReached } = currentTabObj;
 
-    let datasResp;
+    if (isMaxPageReached) return;
+    // Avoid triggering a call api when it's not the first run of the tab.
+    let isFromChangeTab = fromChangeTab && currentAPIPage !== 0;
+    if (isFromChangeTab) return;
 
-    // Avoid triggering a call api when it's not the first run of the tab. 
-    let isfromChangeTab = fromChangeTab && currentAPIPage !== 0;
-    if(isfromChangeTab) return;
+    let dataResp;
+    let dataUpdated = { ...this.state.tabs };
+    let page =
+      fromChangeTab && currentAPIPage !== 0
+        ? currentAPIPage
+        : currentAPIPage + 1;
 
-    let page = fromChangeTab && currentAPIPage !== 0 ? currentAPIPage : currentAPIPage + 1;
-
-
-    if (tabName === "upcomingMovies") {
-
-      datasResp = await getUpcomingMovies(page);
-      if (!datasResp) return null;
-      let dataUpdated = { ...this.state.tabs };
-      dataUpdated[tabIndex].datas = dataUpdated[tabIndex].datas.concat(datasResp.results);
-      dataUpdated[tabIndex].currentAPIPage = datasResp.page;
-      this.setState(() => ({
-        tabs: dataUpdated
-      }));
-
-
-
-    } else if(tabName === "nowPlayingMovies"){
-
-      datasResp = await getNowPlayingMovies(page);
-      if (!datasResp) return null;
-      if (currentAPIPage > page) {console.log("will return cause this.state.tabs[tabIndex].currentAPIPage > page", this.state.tabs[tabIndex].currentAPIPage, page); return };
-
-      let dataUpdated = { ...this.state.tabs };
-      dataUpdated[tabIndex].datas = dataUpdated[tabIndex].datas.concat(datasResp.results);
-      dataUpdated[tabIndex].currentAPIPage = datasResp.page;
-
-      this.setState(prevState => ({
-        tabs: dataUpdated
-      }));
+    if (tabName === 'upcomingMovies') {
+      dataResp = await getUpcomingMovies(page);
+      if (!dataResp) return null;
     } else {
-      // custom filters.
+      dataResp = await getNowPlayingMovies(page);
+      if (!dataResp) return null;
     }
 
-return;
+    dataUpdated[tabIndex].data = dataUpdated[tabIndex].data.concat(
+      dataResp.results
+    );
+    dataUpdated[tabIndex].currentAPIPage = dataResp.page;
+    let updateIsMaxPageReached = this.isMaxPageReached(
+      dataResp.page,
+      dataResp.total_pages
+    );
+
+    if (updateIsMaxPageReached) {
+      dataUpdated[tabIndex].isMaxPageReached = true;
+    }
+
+    this.setState((prevState) => ({
+      tabs: dataUpdated,
+    }));
+    return;
   };
 
   componentDidMount() {
@@ -85,84 +93,105 @@ return;
   }
 
   render() {
-    const { ActionPannel } = this.props;
+    const { ActionPanel } = this.props;
     const { tabIndex } = this.state;
-    const { datas, currentAPIPage } = this.state.tabs[tabIndex];
-    // test if offline
-    // if (this.state.datas && this.state.datas.length <= 0) {
-    //   return <div>Nothing there</div>;
-    // }
+    const { data, isMaxPageReached } = this.state.tabs[tabIndex];
 
-    const ListOfCards = props => {
-      // console.log("props.datas", props.datas);
-      let datas = props.datas;
+    const ListOfCards = (props) => {
+      let { data } = props;
       return (
-        <div className="o-list__cards">
-          {datas.map(function (content, index) {
-            // console.log("content", content, index);
-            let contentType = defineContentType(content);
-            let hysId = createHysIdForItems(content.id, contentType);
-            return (
-              <Card
-                key={content.id}
-                contentId={content.id}
-                hysId={hysId}
-                title={content.title}
-                release={content.release_date}
-                overview={content.overview}
-                poster={
-                  content.media_type === "person"
-                    ? content.profile_path
-                    : content.poster_path
-                }
-                contentType={contentType}
-                ActionPannel={ActionPannel}
-              />
-            );
-          }
-          )}
-          <LoadMoreButton isContentDisplayed={datas.length ? true : false} />
-        </div>
+        <div>
+          <div className="o-list__cards">
+            {data.map(function (content, index) {
+              let contentType = defineContentType(content);
+              const {
+                id,
+                title,
+                release_date,
+                overview,
+                media_type,
+                profile_path,
+                poster_path,
+              } = content;
 
-      )
-    }
+              let hysId = createHysIdForItems(id, contentType);
+              return (
+                <Card
+                  key={id}
+                  contentId={id}
+                  hysId={hysId}
+                  title={title}
+                  release={release_date}
+                  overview={overview}
+                  poster={media_type === 'person' ? profile_path : poster_path}
+                  contentType={contentType}
+                  ActionPanel={ActionPanel}
+                />
+              );
+            })}
+          </div>
+          {!isMaxPageReached && (
+            <LoadMoreButton isContentDisplayed={data.length} />
+          )}
+        </div>
+      );
+    };
 
     const onChangingTab = (tabIndex) => {
-      this.setState({ tabIndex }, () =>  this.discoverMovies(true));
-    }
+      this.setState({ tabIndex }, () => this.discoverMovies(true));
+    };
 
-    const LoadMoreButton = (props) => {
-      if (props.isContentDisplayed) {
-      return (
-        <div className="c-button-loadMore" style={{ 'backgroundColor': 'var(--color-active)', 'color': 'var(--colorOnActiveColorBg)' }} onClick={() => this.discoverMovies()}>
-          <span className="c-button-loadMore__text">see more</span> <IconService nameIcon="loadMore" className="c-button-loadMore__text" iconStyleContext={{ color: "" }} />
-        </div>
-      )
+    const LoadMoreButton = ({ isContentDisplayed }) => {
+      if (isContentDisplayed) {
+        return (
+          <div
+            className="c-button-loadMore"
+            style={{
+              backgroundColor: 'var(--color-active)',
+              color: 'var(--colorOnActiveColorBg)',
+            }}
+            onClick={() => this.discoverMovies()}
+          >
+            <span className="c-button-loadMore__text">see more</span>
+            <IconService
+              nameIcon="loadMore"
+              className="c-button-loadMore__text"
+              iconStyleContext={{ color: '' }}
+            />
+          </div>
+        );
       } else {
-        return false
+        return false;
       }
-    }
-
+    };
 
     return (
       <div>
         <header className="o-list__header o-list__title">
-          <IconService nameIcon="calendar" iconStyleContext={{ color: "", margin: ".5rem" }} />
+          <IconService
+            nameIcon="calendar"
+            iconStyleContext={{ color: '', margin: '.5rem' }}
+          />
           <span className="o-list__title__text">{this.state.nameList}</span>
         </header>
 
-
-        {/* <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}> */}
-        <Tabs selectedIndex={tabIndex} onSelect={modiftabIndex => onChangingTab(modiftabIndex)} >
+        <Tabs
+          selectedIndex={tabIndex}
+          onSelect={(modifTabIndex) => onChangingTab(modifTabIndex)}
+        >
           <TabList className="c-tabs">
-            <Tab selectedClassName="c-tab--selected">Upcoming Movies</Tab>
-            <Tab selectedClassName="c-tab--selected" >In Theaters </Tab>
+            <Tab className="c-tab" selectedClassName="c-tab--selected">
+              Upcoming Movies
+            </Tab>
+            <Tab className="c-tab" selectedClassName="c-tab--selected">
+              In Theaters
+            </Tab>
           </TabList>
-          <TabPanel >
-            <ListOfCards datas={datas} />
+          <TabPanel>
+            <ListOfCards data={data} isMaxPageReached={isMaxPageReached} />
           </TabPanel>
-          <TabPanel >
-            <ListOfCards datas={datas} />
+          <TabPanel>
+            <ListOfCards data={data} isMaxPageReached={isMaxPageReached} />
           </TabPanel>
         </Tabs>
       </div>
@@ -171,9 +200,3 @@ return;
 }
 
 export default withRouter(Calendar);
-
-// listsStore.lists = fakeState.lists.byId;
-// listsStore.allIds = fakeState.lists.allIds;
-// listsStore.customListIds = fakeState.lists.customListIds;
-// listsStore.defaultListIds = fakeState.lists.defaultListIds;
-// listsStore.numberOfLists = fakeState.lists.numberOfLists;

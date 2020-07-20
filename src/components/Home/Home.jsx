@@ -1,55 +1,40 @@
-import React, { Component } from "react";
-import { FOOTER_ITEMS } from "../../services/navigationService";
-import { Link } from "react-router-dom";
-import MediaQuery from "react-responsive";
-import Truncate from "react-truncate";
-import IconService from "../../services/IconService";
-import "./home.css"
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { HOME_ITEMS } from '../../data/navigationService';
+import IconService from '../../services/IconService';
+
+import './home.css';
 class Home extends Component {
   render() {
-    let currentPath = this.props.location.pathname;
     return (
       <div className="c-tiles--home">
-        {Object.values(FOOTER_ITEMS).map((footerItem, index) => {
-          let iconName = footerItem.title;
-          return (
-            <Link
-            key={index}
-              to={
-                footerItem.link
-              }
-            >
-              <div className="c-tile--home ">
-                <MediaQuery maxWidth={767}>
-                  <span className="c-item__icon--small">
-                    <IconService
-                      nameIcon={iconName}
-                      iconStyleContext={{
-                        color: "var(--color-active)"
-                      }}
-                    />
-                  </span>
-                  <Truncate lines={2} ellipsis={"..."}>
-                    <p className="c-tile__text">{footerItem.title}</p>
-                  </Truncate>
-                </MediaQuery>
-                <MediaQuery minWidth={767}>
-                  <span className="c-item__icon--small">
-                    <IconService
-                      nameIcon={iconName}
-                      iconStyleContext={{
-                        color: "var(--color-active)"
-                      }}
-                    />
-                  </span>
-                  <Truncate lines={4} ellipsis={"..."}>
-                    <p className="c-tile__text">{footerItem.title}</p>
-                  </Truncate>
-                </MediaQuery>
-              </div>
-            </Link>
-          );
-        })}
+        {Object.values(HOME_ITEMS).map(
+          ({ title, displayName, link, image }, index) => {
+            return (
+              <Link key={index} to={link}>
+                <div className="c-tile--home">
+                  <div
+                    className="c-tile--home__filter"
+                    style={{
+                      backgroundImage: `url(${image})`,
+                    }}
+                  ></div>
+                  <div className="c-tile--home__inner">
+                    <span className="c-item__icon--small">
+                      <IconService
+                        nameIcon={title}
+                        iconStyleContext={{
+                          color: 'var(--color-active)',
+                        }}
+                      />
+                    </span>
+                    <span className="c-tile__text">{displayName}</span>
+                  </div>
+                </div>
+              </Link>
+            );
+          }
+        )}
       </div>
     );
   }

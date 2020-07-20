@@ -1,70 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./listDisplay.css";
-import IconService from "../../services/IconService";
-import ImageService from "../../services/ImageService";
-import { withRouter } from "react-router-dom";
-import {
-  createHysIdForItems,
-  defineContentType
-} from "../../services/listServiceHelper";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import IconService from '../../services/IconService';
+import { createHysIdForItems } from '../../services/listServiceHelper';
+import './listDisplay.css';
 
-class ListDiplay extends React.Component {
+class ListDisplay extends React.Component {
   render() {
     // too much logic inside component => EVO
-    let type = this.props.type;
-    let data = this.props.data;
-    let hysId = createHysIdForItems(data.id, data.media_type);
-    // console.log(data);
-    let dateContent = data.release_date
-      ? data.release_date
-      : data.first_air_date;
+    const { type, data } = this.props;
+    const {
+      release_date,
+      first_air_date,
+      media_type,
+      id,
+      backdrop_path,
+      name,
+      character,
+      title,
+    } = data;
+
+    let hysId = createHysIdForItems(id, media_type);
+    let dateContent = release_date ? release_date : first_air_date;
     let dateYear = new Date(dateContent).getFullYear();
 
-    if (type === "role") {
+    if (type === 'role') {
       //list of content for a person : icon content type, role, link to content
       return (
         <li className="c-list__item">
-          <span>{dateYear ? dateYear : "___"} </span>
+          <span>{dateYear ? dateYear : '___'} </span>
           {/* cast.release_date? cast.release_date : "____" | date:'yyyy' */}
           <IconService
-            nameIcon={data.media_type}
+            nameIcon={media_type}
             iconStyleContext={{
-              color: "var(--color-active)"
+              color: 'var(--color-active)',
             }}
           />
           <Link
             className=""
             to={{
-              pathname: `/details/${data.id}/${data.media_type}`,
+              pathname: `/details/${id}/${media_type}`,
               state: {
-                contentId: data.media_type,
+                contentId: media_type,
                 hysId,
-                contentType: data.media_type,
-                poster: data.backdrop_path,
-                release: data.release_date
-                  ? data.release_date
-                  : data.first_air_date,
-                title: data.title
-              }
+                contentType: media_type,
+                poster: backdrop_path,
+                release: release_date ? release_date : first_air_date,
+                title,
+              },
             }}
           >
-            {" "}
-            {data.title ? data.title : data.name}
+            {title ? title : name}
           </Link>
-          <span className="">
-             - {data.character ? data.character : "not set"}
-          </span>
+          <span className="">- {character ? character : 'not set'}</span>
         </li>
       );
     } else {
       // cast list :
-      return (
-        <li className="c-cast__list__item">
-         
-        </li>
-      );
+      return <li className="c-cast__list__item"></li>;
     }
   }
 }
-export default withRouter(ListDiplay);
+export default withRouter(ListDisplay);

@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const NotFound = (props) => (
-<div className="c-not-found">
+const NotFound = () => (
+  <div className="c-not-found">
     <p className="c-logo">Result not found</p>
-</div>
-)
-  
+  </div>
+);
 
-export default NotFound ;
+export default NotFound;

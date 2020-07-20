@@ -1,185 +1,198 @@
 .c-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color:var(--color-silver);
-}
-.c-detail__header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
-
-.c-detail__image {
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffecec5f;
 }
 
 .c-details__header__infos {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin: 0 1rem;
-    text-align: left;
-}
-.c-detail__title {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    text-align: center;
-    color:var(--cardTitleTextColor);
+  margin: 0 1rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: left;
 }
 
-.c-detail__sinopsis {
-    font-size: 1.25rem;
+.c-detail__header {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.c-detail__image {
+  margin-bottom: 2rem;
+}
+
+.c-detail__title {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #ffecec;
+}
+.c-detail__subtitle {
+  margin: 2rem 1.5rem 2rem;
+  text-align: left;
+  font-size: 1.2rem;
+  color: var(--color-silver);
+}
+
+.c-detail__synopsis {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
 }
 .c-detail__header__date {
-    white-space: nowrap;
-    font-size: 1.5rem;
-    color:var(--cardTitleTextColorDate);
+  white-space: nowrap;
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--cardTitleTextColorDate);
 }
 
-.c-detail__pannel {
-    width: 10%;
+.c-detail__panel {
+  width: 10%;
 }
 
 .c-details__main {
-    width: 100%;
+  width: 100%;
 }
-
-@media screen and (min-width:767px) {
-    .c-details {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-    .c-detail__header {
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-    .c-detail__pannel .c-actionPannel {
-        justify-content: space-between
-    }
-}
-
-
 
 /**Details**/
-
 .c-detail__header__text {
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
 
+.sections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 
 /**cast**/
 
 .c-cast-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(5rem, 8rem));
+  grid-gap: 1.5rem;
+  justify-items: center;
+}
+
+.c-cast-main__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .c-cast__list {
-    padding-left: 1rem;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+  max-width: 100%;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .c-cast__list__item {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    text-align: left;
-    width: 100%;
-    margin: .5rem;
+  width: 100%;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
-.c-cast-main__item {
-    margin-bottom: 1.25rem;
-    margin-right: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    width: 6rem;
-}
-
-.c-cast__list__item>.c-people__name--text-only--character {
-    margin-right: 0.6rem;
+.c-cast__list__item > .c-people__name--text-only--character {
+  margin-right: 0.6rem;
 }
 
 .c-people__name--text-only,
 .c-people__name--text-only {
-    display: flex;
-    margin-top: 0;
-    margin-bottom: 0;
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .c-people__cast--date {
-    width: 10%
+  width: 10%;
 }
-
 
 /**people**/
 
 .c-thumbnail-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: center;
-    width: 9rem;
-    height: auto;
-    min-height: 15rem;
-    background-color: #79776d;
-    border: 1px solid black;
+  width: 9rem;
+  min-height: 15rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #79776d;
+  text-align: center;
+  border: 1px solid black;
 }
 
 .c-thumbnail--people {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .c-people__name {
-    margin: 0;
-    color:var(--color-silver);
+  margin: 0;
+  color: var(--color-silver);
 }
 
 .c-people__name--character {
-    font-size: .9rem;
-    display: flex;
-    flex-direction: column;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .c-people__name--people {
-    font-size: .8rem;
-    color: #142842;
+  font-size: 0.8rem;
+  color: #142842;
 }
 .c-people__name__actor {
-    color:var(--color-active)
+  color: var(--color-active);
 }
-@media screen and (min-width: 640px) {
-    /*detail*/
-    .c-cast-main {
-        justify-content: flex-start;
-    }
-    .c-detail__image {
-        margin-top: 3.5rem;
-    }
-    /* .c-detail__header {
-        flex-direction: row;
-            padding: 2rem 1rem;
-    } */
-    /* .c-cast__list__item>* { */
-        /* margin-right: 1rem; */
-        /* margin-right: 0.6rem; */
-    /* } */
-    /* .c-cast-main__item {
-        margin-bottom: .25rem;
-        margin-right: .25rem;
-    } */
 
+@media screen and (min-width: 640px) {
+  /*detail*/
+  .c-cast-main {
+    justify-content: flex-start;
+  }
+  .c-detail__image {
+    margin-top: 3.5rem;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .c-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .c-detail__header {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .c-detail__title {
+    font-size: 1.85rem;
+  }
+
+  .c-detail__subtitle {
+    font-size: 2rem;
+    margin: 2rem 1.5rem 2rem;
+  }
+
+  .c-detail__panel .c-actionPanel {
+    justify-content: space-between;
+  }
 }

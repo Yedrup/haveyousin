@@ -1,41 +1,37 @@
-import React from "react";
-import "./listHome.css";
-import MediaQuery from "react-responsive";
-import Truncate from "react-truncate";
-import { Link, withRouter } from "react-router-dom";
-import { inject, observer } from "mobx-react";
-import {
-  getCustomLists
-} from "../../services/listServiceHelper";
-@inject("ListsStore")
+import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
+import Truncate from 'react-truncate';
+import { Link, withRouter } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import { getCustomLists } from '../../services/listServiceHelper';
+import './listHome.css';
+@inject('ListsStore')
 @observer
-class ListHome extends React.Component {
-  componentDidMount() {
-    // console.log("this.props from ListHome", this.props);
-  }
-
+class ListHome extends Component {
   render() {
-    let customLists = getCustomLists(this.props.ListsStore.defaultListIds, this.props.ListsStore.lists);
+    const { defaultListIds, lists } = this.props.ListsStore;
+    let customLists = getCustomLists(defaultListIds, lists);
+
     return (
       <div>
         <div className="c-listHome__list">
-          {Object.values(customLists).map(customList => {
+          {Object.values(customLists).map(({ id, nameList }) => {
             return (
               <Link
-                key={customList.id}
+                key={id}
                 to={{
-                  pathname: "/list/" + [customList.id]
+                  pathname: '/list/' + [id],
                 }}
               >
                 <div className="c-tile">
                   <MediaQuery maxWidth={767}>
-                    <Truncate lines={2} ellipsis={"..."}>
-                      <p className="c-tile__text">{customList.nameList}</p>
+                    <Truncate lines={2} ellipsis={'...'}>
+                      <p className="c-tile__text">{nameList}</p>
                     </Truncate>
                   </MediaQuery>
                   <MediaQuery minWidth={767}>
-                    <Truncate lines={4} ellipsis={"..."}>
-                      <p className="c-tile__text">{customList.nameList}</p>
+                    <Truncate lines={4} ellipsis={'...'}>
+                      <p className="c-tile__text">{nameList}</p>
                     </Truncate>
                   </MediaQuery>
                 </div>

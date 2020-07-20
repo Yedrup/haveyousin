@@ -1,62 +1,64 @@
 :root {
+  --color-red: #e33b3b; /*rgb(227,59,59)*/
+  --color-yellow: #fed530; /*rgb(254,213,48)*/
+  --color-mercury: #e5e5e5; /*rgb(229,229,229)*/
+  --color-silver: #c0c0c0; /*rgb(192,192,192)*/
+  --color-boulder: #797979; /*rgb(121,121,121)*/
+  --color-scorpion: #606060; /*rgb(96,96,96)*/
+  --color-mineShaft: #262525; /*rgb(38,37,37)*/
+  --color-codGrey: #191919; /*rgb(25,25,25)*/
+  --color-codGrey-darker: #111111; /*rgb(17,17,17)*/
+  --color-carbon: #080808; /*rgb(8,8,8)*/
+  --color-black: #000000; /*rgb(0,0,0)*/
 
+  /* Generic */
+  --bodyBackgroundColor: var(--color-codGrey-darker);
+  --bodyTextColor: var(--color-boulder);
+  --title: var(--color-silver);
+  --color-active: var(--color-yellow);
+  --link: var(--color-active);
+  --inputBackgroundColor: var(--color-mercury);
+  --colorOnActiveColorBg: var(--color-carbon);
+  --colorLogo: var(--color-red);
+  --border-radius: 3px;
 
-    --color-red: #e33b3b; /*rgb(227,59,59)*/
-    --color-yellow: #fed530; /*rgb(254,213,48)*/
-    --color-mercury: #E5E5E5; /*rgb(229,229,229)*/
-    --color-silver: #C0C0C0; /*rrgb(192,192,192)*/
-    --color-boulder: #797979; /*rgb(121,121,121)*/
-    --color-scorpion: #606060; /*rgb(96,96,96)*/
-    --color-mineShaft: #262525; /*rrgb(38,37,37)*/
-    --color-codGrey: #191919; /*rgb(25,25,25)*/
-    --color-codGrey-darker: #111111; /*rgb(17,17,17)*/
-    --color-carbon: #080808; /*rgb(8,8,8)*/
-    --color-black: #000000; /*rgb(0,0,0)*/
+  /*Header*/
+  --headerBackgroundColor: var(--color-carbon);
+  --headerTextColor: var(--color-silver);
+  --headerHeight: 5rem;
+  /*Footer*/
+  --footerBackgroundColor: linear-gradient(
+    to top,
+    var(--color-carbon) 80%,
+    rgba(218, 164, 14, 0.221)
+  );
+  --footerHeight: 60px;
 
+  /* Menu */
+  --iconNavColor: var(--color-silver);
+  --menuTexColor: var(--color-scorpion);
+  --menuBackgroundColor: linear-gradient(
+    to bottom,
+    var(--color-carbon) 60%,
+    rgba(218, 164, 14, 0.221)
+  );
+  --menuMarginTop: var(--headerHeight);
+  --button-close-color: var(--color-boulder);
 
-    /* Generic */
-    --bodyBackgroundColor: var(--color-codGrey-darker);
-    --bodyTextColor: var(--color-boulder);
-    --title: var(--color-silver);
-    --color-active: var(--color-yellow);
-    --link:  var(--color-active);
-    --inputBackgroundColor: var(--color-mercury);
-    --colorOnActiveColorBg: var(--color-carbon);
-    --colorLogo: var(--color-red);
+  --menuWidth: 20%; /*fixed large*/
 
-    /*Header*/
-    --headerBackgroundColor: var(--color-carbon);
-    --headerTextColor: var(--color-silver);
-    --headerHeight :5rem;
-    /*Footer*/
-    --footerBackgroundColor: var(--color-mineShaft);
-    --footerHeight: 60px;
+  /* List */
+  --listTitle: var(--color-yellow);
 
+  /* Card */
+  --cardLinesBackgroundColor: var(--color-black);
+  --cardMainBackgroundColor: var(--color-carbon);
+  --cardTitleTextColor: var(--color-silver);
+  --cardTitleTextColorDate: var(--color-boulder);
+  --cardSubInfoTextColor: var(--color-scorpion);
 
-    /* Menu */
-    --iconNavColor: var(--color-silver);
-    --menuTexColor: var(--color-scorpion);
-    /* --menuBackgroundColor: var(--color-boulder); */
-    --menuBackgroundColor: var(--color-carbon);
-    --menuMarginTop : var(--headerHeight);
-    --button-close-color : var(--color-boulder);
-    
-    --menuWidth : 20%; /*fixed large*/
-
-
-     /* List */
-    --listTitle: var(--color-yellow);
-
-    /* Card */
-    --cardLinesBackgroundColor: var(--color-black);
-    --cardMainBackgroundColor: var(--color-carbon);
-    --cardTitleTextColor: var(--color-silver);
-    --cardTitleTextColorDate: var(--color-boulder);
-    --cardSubinfoTextColor: var(--color-scorpion);
-    
-    /* Search */
-    --searchResultTitle: var(--color-silver);
-    --searchSeparationLine: var(--color-scorpion);
-    --searchRequestColor: var(--color-active);
-
+  /* Search */
+  --searchResultTitle: var(--color-silver);
+  --searchSeparationLine: var(--color-scorpion);
+  --searchRequestColor: var(--color-active);
 }

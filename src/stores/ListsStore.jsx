@@ -1,12 +1,12 @@
-import { autorun, observable, action } from "mobx";
-import fakeState from "../listsfakedata.mobx.js";
+import { autorun, observable, action } from 'mobx';
+import defaultData from '../data/default-data.js';
 import {
   setInLocalStorage,
   getFromLocalStorage,
-  isExistingInLocalStorage
-} from "../services/localStorageService";
-import {updateDataListsStore} from "../services/storeService";
-let firstStoreListsrun;
+  isExistingInLocalStorage,
+} from '../services/localStorageService';
+import { updateDataListsStore } from '../services/storeService';
+let firstStoreListsRun;
 let initStoreListFinished;
 
 class ListsStore {
@@ -14,13 +14,13 @@ class ListsStore {
   @observable defaultListIds = [];
   @observable numberOfLists = Number;
   @action.bound
-  addNewList = newList => {
+  addNewList = (newList) => {
     this.allIds.push(newList);
   };
   @action.bound
   addItemInThisList = (listId, itemId) => {
     let isThisItemInThisList = this.lists[listId].itemsInThisList.some(
-      item => itemId === item
+      (item) => itemId === item
     );
     if (isThisItemInThisList) {
       // console.log("need to be removed from list");
@@ -29,48 +29,42 @@ class ListsStore {
     } else {
       this.lists[listId].itemsInThisList.push(itemId);
     }
-    if(initStoreListFinished) {
-      updateDataListsStore(listsStore)
+    if (initStoreListFinished) {
+      updateDataListsStore(listsStore);
     }
   };
-
 }
 
 const listsStore = (window.listsStore = new ListsStore());
 
 const init = () => {
-  let isExistingProperty =  isExistingInLocalStorage("firstStoreListsrun");
+  let isExistingProperty = isExistingInLocalStorage('firstStoreListsRun');
   if (isExistingProperty) {
-    firstStoreListsrun =  getFromLocalStorage("firstStoreListsrun");
+    firstStoreListsRun = getFromLocalStorage('firstStoreListsRun');
   } else {
-    setInLocalStorage("firstStoreListsrun", true);
-    firstStoreListsrun = true;
+    setInLocalStorage('firstStoreListsRun', true);
+    firstStoreListsRun = true;
     isExistingProperty = true;
   }
-  if (isExistingProperty && firstStoreListsrun) {
-    listsStore.lists = fakeState.lists.byId;
-    listsStore.defaultListIds = fakeState.lists.defaultListIds;
-     setInLocalStorage("hysLists", fakeState.lists.byId);
-     setInLocalStorage("defaultListIds", fakeState.lists.defaultListIds);
-     setInLocalStorage("firstStoreListsrun", false);
+  if (isExistingProperty && firstStoreListsRun) {
+    listsStore.lists = defaultData.lists.byId;
+    listsStore.defaultListIds = defaultData.lists.defaultListIds;
+    setInLocalStorage('hysLists', defaultData.lists.byId);
+    setInLocalStorage('defaultListIds', defaultData.lists.defaultListIds);
+    setInLocalStorage('firstStoreListsRun', false);
   } else {
-    listsStore.lists =  getFromLocalStorage("hysLists");
-    listsStore.defaultListIds =  getFromLocalStorage("defaultListIds");
-    setInLocalStorage("firstStoreListsrun", false);
+    listsStore.lists = getFromLocalStorage('hysLists');
+    listsStore.defaultListIds = getFromLocalStorage('defaultListIds');
+    setInLocalStorage('firstStoreListsRun', false);
   }
   initStoreListFinished = true;
-}
+};
 init();
 
 export default listsStore;
 
 autorun(() => {
-  // console.log("LISTSSTORE - autorun")
-  // console.log("LISTSSTORE - is initStoreListFinished autorun listsSTORE", initStoreListFinished)
-  if(initStoreListFinished) {
-    // console.log("LISTSSTORE -  passing by update function")
-    updateDataListsStore(listsStore)
+  if (initStoreListFinished) {
+    updateDataListsStore(listsStore);
   }
-  // console.log("LISTSSTORE - autorun listStore", listsStore);
-
 });
