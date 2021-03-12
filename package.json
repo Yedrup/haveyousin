@@ -55,7 +55,7 @@
     "react": "^16.11.0",
     "react-app-polyfill": "^1.0.4",
     "react-burger-menu": "^2.5.4",
-    "react-dev-utils": "^9.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.11.0",
     "react-icons": "3.8.0",
     "react-responsive": "^5.0.0",
